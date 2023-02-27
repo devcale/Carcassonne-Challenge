@@ -1,5 +1,8 @@
 # Carcassonne Challenge 🏰🎲
 
+![background](https://user-images.githubusercontent.com/65783607/221674219-193c8ab3-9d50-4b3e-88f4-bacf9646b6c8.png)
+
+
 Welcome to Carcassonne Challenge: my web-based implementation of the popular board game Carcassonne! 🎉
 This is a single player variation in which the player will try to score as much points as he can.
 
