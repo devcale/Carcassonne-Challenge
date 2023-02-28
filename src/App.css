@@ -3,6 +3,8 @@
   --bg-primay: white;
 
   --link: #2a0b0b;
+
+  --cell-hover: url('./assets/images/city-a.png');
 }
 
 .App {

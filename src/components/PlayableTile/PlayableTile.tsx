@@ -1,8 +1,11 @@
 import './PlayableTile.css';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useGameStateContext } from '../../helper/Context';
 
 export const PlayableTile = (props: any) => {
+  const { currentTile, setCurrentTile } = useGameStateContext();
   const [description, setDescription] = useState('');
   function configureDescription(): string {
     let desc = '';
@@ -16,11 +19,39 @@ export const PlayableTile = (props: any) => {
     }
     return desc;
   }
+
+  function handleClick(): void {
+    setCurrentTile(props.handIndex);
+    document.documentElement.style.setProperty(
+      '--cell-hover',
+      'url(' + selectImage(props.type) + ')',
+    );
+    console.log(document.documentElement.style.getPropertyValue('--cell-hover'));
+  }
+
+  function selectImage(type: string): string {
+    let selectedImage = '';
+    if (type === 'city') {
+      selectedImage = "'./assets/images/city-a.png'";
+    } else if (type === 'road') {
+      selectedImage = "'./assets/images/road-f.png'";
+    } else if (type === 'abbey') {
+      selectedImage = "'./assets/images/abbey2-a.png'";
+    }
+    return selectedImage;
+  }
+
   useEffect(() => {
     setDescription(configureDescription);
   }, []);
   return (
-    <div className="playable-tile">
+    <div
+      className={'playable-tile '}
+      onClick={handleClick}
+      onKeyDown={handleClick}
+      role="button"
+      tabIndex={props.handIndex + 1}
+    >
       <div className="tile-card-info">
         <div className="tile-card-title">{props.type}</div>
         <div className="tile-card-description">{description}</div>

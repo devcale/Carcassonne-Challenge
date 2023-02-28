@@ -17,6 +17,8 @@
   aspect-ratio: 1;
   outline: 50% solid #0009;
   outline-offset: 50%;
+
+  background-size: cover;
 }
 
 .inactive {
@@ -29,8 +31,9 @@
   outline: 8px solid #e2da5e;
   z-index: 1000;
   outline-offset: 1px;
-  background-image: url('../../assets/images/city-a.png');
   background-size: cover;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .active:hover {
@@ -38,12 +41,23 @@
 }
 
 .active {
-  background-image: url('../../assets/images/city-a.png');
-  background-size: cover;
+  background-image: url('src/assets/images/city-a.png');
+
   cursor: pointer;
 }
 
 .init {
-  background-image: url('../../assets/images/intersection-a.png');
-  background-size: cover;
+  background-image: url('src/assets/images/intersection-a.png');
+}
+
+.city {
+  background-image: url('src/assets/images/city-a.png');
+}
+
+.abbey {
+  background-image: url('src/assets/images/abbey2-a.png');
+}
+
+.road {
+  background-image: url('src/assets/images/road-f.png');
 }
