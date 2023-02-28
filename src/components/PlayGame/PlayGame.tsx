@@ -12,7 +12,7 @@ import { Hand } from '../Hand/Hand';
 import { Points } from '../Points/Points';
 
 export const PlayGame = () => {
-  const [boardSize, setBoardSize] = useState(5);
+  const [boardSize, setBoardSize] = useState(11);
   const [middle, setMiddle] = useState(Math.floor(boardSize / 2));
   const [currentTile, setCurrentTile] = useState<number>(0);
   const [points, setPoints] = useState(0);
@@ -27,6 +27,10 @@ export const PlayGame = () => {
     'src/assets/images/road-f.png',
     'src/assets/images/city-a.png',
     'src/assets/images/abbey2-a.png',
+  ]);
+  const [abbeyCountdown, setAbbeyCountdown] = useState<number>(15);
+  const [cityCountdown, setCityCountdown] = useState<[number, number, number]>([
+    12, 13, 14,
   ]);
 
   const board = new Board(boardSize, boardSize, () => <Cell altitude={0} latitude={0} />);
@@ -68,6 +72,10 @@ export const PlayGame = () => {
         setHand,
         handImages,
         setHandImages,
+        abbeyCountdown,
+        setAbbeyCountdown,
+        cityCountdown,
+        setCityCountdown,
       }}
     >
       <div className="playgame">

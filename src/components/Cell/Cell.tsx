@@ -10,7 +10,17 @@ const Cell = (props: any) => {
   const [backgroundImage, setBackgroundImage] = useState(
     props.type === 'init' ? 'src/assets/images/intersection-a.png' : '',
   );
-  const { hand, setHand, currentTile, handImages, setHandImages } = useGameStateContext();
+  const {
+    hand,
+    setHand,
+    currentTile,
+    handImages,
+    setHandImages,
+    abbeyCountdown,
+    setAbbeyCountdown,
+    cityCountdown,
+    setCityCountdown,
+  } = useGameStateContext();
 
   const tabIndexNum = 5 + props.altitude * props.boardDimension + props.latitude;
 
@@ -47,14 +57,64 @@ const Cell = (props: any) => {
 
   function dealNewCard() {
     const rand = Math.random();
-    let newCard = 'road';
-    let newImage = 'src/assets/images/road-f.png';
-    if (rand < 0.4 && rand >= 0.1) {
-      newCard = 'city';
-      newImage = 'src/assets/images/city-a.png';
-    } else if (rand < 0.1) {
+    let newCard = 'invalid';
+    let newImage = '';
+
+    if (
+      (abbeyCountdown > 2 && cityCountdown[0] > 1) ||
+      (abbeyCountdown > 1 && cityCountdown[0] > 2)
+    ) {
+      if (rand > 0.4) {
+        newCard = 'road';
+        newImage = 'src/assets/images/road-f.png';
+        setAbbeyCountdown(abbeyCountdown - 1);
+        const newCityCountdown: [number, number, number] = [
+          cityCountdown[0] - 1,
+          cityCountdown[1] - 1,
+          cityCountdown[2] - 1,
+        ];
+        setCityCountdown(newCityCountdown);
+      } else if (rand < 0.4 && rand >= 0.1) {
+        newCard = 'city';
+        newImage = 'src/assets/images/city-a.png';
+        setAbbeyCountdown(abbeyCountdown - 1);
+        const newCityCountdown: [number, number, number] = [
+          cityCountdown[1] - 1,
+          cityCountdown[2] - 1,
+          15,
+        ];
+        setCityCountdown(newCityCountdown);
+      } else if (rand < 0.1) {
+        newCard = 'abbey';
+        newImage = 'src/assets/images/abbey2-a.png';
+        setAbbeyCountdown(15);
+        const newCityCountdown: [number, number, number] = [
+          cityCountdown[0] - 1,
+          cityCountdown[1] - 1,
+          cityCountdown[2] - 1,
+        ];
+        setCityCountdown(newCityCountdown);
+      }
+    } else if (abbeyCountdown === 1) {
       newCard = 'abbey';
       newImage = 'src/assets/images/abbey2-a.png';
+      setAbbeyCountdown(15);
+      const newCityCountdown: [number, number, number] = [
+        cityCountdown[0] - 1,
+        cityCountdown[1] - 1,
+        cityCountdown[2] - 1,
+      ];
+      setCityCountdown(newCityCountdown);
+    } else {
+      newCard = 'city';
+      newImage = 'src/assets/images/city-a.png';
+      setAbbeyCountdown(abbeyCountdown - 1);
+      const newCityCountdown: [number, number, number] = [
+        cityCountdown[1] - 1,
+        cityCountdown[2] - 1,
+        15,
+      ];
+      setCityCountdown(newCityCountdown);
     }
 
     const newHand: [string, string, string, string] = [...hand];
