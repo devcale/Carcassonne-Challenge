@@ -33,6 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 45vw;
   width: 20vw;
 }

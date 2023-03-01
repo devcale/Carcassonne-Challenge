@@ -2,42 +2,38 @@ import './PlayGame.css';
 
 import { useEffect, useState } from 'react';
 
-import abbeyImg1 from '../../assets/images/abbey2-a.png';
-import cityImg1 from '../../assets/images/city-a.png';
-import roadImg1 from '../../assets/images/road-f.png';
 import { GameStateContext } from '../../helper/Context';
 import Board from '../Board/Board';
 import Cell from '../Cell/Cell';
+import { Discard } from '../Discard/Discard';
 import { Hand } from '../Hand/Hand';
 import { Points } from '../Points/Points';
 
 export const PlayGame = () => {
+  type handType = [
+    [string, number],
+    [string, number],
+    [string, number],
+    [string, number],
+  ];
   const [boardSize, setBoardSize] = useState(11);
   const [middle, setMiddle] = useState(Math.floor(boardSize / 2));
   const [currentTile, setCurrentTile] = useState<number>(0);
   const [points, setPoints] = useState(0);
-  const [hand, setHand] = useState<[string, string, string, string]>([
-    'road',
-    'road',
-    'city',
-    'abbey',
+  const [hand, setHand] = useState<handType>([
+    [getRandomType(), 0],
+    [getRandomType(), 0],
+    [getRandomType(), 0],
+    [getRandomType(), 0],
   ]);
-  const [handImages, setHandImages] = useState<[string, string, string, string]>([
-    'src/assets/images/road-f.png',
-    'src/assets/images/road-f.png',
-    'src/assets/images/city-a.png',
-    'src/assets/images/abbey2-a.png',
-  ]);
+
   const [abbeyCountdown, setAbbeyCountdown] = useState<number>(15);
   const [cityCountdown, setCityCountdown] = useState<[number, number, number]>([
     12, 13, 14,
   ]);
+  const [discardCountdown, setDiscardCountdown] = useState<number>(5);
 
   const board = new Board(boardSize, boardSize, () => <Cell altitude={0} latitude={0} />);
-
-  useEffect(() => {
-    setMiddle(Math.floor(boardSize / 2));
-  }, []);
 
   function getCellHeight() {
     const newCellHeight = `${100 / boardSize}%`;
@@ -49,18 +45,16 @@ export const PlayGame = () => {
     return newColWidth;
   }
 
-  function getRandomImage(): string {
-    let imgSrc = cityImg1;
-    const tileType = hand[currentTile];
-    if (tileType === 'city') {
-      imgSrc = cityImg1;
-    } else if (tileType === 'road') {
-      imgSrc = roadImg1;
-    } else if (tileType === 'abbey') {
-      imgSrc = abbeyImg1;
-    }
-    return imgSrc;
+  function getRandomType(): string {
+    const types = ['city', 'road', 'abbey'];
+    const rand = Math.floor(Math.random() * 3);
+    return types[rand];
   }
+
+  useEffect(() => {
+    setMiddle(Math.floor(boardSize / 2));
+  }, []);
+
   return (
     <GameStateContext.Provider
       value={{
@@ -70,12 +64,12 @@ export const PlayGame = () => {
         setPoints,
         hand,
         setHand,
-        handImages,
-        setHandImages,
         abbeyCountdown,
         setAbbeyCountdown,
         cityCountdown,
         setCityCountdown,
+        discardCountdown,
+        setDiscardCountdown,
       }}
     >
       <div className="playgame">
@@ -83,6 +77,7 @@ export const PlayGame = () => {
         <div className="play-area">
           <div className="hand-container">
             <Hand />
+            <Discard />
           </div>
 
           <div className="board-container">
@@ -105,7 +100,6 @@ export const PlayGame = () => {
                         latitude={colIndex}
                         boardDimension={boardSize}
                         cellHeight={getCellHeight()}
-                        tileSrc={getRandomImage()}
                         type={defaultType}
                         key={'cell-' + colIndex + '-' + cellIndex}
                       />

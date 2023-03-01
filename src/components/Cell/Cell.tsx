@@ -2,8 +2,8 @@ import './Cell.css';
 
 import { useEffect, useState } from 'react';
 
-import cityImg from '../../assets/images/city-a.png';
 import { useGameStateContext } from '../../helper/Context';
+import { getRandomTile } from '../Hand/Hand';
 
 const Cell = (props: any) => {
   const [type, setType] = useState('inactive');
@@ -14,20 +14,21 @@ const Cell = (props: any) => {
     hand,
     setHand,
     currentTile,
-    handImages,
-    setHandImages,
     abbeyCountdown,
     setAbbeyCountdown,
     cityCountdown,
     setCityCountdown,
+    discardCountdown,
+    setDiscardCountdown,
   } = useGameStateContext();
 
-  const tabIndexNum = 5 + props.altitude * props.boardDimension + props.latitude;
+  const tabIndexNum = 6 + props.altitude * props.boardDimension + props.latitude;
 
   function handleClick() {
     if (type === 'inactive') {
-      setType(hand[currentTile]);
-      dealNewCard();
+      setType(hand[currentTile][0]);
+      updateHand();
+      setDiscardCountdown(discardCountdown > 0 ? discardCountdown - 1 : discardCountdown);
     }
   }
 
@@ -37,7 +38,32 @@ const Cell = (props: any) => {
 
   function handleMouseOver() {
     if (type === 'inactive') {
-      setBackgroundImage(handImages[currentTile]);
+      const images = {
+        city: [
+          'src/assets/images/city-a.png',
+          'src/assets/images/city-b.png',
+          'src/assets/images/city-c.png',
+          'src/assets/images/city-d.png',
+        ],
+        road: [
+          'src/assets/images/road-a.png',
+          'src/assets/images/road-b.png',
+          'src/assets/images/road-c.png',
+        ],
+        abbey: [
+          'src/assets/images/abbey-a.png',
+          'src/assets/images/abbey-b.png',
+          'src/assets/images/abbey-c.png',
+        ],
+      };
+
+      if (hand[currentTile][0] === 'city') {
+        setBackgroundImage(images.city[hand[currentTile][1]]);
+      } else if (hand[currentTile][0] === 'road') {
+        setBackgroundImage(images.road[hand[currentTile][1]]);
+      } else if (hand[currentTile][0] === 'abbey') {
+        setBackgroundImage(images.abbey[hand[currentTile][1]]);
+      }
     }
   }
 
@@ -55,78 +81,24 @@ const Cell = (props: any) => {
     //
   }
 
-  function dealNewCard() {
-    const rand = Math.random();
-    let newCard = 'invalid';
-    let newImage = '';
+  function updateHand() {
+    const nextState = getRandomTile(abbeyCountdown, cityCountdown);
 
-    if (
-      (abbeyCountdown > 2 && cityCountdown[0] > 1) ||
-      (abbeyCountdown > 1 && cityCountdown[0] > 2)
-    ) {
-      if (rand > 0.4) {
-        newCard = 'road';
-        newImage = 'src/assets/images/road-f.png';
-        setAbbeyCountdown(abbeyCountdown - 1);
-        const newCityCountdown: [number, number, number] = [
-          cityCountdown[0] - 1,
-          cityCountdown[1] - 1,
-          cityCountdown[2] - 1,
-        ];
-        setCityCountdown(newCityCountdown);
-      } else if (rand < 0.4 && rand >= 0.1) {
-        newCard = 'city';
-        newImage = 'src/assets/images/city-a.png';
-        setAbbeyCountdown(abbeyCountdown - 1);
-        const newCityCountdown: [number, number, number] = [
-          cityCountdown[1] - 1,
-          cityCountdown[2] - 1,
-          15,
-        ];
-        setCityCountdown(newCityCountdown);
-      } else if (rand < 0.1) {
-        newCard = 'abbey';
-        newImage = 'src/assets/images/abbey2-a.png';
-        setAbbeyCountdown(15);
-        const newCityCountdown: [number, number, number] = [
-          cityCountdown[0] - 1,
-          cityCountdown[1] - 1,
-          cityCountdown[2] - 1,
-        ];
-        setCityCountdown(newCityCountdown);
-      }
-    } else if (abbeyCountdown === 1) {
-      newCard = 'abbey';
-      newImage = 'src/assets/images/abbey2-a.png';
-      setAbbeyCountdown(15);
-      const newCityCountdown: [number, number, number] = [
-        cityCountdown[0] - 1,
-        cityCountdown[1] - 1,
-        cityCountdown[2] - 1,
-      ];
-      setCityCountdown(newCityCountdown);
-    } else {
-      newCard = 'city';
-      newImage = 'src/assets/images/city-a.png';
-      setAbbeyCountdown(abbeyCountdown - 1);
-      const newCityCountdown: [number, number, number] = [
-        cityCountdown[1] - 1,
-        cityCountdown[2] - 1,
-        15,
-      ];
-      setCityCountdown(newCityCountdown);
-    }
+    const newHand: [
+      [string, number],
+      [string, number],
+      [string, number],
+      [string, number],
+    ] = [...hand];
 
-    const newHand: [string, string, string, string] = [...hand];
-    const newImages: [string, string, string, string] = [...handImages];
-
-    newHand[currentTile] = newCard;
-    newImages[currentTile] = newImage;
-
+    newHand[currentTile][0] = nextState.newTile;
+    newHand[currentTile][1] = nextState.newVariation;
+    setAbbeyCountdown(nextState.updatedAbbeyCountdown);
+    setCityCountdown(nextState.updatedCityCountdown);
     setHand(newHand);
-    setHandImages(newImages);
   }
 
+  // Sets the type of each cell on load
   useEffect(() => {
     setType(props.type);
   }, []);

@@ -12,7 +12,7 @@
   border-width: 1px;
   border-color: #53735e;
 
-  transition: 0.2s;
+  transition: 0.5s;
 
   aspect-ratio: 1;
   outline: 50% solid #0009;
@@ -51,13 +51,19 @@
 }
 
 .city {
-  background-image: url('src/assets/images/city-a.png');
+  outline: 9px solid #95a6f0;
+  z-index: 500;
+  outline-offset: -10px;
 }
 
 .abbey {
-  background-image: url('src/assets/images/abbey2-a.png');
+  outline: 9px solid #96e394;
+  z-index: 500;
+  outline-offset: -10px;
 }
 
 .road {
-  background-image: url('src/assets/images/road-f.png');
+  outline: 9px solid #ead6ab;
+  z-index: 500;
+  outline-offset: -10px;
 }
