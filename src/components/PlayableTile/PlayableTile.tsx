@@ -9,6 +9,7 @@ export const PlayableTile = (props: any) => {
     setCurrentTile(props.handIndex);
   }
 
+  console.log();
   return (
     <div
       className={'playable-tile '}
