@@ -11,7 +11,9 @@ export const LandingPage = () => {
         <div className="ui-button">Play Game</div>
       </Link>
 
-      <div className="ui-button">How to Play</div>
+      <Link to="/Carcassonne-Challenge/howtoplay">
+        <div className="ui-button">How to Play</div>
+      </Link>
     </div>
   );
 };
