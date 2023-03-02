@@ -106,7 +106,6 @@ export const Hand = () => {
     }
     return desc;
   }
-  console.log(hand);
 
   return (
     <div className="hand">

@@ -35,6 +35,13 @@
   font-size: 2vw;
 }
 
+.current-points-counter {
+  margin: 5%;
+  color: #f2e963;
+  text-shadow: 2px 2px #735236;
+  font-size: 2.5vw;
+}
+
 .leaderboard-title {
   margin: 5%;
   color: #b39500;

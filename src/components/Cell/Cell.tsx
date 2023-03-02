@@ -3,6 +3,7 @@ import './Cell.css';
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../helper/Context';
+import Board from '../Board/Board';
 import { getRandomTile } from '../Hand/Hand';
 
 const Cell = (props: any) => {
@@ -20,15 +21,36 @@ const Cell = (props: any) => {
     setCityCountdown,
     discardCountdown,
     setDiscardCountdown,
+    mapGlobal,
+    points,
+    setPoints,
   } = useGameStateContext();
+
+  const boardHelper = new Board(
+    0,
+    0,
+    () => '',
+    () => '',
+  );
 
   const tabIndexNum = 6 + props.altitude * props.boardDimension + props.latitude;
 
   function handleClick() {
     if (type === 'inactive') {
-      setType(hand[currentTile][0]);
-      updateHand();
-      setDiscardCountdown(discardCountdown > 0 ? discardCountdown - 1 : discardCountdown);
+      const placedTile = boardHelper.placeTile(
+        hand[currentTile][0],
+        props.latitude,
+        props.altitude,
+        mapGlobal,
+      );
+      if (placedTile.isValid) {
+        setType(hand[currentTile][0]);
+        setPoints(points + placedTile.pointsGained);
+        updateHand();
+        setDiscardCountdown(
+          discardCountdown > 0 ? discardCountdown - 1 : discardCountdown,
+        );
+      }
     }
   }
 

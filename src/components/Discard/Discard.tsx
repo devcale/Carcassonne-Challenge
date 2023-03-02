@@ -12,10 +12,7 @@ export const Discard = () => {
   }
 
   function handleDiscard() {
-    console.log('Actual:');
-    console.log(hand);
     if (discardCountdown === 0) {
-      console.log(hand);
       const newRandoms = [
         getRandomCard(),
         getRandomCard(),
@@ -33,12 +30,8 @@ export const Discard = () => {
       newHand[2] = newRandoms[2];
       newHand[3] = newRandoms[3];
 
-      console.log('New:');
-      console.log(newHand);
       setHand(newHand);
       setDiscardCountdown(5);
-      console.log('Updated:');
-      console.log(hand);
     }
   }
 

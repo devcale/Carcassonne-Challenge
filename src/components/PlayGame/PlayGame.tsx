@@ -33,7 +33,16 @@ export const PlayGame = () => {
   ]);
   const [discardCountdown, setDiscardCountdown] = useState<number>(5);
 
-  const board = new Board(boardSize, boardSize, () => <Cell altitude={0} latitude={0} />);
+  // const [board, setBoard] = useState(new Board(boardSize, boardSize, () => 'inactive'));
+
+  const board = new Board(
+    boardSize,
+    boardSize,
+    () => 'inactive',
+    () => 'init',
+  );
+
+  const [mapGlobal, setMapGlobal] = useState<string[][]>(board.getBoard());
 
   function getCellHeight() {
     const newCellHeight = `${100 / boardSize}%`;
@@ -70,6 +79,8 @@ export const PlayGame = () => {
         setCityCountdown,
         discardCountdown,
         setDiscardCountdown,
+        mapGlobal,
+        setMapGlobal,
       }}
     >
       <div className="playgame">
@@ -104,7 +115,7 @@ export const PlayGame = () => {
                         key={'cell-' + colIndex + '-' + cellIndex}
                       />
                     );
-                    board.setInBoard(colIndex, cellIndex, cell);
+                    board.setInBoard(defaultType, colIndex, cellIndex);
                     return cell;
                   })}
                 </div>

@@ -6,7 +6,6 @@ export const PlayableTile = (props: any) => {
   const { setCurrentTile } = useGameStateContext();
 
   function handleClick(): void {
-    console.log(props.handIndex);
     setCurrentTile(props.handIndex);
   }
 
