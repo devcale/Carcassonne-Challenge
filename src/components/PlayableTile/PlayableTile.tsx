@@ -23,7 +23,9 @@ export const PlayableTile = (props: any) => {
       </div>
 
       <div className="playable-img-container">
-        <div className={'playable-img ' + props.type + '-' + props.variation}> </div>
+        <div className={'playable-img ' + props.type + '-' + props.variation}>
+          <div className="mobile-title">{props.type}</div>
+        </div>
       </div>
     </div>
   );
