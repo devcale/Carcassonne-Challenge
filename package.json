@@ -1,7 +1,10 @@
 {
+  "homepage": "http://devcale.github.io/Carcassonne-Challenge",
   "name": "vite-reactts-eslint-prettier",
   "version": "0.0.0",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
@@ -27,6 +30,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "gh-pages": "^5.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.5.1",
     "typescript": "^4.5.5",
