@@ -28,7 +28,6 @@ const Cell = (props: any) => {
 
   const boardHelper = new Board(
     0,
-    0,
     () => '',
     () => '',
   );
