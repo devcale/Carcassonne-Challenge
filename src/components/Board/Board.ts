@@ -40,6 +40,10 @@ class Board<A> {
     let lowerCell = '';
     let rightCell = '';
     let leftCell = '';
+    let topLeftCell = '';
+    let topRightCell = '';
+    let bottomRightCell = '';
+    let bottomLeftCell = '';
     if (altitude - 1 >= 0) {
       upperCell = map[latitude][altitude - 1];
     } else {
@@ -60,6 +64,26 @@ class Board<A> {
     } else {
       leftCell = 'out';
     }
+    if (latitude - 1 >= 0 && altitude - 1 >= 0) {
+      topLeftCell = map[latitude - 1][altitude - 1];
+    } else {
+      topLeftCell = 'out';
+    }
+    if (latitude + 1 >= 0 && altitude - 1 >= 0) {
+      topRightCell = map[latitude + 1][altitude - 1];
+    } else {
+      topRightCell = 'out';
+    }
+    if (latitude + 1 >= 0 && altitude + 1 >= 0) {
+      bottomRightCell = map[latitude + 1][altitude + 1];
+    } else {
+      bottomRightCell = 'out';
+    }
+    if (latitude - 1 >= 0 && altitude + 1 >= 0) {
+      bottomLeftCell = map[latitude - 1][altitude + 1];
+    } else {
+      bottomLeftCell = 'out';
+    }
 
     if (type === 'city') {
       const allowed = ['city', 'abbey', 'road', 'init'];
@@ -69,6 +93,30 @@ class Board<A> {
         allowed.includes(rightCell) ||
         allowed.includes(leftCell)
       ) {
+        if (topRightCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (topLeftCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (bottomRightCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (bottomLeftCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (upperCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (rightCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (lowerCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (leftCell === 'abbey') {
+          pointsGained += 1;
+        }
         pointsGained += 3;
         isValid = true;
         map[latitude][altitude] = 'city';
@@ -81,6 +129,30 @@ class Board<A> {
         allowed.includes(rightCell) ||
         allowed.includes(leftCell)
       ) {
+        if (topRightCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (topLeftCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (bottomRightCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (bottomLeftCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (upperCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (rightCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (lowerCell === 'abbey') {
+          pointsGained += 1;
+        }
+        if (leftCell === 'abbey') {
+          pointsGained += 1;
+        }
         pointsGained += 1;
         isValid = true;
         map[latitude][altitude] = 'road';
@@ -93,7 +165,31 @@ class Board<A> {
         allowed.includes(rightCell) ||
         allowed.includes(leftCell)
       ) {
-        pointsGained += 1;
+        if (allowed.includes(topRightCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(topLeftCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(bottomRightCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(bottomLeftCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(rightCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(leftCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(upperCell)) {
+          pointsGained += 1;
+        }
+        if (allowed.includes(lowerCell)) {
+          pointsGained += 1;
+        }
+
         isValid = true;
         map[latitude][altitude] = 'abbey';
       }
