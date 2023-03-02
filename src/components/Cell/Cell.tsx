@@ -61,22 +61,9 @@ const Cell = (props: any) => {
   function handleMouseOver() {
     if (type === 'inactive') {
       const images = {
-        city: [
-          'src/assets/images/city-a.png',
-          'src/assets/images/city-b.png',
-          'src/assets/images/city-c.png',
-          'src/assets/images/city-d.png',
-        ],
-        road: [
-          'src/assets/images/road-a.png',
-          'src/assets/images/road-b.png',
-          'src/assets/images/road-c.png',
-        ],
-        abbey: [
-          'src/assets/images/abbey-a.png',
-          'src/assets/images/abbey-b.png',
-          'src/assets/images/abbey-c.png',
-        ],
+        city: ['city-0', 'city-1', 'city-2'],
+        road: ['road-0', 'road-1', 'road-2'],
+        abbey: ['abbey-0', 'abbey-1', 'abbey-2'],
       };
 
       if (hand[currentTile][0] === 'city') {
@@ -127,7 +114,7 @@ const Cell = (props: any) => {
 
   return (
     <div
-      className={'cell ' + type}
+      className={'cell ' + type + ' ' + backgroundImage}
       id={'cell-' + props.latitude + '-' + props.altitude}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -137,7 +124,7 @@ const Cell = (props: any) => {
       onBlur={handleBlur}
       role="button"
       tabIndex={tabIndexNum}
-      style={{ height: props.cellHeight, backgroundImage: `url(${backgroundImage})` }}
+      style={{ height: props.cellHeight }}
     ></div>
   );
 };
