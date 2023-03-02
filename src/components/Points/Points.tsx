@@ -1,6 +1,6 @@
 import './Points.css';
 
-import { useGameStateContext } from '../../helper/Context';
+import { useGameStateContext } from '../../context/Context';
 
 export const Points = () => {
   const { points } = useGameStateContext();

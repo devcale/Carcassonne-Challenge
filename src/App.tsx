@@ -1,13 +1,16 @@
 import './App.css';
-import './fonts/MedievalSharp-Regular.ttf';
 
-import { PlayGame } from './components/PlayGame/PlayGame';
+import { Route, Routes } from 'react-router-dom';
+
+import { LandingPage } from './pages/LandingPage/LandingPage';
+import { PlayGame } from './pages/PlayGame/PlayGame';
 
 function App() {
   return (
-    <div className="App">
-      <PlayGame />
-    </div>
+    <Routes>
+      <Route path="/Carcassonne-Challenge/" element={<LandingPage />} />
+      <Route path="/Carcassonne-Challenge/play" element={<PlayGame />} />
+    </Routes>
   );
 }
 

@@ -46,12 +46,14 @@
   color: #b39500;
   text-shadow: 2px 2px #735236;
   font-size: 2vw;
+  text-align: center;
 }
 
 .tile-card-description {
   color: #735236;
   font-size: 16px;
   width: 100%;
+  text-align: center;
 }
 
 .playable-img-container {

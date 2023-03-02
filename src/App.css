@@ -10,11 +10,6 @@
   height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 body,
 html {
   font-family: 'MedievalSharp';
@@ -42,6 +37,29 @@ button {
 
   background: #845ec2;
   color: white;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -84,6 +102,6 @@ button {
 @font-face {
   font-family: 'MedievalSharp';
   src: local('MedievalSharp-Regular'),
-    url('./fonts/MedievalSharp-Regular.ttf') format('truetype');
+    url('./assets/fonts/MedievalSharp-Regular.ttf') format('truetype');
   font-weight: bold;
 }

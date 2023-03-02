@@ -1,6 +1,6 @@
 import './PlayableTile.css';
 
-import { useGameStateContext } from '../../helper/Context';
+import { useGameStateContext } from '../../context/Context';
 
 export const PlayableTile = (props: any) => {
   const { setCurrentTile } = useGameStateContext();

@@ -1,6 +1,6 @@
 import './Hand.css';
 
-import { useGameStateContext } from '../../helper/Context';
+import { useGameStateContext } from '../../context/Context';
 import { PlayableTile } from '../PlayableTile/PlayableTile';
 
 type cityCounters = [number, number, number];

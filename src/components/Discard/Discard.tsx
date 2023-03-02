@@ -1,6 +1,6 @@
 import './Discard.css';
 
-import { useGameStateContext } from '../../helper/Context';
+import { useGameStateContext } from '../../context/Context';
 
 export const Discard = () => {
   const { hand, setHand, discardCountdown, setDiscardCountdown } = useGameStateContext();

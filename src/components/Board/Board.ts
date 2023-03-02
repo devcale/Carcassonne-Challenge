@@ -1,12 +1,14 @@
 class Board<A> {
   private map: A[][];
+  private size: number;
 
-  constructor(width: number, height: number, init: () => A, center: () => A) {
+  constructor(size: number, init: () => A, center: () => A) {
     this.map = [];
-    const middle = Math.floor(width / 2);
-    for (let i = 0; i < width; i++) {
+    this.size = size;
+    const middle = Math.floor(size / 2);
+    for (let i = 0; i < size; i++) {
       const row: A[] = [];
-      for (let j = 0; j < height; j++) {
+      for (let j = 0; j < size; j++) {
         if (i === middle && j === middle) {
           row.push(center());
         } else {
@@ -23,6 +25,10 @@ class Board<A> {
 
   setInBoard(type: A, latitude: number, altitude: number): void {
     this.map[latitude][altitude] = type;
+  }
+
+  getSize() {
+    return this.size;
   }
 
   // Returns a boolean-number pair

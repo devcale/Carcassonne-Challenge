@@ -7,7 +7,7 @@
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-evenly;
-
+  text-align: center;
   border-style: solid;
   border-width: 10px;
   border-color: #735236;

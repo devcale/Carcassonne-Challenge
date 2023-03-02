@@ -20,6 +20,7 @@
 }
 
 .title {
+  text-align: center;
   padding: 1.5vh;
   font-size: 7vh;
   background-color: #1d2625;
@@ -58,12 +59,22 @@
 
 /* Extra small devices (phones, 768px and down) */
 @media only screen and (max-width: 768px) {
+  .title {
+    display: none;
+    text-align: center;
+    padding: 1.5vh;
+    font-size: 6vw;
+    background-color: #1d2625;
+    color: #f2e963;
+    text-shadow: 2px 2px #f25e3d;
+  }
   .play-area {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    height: 100vh;
   }
 
   .hand-container {
@@ -73,6 +84,8 @@
     flex-direction: column;
     height: 25vh;
     width: 90vw;
+    order: 2;
+    margin: 5%;
   }
   .board-container {
     display: flex;
@@ -84,13 +97,17 @@
     padding: 1.5vw;
     background-color: #735236;
     border-radius: 1%;
+    order: 1;
+    margin: 5%;
   }
   .points-container {
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 0vw;
-    width: 0vw;
+    height: 6vh;
+    width: 90vw;
+    order: 0;
+    margin: 5%;
   }
 
   .board {
@@ -116,6 +133,7 @@
     flex-direction: column;
     height: 45vw;
     width: 20vw;
+    order: 0;
   }
   .board-container {
     display: flex;
@@ -126,6 +144,7 @@
     padding: 1.5vw;
     background-color: #735236;
     border-radius: 1%;
+    order: 1;
   }
   .points-container {
     display: flex;
@@ -133,6 +152,7 @@
     align-items: center;
     height: 45vw;
     width: 20vw;
+    order: 2;
   }
 
   .board {

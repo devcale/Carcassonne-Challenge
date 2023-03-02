@@ -2,7 +2,7 @@ import './Cell.css';
 
 import { useEffect, useState } from 'react';
 
-import { useGameStateContext } from '../../helper/Context';
+import { useGameStateContext } from '../../context/Context';
 import Board from '../Board/Board';
 import { getRandomTile } from '../Hand/Hand';
 
