@@ -16,7 +16,7 @@ export const PlayGame = () => {
     [string, number],
     [string, number],
   ];
-  const [boardSize, setBoardSize] = useState(11);
+  const [boardSize, setBoardSize] = useState(5);
   const [middle, setMiddle] = useState(Math.floor(boardSize / 2));
   const [currentTile, setCurrentTile] = useState<number>(0);
   const [points, setPoints] = useState(0);

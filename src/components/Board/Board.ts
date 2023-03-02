@@ -36,53 +36,37 @@ class Board<A> {
   ): { isValid: boolean; pointsGained: number } {
     let isValid = false;
     let pointsGained = 0;
-    let upperCell = '';
-    let lowerCell = '';
-    let rightCell = '';
-    let leftCell = '';
-    let topLeftCell = '';
-    let topRightCell = '';
-    let bottomRightCell = '';
-    let bottomLeftCell = '';
+    let upperCell = 'out';
+    let lowerCell = 'out';
+    let rightCell = 'out';
+    let leftCell = 'out';
+    let topLeftCell = 'out';
+    let topRightCell = 'out';
+    let bottomRightCell = 'out';
+    let bottomLeftCell = 'out';
     if (altitude - 1 >= 0) {
       upperCell = map[latitude][altitude - 1];
-    } else {
-      upperCell = 'out';
     }
     if (altitude + 1 < map.length) {
       lowerCell = map[latitude][altitude + 1];
-    } else {
-      lowerCell = 'out';
     }
     if (latitude + 1 < map.length) {
       rightCell = map[latitude + 1][altitude];
-    } else {
-      rightCell = 'out';
     }
     if (latitude - 1 >= 0) {
       leftCell = map[latitude - 1][altitude];
-    } else {
-      leftCell = 'out';
     }
     if (latitude - 1 >= 0 && altitude - 1 >= 0) {
       topLeftCell = map[latitude - 1][altitude - 1];
-    } else {
-      topLeftCell = 'out';
     }
-    if (latitude + 1 >= 0 && altitude - 1 >= 0) {
+    if (latitude + 1 < map.length && altitude - 1 >= 0) {
       topRightCell = map[latitude + 1][altitude - 1];
-    } else {
-      topRightCell = 'out';
     }
-    if (latitude + 1 >= 0 && altitude + 1 >= 0) {
+    if (latitude + 1 < map.length && altitude + 1 >= 0) {
       bottomRightCell = map[latitude + 1][altitude + 1];
-    } else {
-      bottomRightCell = 'out';
     }
     if (latitude - 1 >= 0 && altitude + 1 >= 0) {
       bottomLeftCell = map[latitude - 1][altitude + 1];
-    } else {
-      bottomLeftCell = 'out';
     }
 
     if (type === 'city') {
