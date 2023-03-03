@@ -1,4 +1,4 @@
-.main-container {
+.mainContainer {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.title-landing {
+.titleLanding {
   margin: 3%;
   text-align: center;
   padding: 1.5vh;
@@ -16,8 +16,8 @@
   text-shadow: 2px 2px #f25e3d;
 }
 
-.ui-button {
-  margin: 1%;
+.uiButton {
+  margin: 10%;
   width: 20vh;
   height: 5vh;
   border-radius: 20px;
@@ -46,7 +46,7 @@
   transition-property: box-shadow, transform;
 }
 
-.ui-button:hover {
+.uiButton:hover {
   box-shadow: 10px 10px 5px rgba(51, 37, 24, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);

@@ -1,4 +1,4 @@
-.instructions-container {
+.instructionsContainer {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.title-instructions {
+.titleInstructions {
   margin: 1%;
   text-align: center;
   padding: 1.5vh;
@@ -16,7 +16,7 @@
   text-shadow: 2px 2px #f25e3d;
 }
 
-.instructions-content-container {
+.instructionsContentContainer {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

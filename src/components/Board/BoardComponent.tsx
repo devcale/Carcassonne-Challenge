@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 import Cell from '../Cell/Cell';
 import Board from './Board';
+import styling from './BoardComponent.module.css';
 
-export const BoardComponent = (props: any) => {
+export const BoardComponent = (props: { board: Board<string> }) => {
   const [middle, setMiddle] = useState(Math.floor(props.board.getSize() / 2));
 
   function getCellHeight() {
@@ -21,10 +22,10 @@ export const BoardComponent = (props: any) => {
   }, []);
 
   return (
-    <div className="board">
+    <div className={styling.board}>
       {props.board.getBoard().map((col: string[], colIndex: number) => (
         <div
-          className="board-col"
+          className={styling.boardCol}
           id={'col-' + colIndex}
           key={'col-' + colIndex}
           style={{ width: getColWidth() }}

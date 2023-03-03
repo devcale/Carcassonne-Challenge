@@ -1,4 +1,4 @@
-.play-game {
+.playgame {
   height: 100%;
 }
 
@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.board-container {
+.boardContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,14 +28,14 @@
   text-shadow: 2px 2px #f25e3d;
 }
 
-.play-area {
+.playArea {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
   height: 80vh;
 }
 
-.hand-container {
+.handContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +44,7 @@
   width: 20vw;
 }
 
-.points-container {
+.pointsContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +52,7 @@
   width: 20vw;
 }
 
-.board-col {
+.boardCol {
   height: 100%;
   width: 10%;
 }

@@ -1,0 +1,10 @@
+.board {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.boardCol {
+  height: 100%;
+  width: 10%;
+}

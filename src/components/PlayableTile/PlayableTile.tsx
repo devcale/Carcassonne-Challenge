@@ -1,6 +1,5 @@
-import './PlayableTile.css';
-
 import { useGameStateContext } from '../../context/Context';
+import styling from './PlayableTile.module.css';
 
 export const PlayableTile = (props: any) => {
   const { setCurrentTile } = useGameStateContext();
@@ -12,20 +11,22 @@ export const PlayableTile = (props: any) => {
   console.log();
   return (
     <div
-      className={'playable-tile '}
+      className={styling.playableTile}
       onClick={handleClick}
       onKeyDown={handleClick}
       role="button"
       tabIndex={props.handIndex + 1}
     >
-      <div className="tile-card-info">
-        <div className="tile-card-title">{props.type}</div>
-        <div className="tile-card-description">{props.description}</div>
+      <div className={styling.tileCardInfo}>
+        <div className={styling.tileCardTitle}>{props.type}</div>
+        <div className={styling.tileCardDescription}>{props.description}</div>
       </div>
 
-      <div className="playable-img-container">
-        <div className={'playable-img ' + props.type + '-' + props.variation}>
-          <div className="mobile-title">{props.type}</div>
+      <div className={styling.playableImgContainer}>
+        <div
+          className={styling.playableImg + ' ' + styling[props.type + props.variation]}
+        >
+          <div className={styling.mobileTile}>{props.type}</div>
         </div>
       </div>
     </div>

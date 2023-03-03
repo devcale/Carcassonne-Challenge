@@ -1,6 +1,5 @@
-import './Discard.css';
-
 import { useGameStateContext } from '../../context/Context';
+import styling from './Discard.module.css';
 
 export const Discard = () => {
   const { hand, setHand, discardCountdown, setDiscardCountdown } = useGameStateContext();
@@ -51,7 +50,7 @@ export const Discard = () => {
   }
   return (
     <div
-      className="discard-hand"
+      className={styling.discardHand}
       role="button"
       onClick={handleDiscard}
       onKeyDown={handleKeyDown}

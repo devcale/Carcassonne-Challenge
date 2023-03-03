@@ -1,4 +1,4 @@
-.discard-hand {
+.discardHand {
   width: 100%;
   height: 9%;
   border-radius: 20px;
@@ -20,7 +20,7 @@
 
 /* Extra small devices (phones, 768px and down) */
 @media only screen and (max-width: 768px) {
-  .discard-hand {
+  .discardHand {
     width: 80%;
     height: 30%;
     border-radius: 20px;
@@ -43,7 +43,7 @@
 
 /* Small devices (portrait tablets and large phones, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .discard-hand {
+  .discardHand {
     width: 100%;
     height: 9%;
     border-radius: 20px;

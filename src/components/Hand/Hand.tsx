@@ -1,7 +1,6 @@
-import './Hand.css';
-
 import { useGameStateContext } from '../../context/Context';
 import { PlayableTile } from '../PlayableTile/PlayableTile';
+import styling from './Hand.module.css';
 
 type cityCounters = [number, number, number];
 // Returns a random tile, its image, and the updated the counters
@@ -108,7 +107,7 @@ export const Hand = () => {
   }
 
   return (
-    <div className="hand">
+    <div className={styling.hand}>
       <PlayableTile
         type={hand[0][0]}
         variation={hand[0][1]}

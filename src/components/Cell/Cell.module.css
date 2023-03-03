@@ -138,6 +138,10 @@
   .road {
     outline: 2px solid #ead6ab;
   }
+
+  .init {
+    background-image: url('src/assets/images/intersection-a.png');
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 768px and up) */
@@ -177,5 +181,9 @@
 
   .road {
     outline: 9px solid #ead6ab;
+  }
+
+  .init {
+    background-image: url('src/assets/images/intersection-a.png');
   }
 }

@@ -1,18 +1,17 @@
-import './LandingPage.css';
-
-import React from 'react';
 import { Link } from 'react-router-dom';
+
+import styling from './LandingPage.module.css';
 
 export const LandingPage = () => {
   return (
-    <div className="main-container">
-      <div className="title-landing">Carcassonne Challenge</div>
+    <div className={styling.mainContainer}>
+      <div className={styling.titleLanding}>Carcassonne Challenge</div>
       <Link to="/Carcassonne-Challenge/play">
-        <div className="ui-button">Play Game</div>
+        <div className={styling.uiButton}>Play Game</div>
       </Link>
 
       <Link to="/Carcassonne-Challenge/howtoplay">
-        <div className="ui-button">How to Play</div>
+        <div className={styling.uiButton}>How to Play</div>
       </Link>
     </div>
   );

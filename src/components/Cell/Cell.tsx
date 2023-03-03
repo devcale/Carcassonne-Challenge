@@ -1,12 +1,17 @@
-import './Cell.css';
-
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
 import Board from '../Board/Board';
 import { getRandomTile } from '../Hand/Hand';
+import styling from './Cell.module.css';
 
-const Cell = (props: any) => {
+const Cell = (props: {
+  type: string;
+  altitude: number;
+  latitude: number;
+  boardDimension: number;
+  cellHeight: string;
+}) => {
   const [type, setType] = useState('inactive');
   const [backgroundImage, setBackgroundImage] = useState(
     props.type === 'init' ? 'src/assets/images/intersection-a.png' : '',
@@ -113,7 +118,7 @@ const Cell = (props: any) => {
 
   return (
     <div
-      className={'cell ' + type + ' ' + backgroundImage}
+      className={styling.cell + ' ' + styling[type] + ' ' + styling[backgroundImage]}
       id={'cell-' + props.latitude + '-' + props.altitude}
       onClick={handleClick}
       onKeyDown={handleKeyDown}

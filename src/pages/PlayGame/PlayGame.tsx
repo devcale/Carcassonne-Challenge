@@ -1,5 +1,3 @@
-import './PlayGame.css';
-
 import { useState } from 'react';
 
 import Board from '../../components/Board/Board';
@@ -8,6 +6,7 @@ import { Discard } from '../../components/Discard/Discard';
 import { Hand } from '../../components/Hand/Hand';
 import { Points } from '../../components/Points/Points';
 import { GameStateContext } from '../../context/Context';
+import styling from './PlayGame.module.css';
 
 export const PlayGame = () => {
   type handType = [
@@ -64,18 +63,18 @@ export const PlayGame = () => {
         setMapGlobal,
       }}
     >
-      <div className="playgame">
-        <div className="title">Carcassonne Challenge</div>
-        <div className="play-area">
-          <div className="hand-container">
+      <div className={styling.playgame}>
+        <div className={styling.title}>Carcassonne Challenge</div>
+        <div className={styling.playArea}>
+          <div className={styling.handContainer}>
             <Hand />
             <Discard />
           </div>
 
-          <div className="board-container">
+          <div className={styling.boardContainer}>
             <BoardComponent board={board} />
           </div>
-          <div className="points-container">
+          <div className={styling.pointsContainer}>
             <Points />
           </div>
         </div>

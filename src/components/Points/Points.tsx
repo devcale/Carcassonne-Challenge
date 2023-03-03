@@ -1,18 +1,17 @@
-import './Points.css';
-
 import { useGameStateContext } from '../../context/Context';
+import styling from './Points.module.css';
 
 export const Points = () => {
   const { points } = useGameStateContext();
   return (
-    <div className="points-section">
-      <div className="current-points-section">
-        <div className="current-points-title">Points</div>
-        <div className="current-points-counter">{points * 100}</div>
+    <div className={styling.pointsSection}>
+      <div className={styling.currentPointsSection}>
+        <div className={styling.currentPointsTitle}>Points</div>
+        <div className={styling.currentPointsCounter}>{points * 100}</div>
       </div>
-      <div className="leaderboard-section">
-        <div className="leaderboard-title">Leaderboard</div>
-        <div className="leaderboard"></div>
+      <div className={styling.leaderboardSection}>
+        <div className={styling.leaderboardTitle}>Leaderboard</div>
+        <div className={styling.leaderboard}></div>
       </div>
     </div>
   );

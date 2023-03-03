@@ -1,4 +1,4 @@
-.playable-tile {
+.playableTile {
   width: 100%;
   height: 18%;
   border-radius: 20px;
@@ -24,7 +24,7 @@
   transition-property: box-shadow, transform;
 }
 
-.playable-tile:hover {
+.playableTile:hover {
   box-shadow: 10px 10px 5px rgba(51, 37, 24, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -35,28 +35,28 @@
   transform: scale(1.1);
 }
 
-.tile-card-info {
+.tileCardInfo {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   width: 40%;
 }
 
-.tile-card-title {
+.tileCardTitle {
   color: #b39500;
   text-shadow: 2px 2px #735236;
   font-size: 2vw;
   text-align: center;
 }
 
-.tile-card-description {
+.tileCardDescription {
   color: #735236;
   font-size: 16px;
   width: 100%;
   text-align: center;
 }
 
-.playable-img-container {
+.playableImgContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -64,7 +64,7 @@
   height: 100%;
 }
 
-.playable-img {
+.playableImg {
   border-radius: 10%;
   margin: 5%;
   height: 100%;
@@ -76,49 +76,49 @@
   align-items: center;
 }
 
-.mobile-title {
+.mobileTile {
   display: none;
 }
 
-.city-0 {
+.city0 {
   background-image: url('../../assets/images/city-a.png');
 }
 
-.road-0 {
+.road0 {
   background-image: url('../../assets/images/road-a.png');
 }
 
-.abbey-0 {
+.abbey0 {
   background-image: url('../../assets/images/abbey-a.png');
 }
 
-.city-1 {
+.city1 {
   background-image: url('../../assets/images/city-b.png');
 }
 
-.road-1 {
+.road1 {
   background-image: url('../../assets/images/road-b.png');
 }
 
-.abbey-1 {
+.abbey1 {
   background-image: url('../../assets/images/abbey-b.png');
 }
 
-.city-2 {
+.city2 {
   background-image: url('../../assets/images/city-c.png');
 }
 
-.road-2 {
+.road2 {
   background-image: url('../../assets/images/road-c.png');
 }
 
-.abbey-2 {
+.abbey2 {
   background-image: url('../../assets/images/abbey-c.png');
 }
 
 /* Extra small devices (phones, 768px and down) */
 @media only screen and (max-width: 768px) {
-  .playable-tile {
+  .playableTile {
     width: 20%;
     height: 80%;
     border-radius: 20px;
@@ -145,14 +145,14 @@
     transition-property: box-shadow, transform;
   }
 
-  .tile-card-info {
+  .tileCardInfo {
     display: none;
     flex-direction: column;
     justify-content: space-evenly;
     width: 40%;
   }
 
-  .playable-img-container {
+  .playableImgContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -160,7 +160,7 @@
     height: 100%;
   }
 
-  .mobile-title {
+  .mobileTile {
     display: inline;
     color: white;
     text-shadow: 2px 2px black;
@@ -169,7 +169,7 @@
 
 /* Small devices (portrait tablets and large phones, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .playable-tile {
+  .playableTile {
     width: 100%;
     height: 18%;
     border-radius: 20px;
@@ -195,14 +195,14 @@
     transition-property: box-shadow, transform;
   }
 
-  .tile-card-info {
+  .tileCardInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     width: 40%;
   }
 
-  .playable-img-container {
+  .playableImgContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
