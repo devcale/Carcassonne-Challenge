@@ -13,7 +13,7 @@ To get started with the game, follow these steps:
 
 1.  Clone the repository to your local machine using the following command: 🤖
 
-        git clone https://github.com/your-username/carcassonne-game.git
+        git clone https://github.com/devcale/Carcassonne-Challenge.git
 
 2.  Install the dependencies using npm: 📦
 
