@@ -1,7 +1,12 @@
 import { useGameStateContext } from '../../context/Context';
 import styling from './PlayableTile.module.css';
 
-export const PlayableTile = (props: any) => {
+export const PlayableTile = (props: {
+  type: string;
+  handIndex: number;
+  description: string;
+  variation: number;
+}) => {
   const { setCurrentTile } = useGameStateContext();
 
   function handleClick(): void {
