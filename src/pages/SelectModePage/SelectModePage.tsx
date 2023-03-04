@@ -19,7 +19,7 @@ export const SelectModePage = () => {
           () => 'inactive',
           () => 'init',
         );
-        setMapGlobal(board);
+        setMapGlobal(board.getBoard());
       } else if (option === 'classic') {
         setBoardSize(11);
       } else if (option === 'large') {
