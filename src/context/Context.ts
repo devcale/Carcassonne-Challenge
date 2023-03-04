@@ -40,6 +40,9 @@ export type GameState = {
 
   mapGlobal: string[][];
   setMapGlobal: (mapGlobal: string[][]) => void;
+
+  boardSize: number;
+  setBoardSize: (boardSize: number) => void;
 };
 
 export const GameStateContext: React.Context<GameState> = createContext<GameState>({
@@ -77,6 +80,10 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   },
   mapGlobal: [[]],
   setMapGlobal: (newMapGlobal: string[][]) => {
+    //
+  },
+  boardSize: 11,
+  setBoardSize: (newBoardSize: number) => {
     //
   },
 });

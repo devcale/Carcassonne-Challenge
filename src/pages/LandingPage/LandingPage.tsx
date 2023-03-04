@@ -6,7 +6,7 @@ export const LandingPage = () => {
   return (
     <div className={styling.mainContainer}>
       <div className={styling.titleLanding}>Carcassonne Challenge</div>
-      <Link to="/Carcassonne-Challenge/play">
+      <Link to="/Carcassonne-Challenge/gamemode">
         <div className={styling.uiButton}>Play Game</div>
       </Link>
 
