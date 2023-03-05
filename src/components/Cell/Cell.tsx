@@ -94,6 +94,10 @@ const Cell = (props: {
     //
   }
 
+  function endGame(): void {
+    //
+  }
+
   function updateHand() {
     const nextState = getRandomTile(abbeyCountdown, cityCountdown);
 
@@ -109,6 +113,12 @@ const Cell = (props: {
     setAbbeyCountdown(nextState.updatedAbbeyCountdown);
     setCityCountdown(nextState.updatedCityCountdown);
     setHand(newHand);
+
+    //Check if game has ended
+    if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown)) {
+      setPoints(0);
+      console.log('Game has ended');
+    }
   }
 
   // Sets the type of each cell on load

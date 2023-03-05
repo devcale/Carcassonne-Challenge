@@ -1,13 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
 import Cell from '../Cell/Cell';
 import styling from './BoardComponent.module.css';
 
 export const BoardComponent = () => {
-  const { mapGlobal, setPoints } = useGameStateContext();
+  const {
+    mapGlobal,
+    setPoints,
+    setDiscardCountdown,
+    setAbbeyCountdown,
+    setCityCountdown,
+  } = useGameStateContext();
 
   useEffect(() => {
+    setDiscardCountdown(5);
+    setAbbeyCountdown(15);
+    setCityCountdown([12, 13, 14]);
     setPoints(0);
     console.log('Rendered board with board size: ' + mapGlobal.length);
     console.log('Map is: ');
