@@ -17,8 +17,6 @@ function App() {
     [string, number],
     [string, number],
   ];
-  const [mapSize, setMapSize] = useState(11);
-  const [cellSize, setCellSize] = useState(`${100 / mapSize}%`);
   const [currentTile, setCurrentTile] = useState<number>(0);
   const [points, setPoints] = useState(0);
   const [hand, setHand] = useState<handType>([
@@ -34,7 +32,7 @@ function App() {
   const [discardCountdown, setDiscardCountdown] = useState<number>(5);
 
   const board = new Board(
-    mapSize,
+    11,
     () => 'inactive',
     () => 'init',
   );
@@ -68,10 +66,6 @@ function App() {
         setDiscardCountdown,
         mapGlobal,
         setMapGlobal,
-        mapSize,
-        setMapSize,
-        cellSize,
-        setCellSize,
       }}
     >
       <Routes>

@@ -9,19 +9,14 @@ import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
 export const SelectModePage = () => {
-  const { mapSize, setMapSize, mapGlobal, setMapGlobal, setCellSize } =
-    useGameStateContext();
+  const { mapGlobal, setMapGlobal } = useGameStateContext();
 
-  const [selectedMapSize, setSelectedMapSize] = useState(mapSize);
   function mapDuplication(mapToChange: string[][]): string[][] {
     const mapInit: string[][] = mapToChange.map((subArr) => subArr.slice());
     return mapInit;
   }
 
   function updateMapValues(size: number): void {
-    setSelectedMapSize(size);
-    console.log('Map size selected: ' + selectedMapSize);
-    setCellSize(`${100 / selectedMapSize}%`);
     const board = new Board(
       size,
       () => 'inactive',

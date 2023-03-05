@@ -37,12 +37,6 @@ export type GameState = {
 
   mapGlobal: string[][];
   setMapGlobal: (mapGlobal: string[][]) => void;
-
-  mapSize: number;
-  setMapSize: (newMapSize: number) => void;
-
-  cellSize: string;
-  setCellSize: (cellSize: string) => void;
 };
 
 export const GameStateContext: React.Context<GameState> = createContext<GameState>({
@@ -80,14 +74,6 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   },
   mapGlobal: [],
   setMapGlobal: (newMapGlobal: string[][]) => {
-    //
-  },
-  mapSize: 11,
-  setMapSize: (newMapSize: number) => {
-    //
-  },
-  cellSize: `${100 / 11}%`,
-  setCellSize: (newCellSize: string) => {
     //
   },
 });
