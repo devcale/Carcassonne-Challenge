@@ -1,8 +1,5 @@
 import { createContext, useContext } from 'react';
 
-import Board from '../components/Board/Board';
-import Cell from '../components/Cell/Cell';
-
 export type GameState = {
   // Used to simbolize the index of tile that the player has selected in his hand
   // 0 <= currentTile < 5
@@ -41,8 +38,11 @@ export type GameState = {
   mapGlobal: string[][];
   setMapGlobal: (mapGlobal: string[][]) => void;
 
-  boardSize: number;
-  setBoardSize: (boardSize: number) => void;
+  mapSize: number;
+  setMapSize: (newMapSize: number) => void;
+
+  cellSize: string;
+  setCellSize: (cellSize: string) => void;
 };
 
 export const GameStateContext: React.Context<GameState> = createContext<GameState>({
@@ -78,12 +78,16 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   setDiscardCountdown: (newDiscardCountdown: number) => {
     //
   },
-  mapGlobal: [[]],
+  mapGlobal: [],
   setMapGlobal: (newMapGlobal: string[][]) => {
     //
   },
-  boardSize: 11,
-  setBoardSize: (newBoardSize: number) => {
+  mapSize: 11,
+  setMapSize: (newMapSize: number) => {
+    //
+  },
+  cellSize: `${100 / 11}%`,
+  setCellSize: (newCellSize: string) => {
     //
   },
 });
