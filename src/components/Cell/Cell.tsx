@@ -82,7 +82,7 @@ const Cell = (props: {
 
   function handleMouseOut() {
     if (type === 'inactive') {
-      setBackgroundImage('');
+      setBackgroundImage('inactive');
     }
   }
 
