@@ -1,11 +1,10 @@
-import Board from '../../components/Board/Board';
 import { BoardComponent } from '../../components/Board/BoardComponent';
 import { Discard } from '../../components/Discard/Discard';
 import { Hand } from '../../components/Hand/Hand';
 import { Points } from '../../components/Points/Points';
 import styling from './PlayGame.module.css';
 
-export const PlayGame = (props: { board: Board<string> }) => {
+export const PlayGame = () => {
   return (
     <div className={styling.playgame}>
       <div className={styling.title}>Carcassonne Challenge</div>
@@ -16,7 +15,7 @@ export const PlayGame = (props: { board: Board<string> }) => {
         </div>
 
         <div className={styling.boardContainer}>
-          <BoardComponent board={props.board} />
+          <BoardComponent />
         </div>
         <div className={styling.pointsContainer}>
           <Points />

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import abbeysAblaze from '../../assets/images/abbeys-ablaze.png';
@@ -8,30 +9,50 @@ import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
 export const SelectModePage = () => {
-  const { boardSize, setBoardSize, setMapGlobal } = useGameStateContext();
+  const { mapGlobal, setMapGlobal } = useGameStateContext();
+
+  function mapDuplication(mapToChange: string[][]): string[][] {
+    const mapInit: string[][] = mapToChange.map((subArr) => subArr.slice());
+    return mapInit;
+  }
+
+  function updateMapValues(size: number): void {
+    const board = new Board(
+      size,
+      () => 'inactive',
+      () => 'init',
+    );
+    const newBoard = mapDuplication(board.getBoard());
+    console.log('Board created: ');
+    console.log(newBoard);
+    setMapGlobal(newBoard);
+    console.log('Board updated: ');
+    console.log(mapGlobal);
+  }
 
   function handleClick(optionType: string, option: string) {
     if (optionType === 'size') {
       if (option === 'small') {
-        setBoardSize(5);
-        const board = new Board(
-          boardSize,
-          () => 'inactive',
-          () => 'init',
-        );
-        setMapGlobal(board.getBoard());
+        console.log('enters small');
+        updateMapValues(5);
       } else if (option === 'classic') {
-        setBoardSize(11);
+        console.log('enters classic');
+        updateMapValues(11);
       } else if (option === 'large') {
-        setBoardSize(15);
+        console.log('enters large');
+        updateMapValues(15);
       } else if (option === 'colossal') {
-        setBoardSize(21);
+        console.log('enters colossal');
+        updateMapValues(21);
       }
     }
   }
   function handleKeyDown() {
     //
   }
+  useEffect(() => {
+    console.log('Triggered refresh on select mode page');
+  }, []);
   return (
     <div className={styling.gameModeContainer}>
       <div className={styling.title}>Carcassonne Challenge</div>

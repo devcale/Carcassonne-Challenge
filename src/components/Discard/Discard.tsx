@@ -1,10 +1,18 @@
 import { useGameStateContext } from '../../context/Context';
+import Board from '../Board/Board';
 import styling from './Discard.module.css';
 
 export const Discard = () => {
-  const { hand, setHand, discardCountdown, setDiscardCountdown } = useGameStateContext();
+  const { hand, setHand, discardCountdown, setDiscardCountdown, mapGlobal } =
+    useGameStateContext();
 
   const discardHandTabIndex = 4;
+
+  const boardHelper = new Board(
+    0,
+    () => '',
+    () => '',
+  );
 
   function handleKeyDown() {
     //
@@ -31,6 +39,7 @@ export const Discard = () => {
 
       setHand(newHand);
       setDiscardCountdown(5);
+      boardHelper.checkGameEnd(newHand, mapGlobal, 5);
     }
   }
 
