@@ -1,0 +1,16 @@
+.modalTitle {
+  font-size: 5vh;
+
+  color: #b39500;
+  text-shadow: 2px 2px 1px #735236;
+}
+
+.modalDescription {
+  font-size: 2vh;
+}
+
+.finalPoints {
+  font-size: 5vh;
+  color: #b39500;
+  text-shadow: 2px 2px 1px #735236;
+}

@@ -29,6 +29,7 @@ const Cell = (props: {
     mapGlobal,
     points,
     setPoints,
+    setGameHasEnded,
   } = useGameStateContext();
 
   const boardHelper = new Board(
@@ -116,7 +117,7 @@ const Cell = (props: {
 
     //Check if game has ended
     if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown)) {
-      setPoints(0);
+      setGameHasEnded(true);
       console.log('Game has ended');
     }
   }

@@ -37,6 +37,9 @@ export type GameState = {
 
   mapGlobal: string[][];
   setMapGlobal: (mapGlobal: string[][]) => void;
+
+  gameHasEnded: boolean;
+  setGameHasEnded: (gameHasEnded: boolean) => void;
 };
 
 export const GameStateContext: React.Context<GameState> = createContext<GameState>({
@@ -74,6 +77,10 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   },
   mapGlobal: [],
   setMapGlobal: (newMapGlobal: string[][]) => {
+    //
+  },
+  gameHasEnded: false,
+  setGameHasEnded: (newGameHasEnded: boolean) => {
     //
   },
 });

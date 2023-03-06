@@ -32,24 +32,18 @@
   border-color: #bf7f47;
 }
 
-.selected {
-  border-radius: 20px;
-  background-color: #ffd5a1;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #bf7f47;
-}
-
 .dealingModeContainer {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   font-size: 3vh;
-  height: 45%;
+  height: 40%;
   width: 60%;
   margin: 1%;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
 }
 
 .dealingModeOptions {
@@ -59,46 +53,97 @@
   justify-content: center;
   align-items: center;
 }
+.dealingModeOptionsForm {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .dealingModeOption {
   height: 90%;
-  width: 17%;
+  width: 20%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 
   text-align: center;
 
-  padding-left: 1%;
-  padding-right: 1%;
   margin: 1%;
   font-size: 2vh;
 }
 .dealingModeImageContainer {
-  border-radius: 10px;
-  margin-bottom: 5%;
-  height: 50%;
+  border-radius: inherit;
+  transform: scale(1.01);
+  height: 100%;
   width: 100%;
 }
 
 .dealingModeImage {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #735236;
+  border-radius: inherit;
+}
+
+.dealingModeOption:hover > div {
+  visibility: visible;
+  background-color: rgba(51, 37, 24, 0.75);
+  color: rgba(255, 255, 255, 1);
+  transform: scale(1.01);
+  font-size: 3.5vh;
+  transition: background-color 0.6s, color 0.5s, font-size 0.5s;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.selectedMode > div {
+  visibility: visible;
+  background-color: rgba(51, 37, 24, 0.95);
+  color: rgba(255, 255, 255, 1);
+  transform: scale(1.01);
+  font-size: 3.5vh;
+  transition: background-color 0.6s, color 0.5s, font-size 0.5s;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.unselectedMode > div {
+  visibility: visible;
+  background-color: rgba(51, 37, 24, 0.3);
+  color: rgba(255, 255, 255, 0);
+  transform: scale(1.01);
+  font-size: 3.5vh;
+  transition: background-color 0.6s, color 0.5s, font-size 0.5s;
+  text-shadow: none;
 }
 
 .dealingModeInfo {
-  height: 30%;
+  visibility: visible;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  transform: scale(1.01);
+  background-color: rgba(51, 37, 24, 0.3);
+  border-radius: inherit;
+  color: rgba(0, 0, 0, 0);
+  font-size: 2.5vh;
+  text-shadow: none;
 }
 .dealingModeTitle {
-  font-size: 1.5vh;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: inherit;
   padding-bottom: 5%;
+  color: white;
 }
 
 .dealingModeDescription {
   font-size: 1.2vh;
+  color: inherit;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .dealingModeImage {
@@ -117,6 +162,8 @@
   height: 15%;
   width: 40%;
   margin: 1%;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000;
 }
 .boardSizeOptions {
   height: 60%;
@@ -126,14 +173,23 @@
   align-items: center;
 }
 
+.boardSizeOptionsForm {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .boardSizeOption {
   display: inline;
   align-items: center;
   text-align: center;
-  width: 15%;
+  width: 20%;
   padding: 1%;
-  margin: 1%;
   font-size: 2vh;
+  color: #000;
+  text-shadow: none;
 }
 
 .playButton {
@@ -164,6 +220,12 @@
 }
 
 .interactable:hover {
+  box-shadow: 6px 6px 3px rgba(51, 37, 24, 0.5);
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+}
+
+.interactable:focus {
   box-shadow: 6px 6px 3px rgba(51, 37, 24, 0.5);
   -webkit-transform: scale(1.08);
   transform: scale(1.08);

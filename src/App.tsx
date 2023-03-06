@@ -38,6 +38,7 @@ function App() {
   );
 
   const [mapGlobal, setMapGlobal] = useState<string[][]>(initMapGlobal);
+  const [gameHasEnded, setGameHasEnded] = useState<boolean>(false);
 
   function initMapGlobal(): string[][] {
     const mapInit: string[][] = board.getBoard().map((subArr) => subArr.slice());
@@ -66,6 +67,8 @@ function App() {
         setDiscardCountdown,
         mapGlobal,
         setMapGlobal,
+        gameHasEnded,
+        setGameHasEnded,
       }}
     >
       <Routes>
