@@ -1,14 +1,42 @@
-import Board from '../../components/Board/Board';
+import { useEffect, useState } from 'react';
+
 import { BoardComponent } from '../../components/Board/BoardComponent';
 import { Discard } from '../../components/Discard/Discard';
 import { Hand } from '../../components/Hand/Hand';
+import { EndGameModal } from '../../components/Modal/EndGameModal';
 import { Points } from '../../components/Points/Points';
+import { useGameStateContext } from '../../context/Context';
 import styling from './PlayGame.module.css';
 
-export const PlayGame = (props: { board: Board<string> }) => {
+export const PlayGame = () => {
+  const {
+    gameHasEnded,
+    mapGlobal,
+    setPoints,
+    setDiscardCountdown,
+    setAbbeyCountdown,
+    setCityCountdown,
+    setGameHasEnded,
+  } = useGameStateContext();
+
+  const handleClose = () => setGameHasEnded(false);
+
+  useEffect(() => {
+    setGameHasEnded(false);
+    setDiscardCountdown(5);
+    setAbbeyCountdown(15);
+    setCityCountdown([12, 13, 14]);
+    setPoints(0);
+    console.log('Rendered board with board size: ' + mapGlobal.length);
+    console.log('Map is: ');
+    console.log(mapGlobal);
+  }, []);
   return (
     <div className={styling.playgame}>
-      <div className={styling.title}>Carcassonne Challenge</div>
+      <EndGameModal openModal={gameHasEnded} closeModal={handleClose} />
+      <div className={styling.title}>
+        {gameHasEnded ? 'Game Over' : 'Carcassonne Challenge'}
+      </div>
       <div className={styling.playArea}>
         <div className={styling.handContainer}>
           <Hand />
@@ -16,7 +44,7 @@ export const PlayGame = (props: { board: Board<string> }) => {
         </div>
 
         <div className={styling.boardContainer}>
-          <BoardComponent board={props.board} />
+          <BoardComponent />
         </div>
         <div className={styling.pointsContainer}>
           <Points />

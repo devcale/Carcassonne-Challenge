@@ -29,6 +29,7 @@ const Cell = (props: {
     mapGlobal,
     points,
     setPoints,
+    setGameHasEnded,
   } = useGameStateContext();
 
   const boardHelper = new Board(
@@ -82,7 +83,7 @@ const Cell = (props: {
 
   function handleMouseOut() {
     if (type === 'inactive') {
-      setBackgroundImage('');
+      setBackgroundImage('inactive');
     }
   }
 
@@ -91,6 +92,10 @@ const Cell = (props: {
   }
 
   function handleBlur() {
+    //
+  }
+
+  function endGame(): void {
     //
   }
 
@@ -109,6 +114,12 @@ const Cell = (props: {
     setAbbeyCountdown(nextState.updatedAbbeyCountdown);
     setCityCountdown(nextState.updatedCityCountdown);
     setHand(newHand);
+
+    //Check if game has ended
+    if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown)) {
+      setGameHasEnded(true);
+      console.log('Game has ended');
+    }
   }
 
   // Sets the type of each cell on load
