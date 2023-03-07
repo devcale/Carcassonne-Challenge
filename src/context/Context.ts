@@ -35,8 +35,8 @@ export type GameState = {
   discardCountdown: number;
   setDiscardCountdown: (discardCountdown: number) => void;
 
-  mapGlobal: string[][];
-  setMapGlobal: (mapGlobal: string[][]) => void;
+  mapGlobal: {type: string, variant: number}[][];
+  setMapGlobal: (mapGlobal: {type: string, variant: number}[][]) => void;
 
   gameHasEnded: boolean;
   setGameHasEnded: (gameHasEnded: boolean) => void;
@@ -76,7 +76,7 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
     //
   },
   mapGlobal: [],
-  setMapGlobal: (newMapGlobal: string[][]) => {
+  setMapGlobal: (newMapGlobal: {type: string, variant: number}[][]) => {
     //
   },
   gameHasEnded: false,

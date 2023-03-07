@@ -8,21 +8,28 @@ import roadRally from '../../assets/images/road-rally.png';
 import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
+type cellType = { type: string; variant: number };
 export const SelectModePage = () => {
   const { mapGlobal, setMapGlobal } = useGameStateContext();
   const [selectedMode, setSelectedMode] = useState('classic');
   const [selectedSize, setSelectedSize] = useState('classic');
 
-  function mapDuplication(mapToChange: string[][]): string[][] {
-    const mapInit: string[][] = mapToChange.map((subArr) => subArr.slice());
+  function mapDuplication(mapToChange: cellType[][]): cellType[][] {
+    const mapInit: cellType[][] = mapToChange.map((subArr) => subArr.slice());
     return mapInit;
   }
 
   function updateMapValues(size: number): void {
     const board = new Board(
       size,
-      () => 'inactive',
-      () => 'init',
+      {
+        type: 'inactive',
+        variant: 0,
+      },
+      {
+        type: 'init',
+        variant: 0,
+      },
     );
     const newBoard = mapDuplication(board.getBoard());
     console.log('Board created: ');

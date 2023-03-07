@@ -7,6 +7,7 @@ import styling from './Cell.module.css';
 
 const Cell = (props: {
   type: string;
+  variant: number;
   altitude: number;
   latitude: number;
   boardDimension: number;
@@ -32,18 +33,14 @@ const Cell = (props: {
     setGameHasEnded,
   } = useGameStateContext();
 
-  const boardHelper = new Board(
-    0,
-    () => '',
-    () => '',
-  );
+  const boardHelper = new Board(0, { type: '', variant: 0 }, { type: '', variant: 0 });
 
   const tabIndexNum = 6 + props.altitude * props.boardDimension + props.latitude;
 
   function handleClick() {
     if (type === 'inactive') {
       const placedTile = boardHelper.placeTile(
-        hand[currentTile][0],
+        { type: hand[currentTile][0], variant: hand[currentTile][1] },
         props.latitude,
         props.altitude,
         mapGlobal,

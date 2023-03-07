@@ -67,7 +67,7 @@
     background-size: cover;
 
     z-index: 500;
-    outline-offset: -10px;
+    outline-offset: -6px;
 
     outline-style: none;
     user-select: none;
@@ -102,24 +102,20 @@
 
   .init {
     background-image: url('src/assets/images/intersection-a.png');
-    outline: 9px solid;
-    outline-style: ridge;
+    outline: 1px solid;
     outline-color: white;
   }
 
   .city {
-    outline: 9px solid #f0c195;
-    outline-style: ridge;
+    outline: 5px solid #f0c195;
   }
 
   .abbey {
-    outline: 9px solid #96e394;
-    outline-style: ridge;
+    outline: 5px solid gold;
   }
 
   .road {
-    outline: 9px solid #ead6ab;
-    outline-style: ridge;
+    outline: 5px solid #ead6ab;
   }
 
   .city-0 {

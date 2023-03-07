@@ -8,11 +8,7 @@ export const Discard = () => {
 
   const discardHandTabIndex = 4;
 
-  const boardHelper = new Board(
-    0,
-    () => '',
-    () => '',
-  );
+  const boardHelper = new Board(0, { type: '', variant: 0 }, { type: '', variant: 0 });
 
   function handleKeyDown() {
     //

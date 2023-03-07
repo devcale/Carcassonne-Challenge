@@ -9,7 +9,7 @@ import { InstructionsPage } from './pages/InstructionsPage/InstructionsPage';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { PlayGame } from './pages/PlayGame/PlayGame';
 import { SelectModePage } from './pages/SelectModePage/SelectModePage';
-
+type cellType = { type: string; variant: number };
 function App() {
   type handType = [
     [string, number],
@@ -33,15 +33,15 @@ function App() {
 
   const board = new Board(
     11,
-    () => 'inactive',
-    () => 'init',
+    { type: 'inactive', variant: 0 },
+    { type: 'init', variant: 0 },
   );
 
-  const [mapGlobal, setMapGlobal] = useState<string[][]>(initMapGlobal);
+  const [mapGlobal, setMapGlobal] = useState<cellType[][]>(initMapGlobal);
   const [gameHasEnded, setGameHasEnded] = useState<boolean>(false);
 
-  function initMapGlobal(): string[][] {
-    const mapInit: string[][] = board.getBoard().map((subArr) => subArr.slice());
+  function initMapGlobal(): cellType[][] {
+    const mapInit: cellType[][] = board.getBoard().map((subArr) => subArr.slice());
     return mapInit;
   }
 

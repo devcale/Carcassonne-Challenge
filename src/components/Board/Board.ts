@@ -1,29 +1,31 @@
-class Board<A> {
-  private map: A[][];
+type cellType = {type: string, variant: number};
+
+class Board {
+  private map: cellType[][];
   private size: number;
 
-  constructor(size: number, init: () => A, center: () => A) {
+  constructor(size: number, init: cellType, center: cellType) {
     this.map = [];
     this.size = size;
     const middle = Math.floor(size / 2);
     for (let i = 0; i < size; i++) {
-      const row: A[] = [];
+      const row: cellType[] = [];
       for (let j = 0; j < size; j++) {
         if (i === middle && j === middle) {
-          row.push(center());
+          row.push(center);
         } else {
-          row.push(init());
+          row.push(init);
         }
       }
       this.map.push(row);
     }
   }
 
-  getFromBoard(x: number, y: number): A {
+  getFromBoard(x: number, y: number): cellType {
     return this.map[x][y];
   }
 
-  setInBoard(type: A, latitude: number, altitude: number): void {
+  setInBoard(type: cellType, latitude: number, altitude: number): void {
     this.map[latitude][altitude] = type;
   }
 
@@ -32,17 +34,17 @@ class Board<A> {
   }
 
   isPlacementValid(
-    type: string,
+    cell: cellType,
     latitude: number,
     altitude: number,
-    map: string[][],
+    map: cellType[][],
   ): boolean {
     let isValid = false;
     const currentCell = map[latitude][altitude];
-    let upperCell = 'out';
-    let lowerCell = 'out';
-    let rightCell = 'out';
-    let leftCell = 'out';
+    let upperCell = {type: 'out', variant:0};
+    let lowerCell = {type: 'out', variant:0};
+    let rightCell = {type: 'out', variant:0};
+    let leftCell = {type: 'out', variant:0};
 
     if (altitude - 1 >= 0) {
       upperCell = map[latitude][altitude - 1];
@@ -57,22 +59,22 @@ class Board<A> {
       leftCell = map[latitude - 1][altitude];
     }
 
-    let allowed: string[] = [];
+    let allowedTypes: string[] = [];
 
-    if (type === 'city') {
-      allowed = ['city', 'abbey', 'road', 'init'];
-    } else if (type === 'road') {
-      allowed = ['road', 'init'];
-    } else if (type === 'abbey') {
-      allowed = ['city', 'abbey', 'road', 'init'];
+    if (cell.type === 'city') {
+      allowedTypes = ['city', 'abbey', 'road', 'init'];
+    } else if (cell.type === 'road') {
+      allowedTypes = ['road', 'init'];
+    } else if (cell.type === 'abbey') {
+      allowedTypes = ['city', 'abbey', 'road', 'init'];
     }
 
     if (
-      currentCell === 'inactive' &&
-      (allowed.includes(upperCell) ||
-        allowed.includes(lowerCell) ||
-        allowed.includes(rightCell) ||
-        allowed.includes(leftCell))
+      currentCell.type === 'inactive' &&
+      (allowedTypes.includes(upperCell.type) ||
+      allowedTypes.includes(lowerCell.type) ||
+      allowedTypes.includes(rightCell.type) ||
+      allowedTypes.includes(leftCell.type))
     ) {
       isValid = true;
     }
@@ -80,16 +82,16 @@ class Board<A> {
     return isValid;
   }
 
-  abbeyPoints(type: string, latitude: number, altitude: number, map: string[][]): number {
+  abbeyPoints(cell: cellType, latitude: number, altitude: number, map: cellType[][]): number {
     let pointsGained = 0;
-    let upperCell = 'out';
-    let lowerCell = 'out';
-    let rightCell = 'out';
-    let leftCell = 'out';
-    let topLeftCell = 'out';
-    let topRightCell = 'out';
-    let bottomRightCell = 'out';
-    let bottomLeftCell = 'out';
+    let upperCell = {type: 'out', variant:0};
+    let lowerCell = {type: 'out', variant:0};
+    let rightCell = {type: 'out', variant:0};
+    let leftCell = {type: 'out', variant:0};
+    let topLeftCell = {type: 'out', variant:0};
+    let topRightCell = {type: 'out', variant:0};
+    let bottomRightCell = {type: 'out', variant:0};
+    let bottomLeftCell = {type: 'out', variant:0};
 
     if (altitude - 1 >= 0) {
       upperCell = map[latitude][altitude - 1];
@@ -116,55 +118,55 @@ class Board<A> {
       bottomLeftCell = map[latitude - 1][altitude + 1];
     }
 
-    const allowed = ['abbey', 'city', 'road'];
-    if (type === 'abbey') {
-      if (allowed.includes(topRightCell)) {
+    const allowedTypes = ['abbey', 'city', 'road'];
+    if (cell.type === 'abbey') {
+      if (allowedTypes.includes(topRightCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(topLeftCell)) {
+      if (allowedTypes.includes(topLeftCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(bottomRightCell)) {
+      if (allowedTypes.includes(bottomRightCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(bottomLeftCell)) {
+      if (allowedTypes.includes(bottomLeftCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(rightCell)) {
+      if (allowedTypes.includes(rightCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(leftCell)) {
+      if (allowedTypes.includes(leftCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(upperCell)) {
+      if (allowedTypes.includes(upperCell.type)) {
         pointsGained += 1;
       }
-      if (allowed.includes(lowerCell)) {
+      if (allowedTypes.includes(lowerCell.type)) {
         pointsGained += 1;
       }
     } else {
-      if (topRightCell === 'abbey') {
+      if (topRightCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (topLeftCell === 'abbey') {
+      if (topLeftCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (bottomRightCell === 'abbey') {
+      if (bottomRightCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (bottomLeftCell === 'abbey') {
+      if (bottomLeftCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (upperCell === 'abbey') {
+      if (upperCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (rightCell === 'abbey') {
+      if (rightCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (lowerCell === 'abbey') {
+      if (lowerCell.type === 'abbey') {
         pointsGained += 1;
       }
-      if (leftCell === 'abbey') {
+      if (leftCell.type === 'abbey') {
         pointsGained += 1;
       }
     }
@@ -173,7 +175,7 @@ class Board<A> {
 
   checkGameEnd(
     hand: [[string, number], [string, number], [string, number], [string, number]],
-    map: string[][],
+    map: cellType[][],
     discardCountdown: number,
   ): boolean {
     console.log('Checking if game has ended');
@@ -183,10 +185,10 @@ class Board<A> {
     } else {
       let found = false;
       for (let i = 0; i < hand.length && !found; i++) {
-        const handTileType: string = hand[i][0];
+        const handTile: cellType = {type: hand[i][0], variant: hand[i][1]}
         for (let j = 0; j < map.length && !found; j++) {
           for (let k = 0; k < map[j].length && !found; k++) {
-            if (this.isPlacementValid(handTileType, j, k, map)) {
+            if (this.isPlacementValid(handTile, j, k, map)) {
               gameHasEnded = false;
               found = true;
             }
@@ -203,39 +205,27 @@ class Board<A> {
   // The boolean is used to indicate if the tile was successfully placed
   // The number is the amount of points gained
   placeTile(
-    type: string,
+    cell: cellType,
     latitude: number,
     altitude: number,
-    map: string[][],
+    map: cellType[][],
   ): { isValid: boolean; pointsGained: number } {
     let pointsGained = 0;
     let isValid = false;
 
-    if (type === 'city') {
-      if (this.isPlacementValid(type, latitude, altitude, map)) {
-        pointsGained += this.abbeyPoints(type, latitude, altitude, map);
+    
+      if (this.isPlacementValid(cell, latitude, altitude, map)) {
+        pointsGained += this.abbeyPoints(cell, latitude, altitude, map);
         pointsGained += 3;
         isValid = true;
-        map[latitude][altitude] = 'city';
+        map[latitude][altitude] = cell;
       }
-    } else if (type === 'road') {
-      if (this.isPlacementValid(type, latitude, altitude, map)) {
-        pointsGained += this.abbeyPoints(type, latitude, altitude, map);
-        pointsGained += 1;
-        isValid = true;
-        map[latitude][altitude] = 'road';
-      }
-    } else if (type === 'abbey') {
-      if (this.isPlacementValid(type, latitude, altitude, map)) {
-        pointsGained += this.abbeyPoints(type, latitude, altitude, map);
-        isValid = true;
-        map[latitude][altitude] = 'abbey';
-      }
-    }
+      
+    
     return { isValid: isValid, pointsGained: pointsGained };
   }
 
-  getBoard(): A[][] {
+  getBoard(): cellType[][] {
     return this.map;
   }
 }
