@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
+import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
-import { getRandomTile } from '../Hand/Hand';
 import styling from './Cell.module.css';
 
 const Cell = (props: {
@@ -30,6 +30,7 @@ const Cell = (props: {
     mapGlobal,
     points,
     setPoints,
+    gameMode,
     setGameHasEnded,
   } = useGameStateContext();
 
@@ -44,6 +45,7 @@ const Cell = (props: {
         props.latitude,
         props.altitude,
         mapGlobal,
+        gameMode,
       );
       if (placedTile.isValid) {
         setType(hand[currentTile][0]);
@@ -63,8 +65,23 @@ const Cell = (props: {
   function handleMouseOver() {
     if (type === 'inactive') {
       const images = {
-        city: ['city-0', 'city-1', 'city-2'],
-        road: ['road-0', 'road-1', 'road-2'],
+        city: ['city-0', 'city-1', 'city-2', 'city-3'],
+        road: [
+          'road-0',
+          'road-1',
+          'road-2',
+          'road-3',
+          'road-4',
+          'road-5',
+          'road-6',
+          'road-7',
+          'road-8',
+          'road-9',
+          'road-10',
+          'road-11',
+          'road-12',
+          'road-13',
+        ],
         abbey: ['abbey-0', 'abbey-1', 'abbey-2'],
       };
 
@@ -97,7 +114,7 @@ const Cell = (props: {
   }
 
   function updateHand() {
-    const nextState = getRandomTile(abbeyCountdown, cityCountdown);
+    const nextState = DealNewTile(abbeyCountdown, cityCountdown, gameMode);
 
     const newHand: [
       [string, number],
@@ -106,14 +123,14 @@ const Cell = (props: {
       [string, number],
     ] = [...hand];
 
-    newHand[currentTile][0] = nextState.newTile;
-    newHand[currentTile][1] = nextState.newVariation;
+    newHand[currentTile][0] = nextState.tile.type;
+    newHand[currentTile][1] = nextState.tile.variant;
     setAbbeyCountdown(nextState.updatedAbbeyCountdown);
     setCityCountdown(nextState.updatedCityCountdown);
     setHand(newHand);
 
     //Check if game has ended
-    if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown)) {
+    if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown, gameMode)) {
       setGameHasEnded(true);
       console.log('Game has ended');
     }

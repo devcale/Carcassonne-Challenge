@@ -10,8 +10,8 @@ import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
 type cellType = { type: string; variant: number };
 export const SelectModePage = () => {
-  const { mapGlobal, setMapGlobal } = useGameStateContext();
-  const [selectedMode, setSelectedMode] = useState('classic');
+  const { mapGlobal, setMapGlobal, setGameMode } = useGameStateContext();
+  const [selectedMode, setSelectedMode] = useState('classic'); // Manages UI Update
   const [selectedSize, setSelectedSize] = useState('classic');
 
   function mapDuplication(mapToChange: cellType[][]): cellType[][] {
@@ -52,14 +52,18 @@ export const SelectModePage = () => {
       if (option === 'classic') {
         console.log('enters classic mode');
         setSelectedMode('classic');
+        setGameMode('classic');
       } else if (option === 'road') {
         console.log('enters road mode');
+        setGameMode('road');
         setSelectedMode('road');
       } else if (option === 'city') {
         console.log('enters city mode');
+        setGameMode('city');
         setSelectedMode('city');
       } else if (option === 'abbey') {
         console.log('enters abbey mode');
+        setGameMode('abbey');
         setSelectedMode('abbey');
       }
     }

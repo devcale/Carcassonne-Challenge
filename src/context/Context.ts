@@ -35,8 +35,14 @@ export type GameState = {
   discardCountdown: number;
   setDiscardCountdown: (discardCountdown: number) => void;
 
+  // Stores the state of the board
+  // "type" stands for the type of tile that is currently in a given position (i.e. "road", "abbey", "city", "init", "inactive")
+  // "variant" stands for the variant of a given tile (Mostly used for image variety and road rally mode)
   mapGlobal: { type: string; variant: number }[][];
   setMapGlobal: (mapGlobal: { type: string; variant: number }[][]) => void;
+
+  gameMode: string;
+  setGameMode: (gameMode: string) => void;
 
   gameHasEnded: boolean;
   setGameHasEnded: (gameHasEnded: boolean) => void;
@@ -77,6 +83,10 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   },
   mapGlobal: [],
   setMapGlobal: (newMapGlobal: { type: string; variant: number }[][]) => {
+    //
+  },
+  gameMode: 'classic',
+  setGameMode: (newGameMode: string) => {
     //
   },
   gameHasEnded: false,

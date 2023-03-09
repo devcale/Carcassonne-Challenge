@@ -101,7 +101,7 @@
   }
 
   .init {
-    background-image: url('src/assets/images/roads/road-a.png');
+    background-image: url('src/assets/images/roads/intersection-a.png');
     outline: 5px solid #ead6ab;
   }
 
@@ -118,38 +118,68 @@
   }
 
   .city-0 {
-    background-image: url('../../assets/images/cities/city-a.png');
+    background-image: url('../../assets/images/cities/000-city.png');
+  }
+  .city-1 {
+    background-image: url('../../assets/images/cities/001-city.png');
+  }
+  .city-2 {
+    background-image: url('../../assets/images/cities/002-city.png');
+  }
+  .city-3 {
+    background-image: url('../../assets/images/cities/003-city.png');
   }
 
   .road-0 {
-    background-image: url('../../assets/images/roads/road-a.png');
+    background-image: url('../../assets/images/roads/000-four-way.png');
+  }
+  .road-1 {
+    background-image: url('../../assets/images/roads/001-three-way-top.png');
+  }
+  .road-2 {
+    background-image: url('../../assets/images/roads/002-three-way-right.png');
+  }
+  .road-3 {
+    background-image: url('../../assets/images/roads/003-three-way-bottom.png');
+  }
+  .road-4 {
+    background-image: url('../../assets/images/roads/004-three-way-left.png');
+  }
+  .road-5 {
+    background-image: url('../../assets/images/roads/005-corner-top-right.png');
+  }
+  .road-6 {
+    background-image: url('../../assets/images/roads/006-corner-right-bottom.png');
+  }
+  .road-7 {
+    background-image: url('../../assets/images/roads/007-corner-bottom-left.png');
+  }
+  .road-8 {
+    background-image: url('../../assets/images/roads/008-corner-left-top.png');
+  }
+  .road-9 {
+    background-image: url('../../assets/images/roads/009-straight-top-bottom.png');
+  }
+  .road-10 {
+    background-image: url('../../assets/images/roads/010-straight-left-right.png');
+  }
+  .road-11 {
+    background-image: url('../../assets/images/roads/011-generic-road.png');
+  }
+  .road-12 {
+    background-image: url('../../assets/images/roads/012-generic-road.png');
+  }
+  .road-13 {
+    background-image: url('../../assets/images/roads/013-generic-road.png');
   }
 
   .abbey-0 {
-    background-image: url('../../assets/images/abbeys/abbey-a.png');
+    background-image: url('../../assets/images/abbeys/000-abbey.png');
   }
-
-  .city-1 {
-    background-image: url('../../assets/images/cities/city-b.png');
-  }
-
-  .road-1 {
-    background-image: url('../../assets/images/roads/road-b.png');
-  }
-
   .abbey-1 {
-    background-image: url('../../assets/images/abbeys/abbey-b.png');
+    background-image: url('../../assets/images/abbeys/001-abbey.png');
   }
-
-  .city-2 {
-    background-image: url('../../assets/images/cities/city-c.png');
-  }
-
-  .road-2 {
-    background-image: url('../../assets/images/roads/road-c.png');
-  }
-
   .abbey-2 {
-    background-image: url('../../assets/images/abbeys/abbey-c.png');
+    background-image: url('../../assets/images/abbeys/002-abbey.png');
   }
 }
