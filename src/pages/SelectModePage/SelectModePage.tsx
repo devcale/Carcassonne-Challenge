@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import abbeysAblaze from '../../assets/images/abbeys-ablaze.png';
-import cityCraze from '../../assets/images/city-craze.png';
-import classicCarca from '../../assets/images/classic-carcassonne.png';
-import roadRally from '../../assets/images/road-rally.png';
+import abbeysAblaze from '../../assets/images/modes/abbeys-ablaze.png';
+import cityCraze from '../../assets/images/modes/city-craze.png';
+import classicCarca from '../../assets/images/modes/classic-carcassonne.png';
+import roadRally from '../../assets/images/modes/road-rally.png';
 import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';

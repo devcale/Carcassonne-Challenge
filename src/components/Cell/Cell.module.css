@@ -101,9 +101,8 @@
   }
 
   .init {
-    background-image: url('src/assets/images/intersection-a.png');
-    outline: 1px solid;
-    outline-color: white;
+    background-image: url('src/assets/images/roads/road-a.png');
+    outline: 5px solid #ead6ab;
   }
 
   .city {
@@ -119,38 +118,38 @@
   }
 
   .city-0 {
-    background-image: url('../../assets/images/city-a.png');
+    background-image: url('../../assets/images/cities/city-a.png');
   }
 
   .road-0 {
-    background-image: url('../../assets/images/road-a.png');
+    background-image: url('../../assets/images/roads/road-a.png');
   }
 
   .abbey-0 {
-    background-image: url('../../assets/images/abbey-a.png');
+    background-image: url('../../assets/images/abbeys/abbey-a.png');
   }
 
   .city-1 {
-    background-image: url('../../assets/images/city-b.png');
+    background-image: url('../../assets/images/cities/city-b.png');
   }
 
   .road-1 {
-    background-image: url('../../assets/images/road-b.png');
+    background-image: url('../../assets/images/roads/road-b.png');
   }
 
   .abbey-1 {
-    background-image: url('../../assets/images/abbey-b.png');
+    background-image: url('../../assets/images/abbeys/abbey-b.png');
   }
 
   .city-2 {
-    background-image: url('../../assets/images/city-c.png');
+    background-image: url('../../assets/images/cities/city-c.png');
   }
 
   .road-2 {
-    background-image: url('../../assets/images/road-c.png');
+    background-image: url('../../assets/images/roads/road-c.png');
   }
 
   .abbey-2 {
-    background-image: url('../../assets/images/abbey-c.png');
+    background-image: url('../../assets/images/abbeys/abbey-c.png');
   }
 }
