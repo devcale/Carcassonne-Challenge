@@ -121,8 +121,7 @@ export const SelectModePage = () => {
                   Classic <br /> Challenge
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  The classic game rules. Get the highest score possible and compare
-                  yourself to the best to ever play
+                  The classic game rules. Get the highest score possible!
                 </div>
               </div>
             </div>
@@ -155,9 +154,8 @@ export const SelectModePage = () => {
                   Rally
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  In this game mode, the player will focus on building roads and
-                  connecting them to score points. Road tiles will now have different
-                  directions, and you may only connect them if they line up.
+                  The roads that wind through our lands now bear differing paths and
+                  directions, requiring alignment to be joined.
                 </div>
               </div>
             </div>
@@ -190,9 +188,11 @@ export const SelectModePage = () => {
                   Craze
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  This game mode is focused on building cities, with a higher point value
-                  for completed cities. The game will feature more city tiles in the draw
-                  pile, and larger cities could be more common.
+                  Build mighty cities! <br />
+                  <br />
+                  Cities will now have to be aligned by their walls.
+                  <br />
+                  Greater cities bring greater glory and riches to thee!
                 </div>
               </div>
             </div>
@@ -225,10 +225,14 @@ export const SelectModePage = () => {
                   Ablaze
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  Watch out player! <br />
-                  The abbeys are on fire! <br />
-                  Abbeys will be more common in the draw pile, but they will now discount
-                  you points for each tile besides them.
+                  Beware, noble players!
+                  <br />
+                  <br />
+                  Abbeys now burn bright and are more common in the draw pile.
+                  <br />
+                  <br />
+                  But placing tiles near them shall reduce your points, as the flames of
+                  destruction threaten to spread.
                 </div>
               </div>
             </div>
