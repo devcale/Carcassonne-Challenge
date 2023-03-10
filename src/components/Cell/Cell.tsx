@@ -65,7 +65,30 @@ const Cell = (props: {
   function handleMouseOver() {
     if (type === 'inactive') {
       const images = {
-        city: ['city-0', 'city-1', 'city-2', 'city-3'],
+        city: [
+          'city-0',
+          'city-1',
+          'city-2',
+          'city-3',
+          'city-4',
+          'city-5',
+          'city-6',
+          'city-7',
+          'city-8',
+          'city-9',
+          'city-10',
+          'city-11',
+          'city-12',
+          'city-13',
+          'city-14',
+          'city-15',
+          'city-16',
+          'city-17',
+          'city-18',
+          'city-19',
+          'city-20',
+          'city-21',
+        ],
         road: [
           'road-0',
           'road-1',

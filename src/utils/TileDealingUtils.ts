@@ -42,7 +42,10 @@ export function DealNewTile(
     } else if (rand < 0.4 && rand >= 0.1) {
       newTile = {
         type: 'city',
-        variant: Math.floor(Math.random() * 4),
+        variant:
+          gameMode === 'city'
+            ? Math.floor(Math.random() * 18)
+            : Math.floor(Math.random() * 4) + 18,
       };
       updatedAbbeyCountdown = abbeyCountdown - 1;
       const newCityCountdown: CityCounters = [
@@ -79,7 +82,10 @@ export function DealNewTile(
   } else {
     newTile = {
       type: 'city',
-      variant: Math.floor(Math.random() * 4),
+      variant:
+        gameMode === 'city'
+          ? Math.floor(Math.random() * 18)
+          : Math.floor(Math.random() * 4) + 18,
     };
     updatedAbbeyCountdown = abbeyCountdown - 1;
     const newCityCountdown: CityCounters = [
