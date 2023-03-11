@@ -26,11 +26,61 @@ export function IsPlacementValid(
     leftCell = map[latitude - 1][altitude];
   }
 
+  const isOnlyCornerTopLeft =
+    upperCell.type === 'out' &&
+    leftCell.type === 'out' &&
+    lowerCell.type === 'inactive' &&
+    rightCell.type === 'inactive';
+  const isOnlyCornerTopRight =
+    upperCell.type === 'out' &&
+    leftCell.type === 'inactive' &&
+    lowerCell.type === 'inactive' &&
+    rightCell.type === 'out';
+  const isOnlyCornerBottomLeft =
+    upperCell.type === 'inactive' &&
+    leftCell.type === 'out' &&
+    lowerCell.type === 'out' &&
+    rightCell.type === 'inactive';
+  const isOnlyCornerBottomRight =
+    upperCell.type === 'inactive' &&
+    leftCell.type === 'inactive' &&
+    lowerCell.type === 'out' &&
+    rightCell.type === 'out';
+  const isOnlyTop =
+    upperCell.type === 'out' &&
+    leftCell.type === 'inactive' &&
+    lowerCell.type === 'inactive' &&
+    rightCell.type === 'inactive';
+  const isOnlyRight =
+    upperCell.type === 'inactive' &&
+    leftCell.type === 'inactive' &&
+    lowerCell.type === 'inactive' &&
+    rightCell.type === 'out';
+  const isOnlyBottom =
+    upperCell.type === 'inactive' &&
+    leftCell.type === 'inactive' &&
+    lowerCell.type === 'out' &&
+    rightCell.type === 'inactive';
+  const isOnlyLeft =
+    upperCell.type === 'inactive' &&
+    leftCell.type === 'out' &&
+    lowerCell.type === 'inactive' &&
+    rightCell.type === 'inactive';
+  const isOnlyBorder =
+    isOnlyCornerTopLeft ||
+    isOnlyCornerTopRight ||
+    isOnlyCornerBottomRight ||
+    isOnlyCornerBottomLeft ||
+    isOnlyTop ||
+    isOnlyRight ||
+    isOnlyBottom ||
+    isOnlyLeft;
+
   let allowedTypes: string[] = [];
-  let allowedRoadTopCellVariants: number[] = [];
-  let allowedRoadBottomCellVariants: number[] = [];
-  let allowedRoadRightCellVariants: number[] = [];
-  let allowedRoadLeftCellVariants: number[] = [];
+  const allowedRoadTopCellVariants: number[] = [];
+  const allowedRoadBottomCellVariants: number[] = [];
+  const allowedRoadRightCellVariants: number[] = [];
+  const allowedRoadLeftCellVariants: number[] = [];
   const roadsThatConnectToBottom = [0, 2, 3, 4, 6, 7, 9];
   const roadsThatConnectToLeft = [0, 1, 3, 4, 7, 8, 10];
   const roadsThatConnectToTop = [0, 1, 2, 4, 5, 8, 9];
@@ -64,63 +114,92 @@ export function IsPlacementValid(
     if (cell.type === 'city') {
       allowedTypes = ['city', 'abbey', 'road', 'init'];
     } else if (cell.type === 'road') {
-      allowedTypes = ['init'];
-      if (cell.variant === 0) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
-      } else if (cell.variant === 1) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = [];
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
-      } else if (cell.variant === 2) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = [];
-      } else if (cell.variant === 3) {
-        allowedRoadTopCellVariants = [];
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
-      } else if (cell.variant === 4) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = [];
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
-      } else if (cell.variant === 5) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = [];
-        allowedRoadLeftCellVariants = [];
-      } else if (cell.variant === 6) {
-        allowedRoadTopCellVariants = [];
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = [];
-      } else if (cell.variant === 7) {
-        allowedRoadTopCellVariants = [];
-        allowedRoadRightCellVariants = [];
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
-      } else if (cell.variant === 8) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = [];
-        allowedRoadBottomCellVariants = [];
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
-      } else if (cell.variant === 9) {
-        allowedRoadTopCellVariants = roadsThatConnectToBottom;
-        allowedRoadRightCellVariants = [];
-        allowedRoadBottomCellVariants = roadsThatConnectToTop;
-        allowedRoadLeftCellVariants = [];
-      } else if (cell.variant === 10) {
-        allowedRoadTopCellVariants = [];
-        allowedRoadRightCellVariants = roadsThatConnectToLeft;
-        allowedRoadBottomCellVariants = [];
-        allowedRoadLeftCellVariants = roadsThatConnectToRight;
+      let topConnectsToCurrent = false;
+      let currentConnectsToTop = false;
+      let rightConnectsToCurrent = false;
+      let currentConnectsToRight = false;
+      let bottomConnectsToCurrent = false;
+      let currentConnectsToBottom = false;
+      let leftConnectsToCurrent = false;
+      let currentConnectsToLeft = false;
+      //Check top:
+      if (upperCell.type !== 'inactive') {
+        if (upperCell.type === 'road') {
+          if (roadsThatConnectToBottom.includes(upperCell.variant)) {
+            topConnectsToCurrent = true;
+          }
+          if (roadsThatConnectToTop.includes(cell.variant)) {
+            currentConnectsToTop = true;
+          }
+        } else {
+          topConnectsToCurrent = true;
+          currentConnectsToTop = true;
+        }
       }
+
+      //Check right:
+      if (rightCell.type !== 'inactive') {
+        if (rightCell.type === 'road') {
+          if (roadsThatConnectToLeft.includes(rightCell.variant)) {
+            rightConnectsToCurrent = true;
+          }
+          if (roadsThatConnectToRight.includes(cell.variant)) {
+            currentConnectsToRight = true;
+          }
+        } else {
+          topConnectsToCurrent = true;
+          currentConnectsToTop = true;
+        }
+      }
+
+      //Check bottom:
+      if (lowerCell.type !== 'inactive') {
+        if (lowerCell.type === 'road') {
+          if (roadsThatConnectToTop.includes(lowerCell.variant)) {
+            bottomConnectsToCurrent = true;
+          }
+          if (roadsThatConnectToBottom.includes(cell.variant)) {
+            currentConnectsToBottom = true;
+          }
+        } else {
+          topConnectsToCurrent = true;
+          currentConnectsToTop = true;
+        }
+      }
+
+      //Check left:
+      if (leftCell.type !== 'inactive') {
+        if (leftCell.type === 'road') {
+          if (roadsThatConnectToRight.includes(leftCell.variant)) {
+            leftConnectsToCurrent = true;
+          }
+          if (roadsThatConnectToLeft.includes(cell.variant)) {
+            currentConnectsToLeft = true;
+          }
+        } else {
+          topConnectsToCurrent = true;
+          currentConnectsToTop = true;
+        }
+      }
+
+      isValid =
+        topConnectsToCurrent === currentConnectsToTop &&
+        rightConnectsToCurrent === currentConnectsToRight &&
+        bottomConnectsToCurrent === currentConnectsToBottom &&
+        leftConnectsToCurrent === currentConnectsToLeft &&
+        (upperCell.type !== 'inactive' ||
+          rightCell.type !== 'inactive' ||
+          lowerCell.type !== 'inactive' ||
+          leftCell.type !== 'inactive') &&
+        (upperCell.type === 'road' ||
+          rightCell.type === 'road' ||
+          lowerCell.type === 'road' ||
+          leftCell.type === 'road' ||
+          upperCell.type === 'init' ||
+          rightCell.type === 'init' ||
+          lowerCell.type === 'init' ||
+          leftCell.type === 'init') &&
+        !isOnlyBorder;
     } else if (cell.type === 'abbey') {
       allowedTypes = ['city', 'abbey', 'road', 'init'];
     }
@@ -137,79 +216,9 @@ export function IsPlacementValid(
       ) {
         isValid = true;
       }
-    } else if (currentCell.type === 'inactive' && cell.type === 'road') {
-      if (
-        (upperCell.type === 'init' && roadsThatConnectToTop.includes(cell.variant)) ||
-        (rightCell.type === 'init' && roadsThatConnectToRight.includes(cell.variant)) ||
-        (lowerCell.type === 'init' && roadsThatConnectToBottom.includes(cell.variant)) ||
-        (leftCell.type === 'init' && roadsThatConnectToLeft.includes(cell.variant)) ||
-        (upperCell.type === 'road' &&
-          roadsThatConnectToTop.includes(cell.variant) &&
-          allowedRoadTopCellVariants.includes(upperCell.variant)) ||
-        (rightCell.type === 'road' &&
-          roadsThatConnectToRight.includes(cell.variant) &&
-          allowedRoadRightCellVariants.includes(rightCell.variant)) ||
-        (lowerCell.type === 'road' &&
-          roadsThatConnectToBottom.includes(cell.variant) &&
-          allowedRoadBottomCellVariants.includes(lowerCell.variant)) ||
-        (leftCell.type === 'road' &&
-          roadsThatConnectToLeft.includes(cell.variant) &&
-          allowedRoadLeftCellVariants.includes(leftCell.variant))
-      ) {
-        isValid = true;
-      }
     }
   } // ------------------------------------------- CITY GAMEMODE ------------------------------------------------------
   else if (gameMode == 'city') {
-    const isOnlyCornerTopLeft =
-      upperCell.type === 'out' &&
-      leftCell.type === 'out' &&
-      lowerCell.type === 'inactive' &&
-      rightCell.type === 'inactive';
-    const isOnlyCornerTopRight =
-      upperCell.type === 'out' &&
-      leftCell.type === 'inactive' &&
-      lowerCell.type === 'inactive' &&
-      rightCell.type === 'out';
-    const isOnlyCornerBottomLeft =
-      upperCell.type === 'inactive' &&
-      leftCell.type === 'out' &&
-      lowerCell.type === 'out' &&
-      rightCell.type === 'inactive';
-    const isOnlyCornerBottomRight =
-      upperCell.type === 'inactive' &&
-      leftCell.type === 'inactive' &&
-      lowerCell.type === 'out' &&
-      rightCell.type === 'out';
-    const isOnlyTop =
-      upperCell.type === 'out' &&
-      leftCell.type === 'inactive' &&
-      lowerCell.type === 'inactive' &&
-      rightCell.type === 'inactive';
-    const isOnlyRight =
-      upperCell.type === 'inactive' &&
-      leftCell.type === 'inactive' &&
-      lowerCell.type === 'inactive' &&
-      rightCell.type === 'out';
-    const isOnlyBottom =
-      upperCell.type === 'inactive' &&
-      leftCell.type === 'inactive' &&
-      lowerCell.type === 'out' &&
-      rightCell.type === 'inactive';
-    const isOnlyLeft =
-      upperCell.type === 'inactive' &&
-      leftCell.type === 'out' &&
-      lowerCell.type === 'inactive' &&
-      rightCell.type === 'inactive';
-    const isOnlyBorder =
-      isOnlyCornerTopLeft ||
-      isOnlyCornerTopRight ||
-      isOnlyCornerBottomRight ||
-      isOnlyCornerBottomLeft ||
-      isOnlyTop ||
-      isOnlyRight ||
-      isOnlyBottom ||
-      isOnlyLeft;
     if (currentCell.type === 'inactive' && cell.type === 'abbey') {
       let upperValid = false;
       let rightValid = false;
