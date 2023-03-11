@@ -67,14 +67,14 @@
     background-size: cover;
 
     z-index: 500;
-    outline-offset: -6px;
+    outline-offset: -4px;
 
     outline-style: none;
     user-select: none;
   }
 
   .inactive {
-    background-color: #77a690;
+    background-color: #405b42;
     cursor: pointer;
   }
 
@@ -102,19 +102,19 @@
 
   .init {
     background-image: url('src/assets/images/roads/intersection-a.png');
-    outline: 5px solid #ead6ab;
+    outline: 3px solid #ead6ab;
   }
 
   .city {
-    outline: 5px solid #f0c195;
+    outline: 3px solid #f0c1957d;
   }
 
   .abbey {
-    outline: 5px solid gold;
+    outline: 3px solid rgba(255, 215, 0, 0.5);
   }
 
   .road {
-    outline: 5px solid #ead6ab;
+    outline: 3px solid #ead6ab7d;
   }
 
   .city-0 {
@@ -235,5 +235,14 @@
   }
   .abbey-2 {
     background-image: url('../../assets/images/abbeys/002-abbey.png');
+  }
+  .abbey-3 {
+    background-image: url('../../assets/images/abbeys/003-abbey.png');
+  }
+  .abbey-4 {
+    background-image: url('../../assets/images/abbeys/004-abbey.png');
+  }
+  .abbey-5 {
+    background-image: url('../../assets/images/abbeys/005-abbey.png');
   }
 }

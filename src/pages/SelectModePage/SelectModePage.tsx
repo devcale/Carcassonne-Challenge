@@ -191,6 +191,7 @@ export const SelectModePage = () => {
                   Build mighty cities! <br />
                   <br />
                   Cities will now have to be aligned by their walls.
+                  <br /> Abbeys may not be placed adjacent to other abbeys.
                   <br />
                   Greater cities bring greater glory and riches to thee!
                 </div>

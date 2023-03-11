@@ -11,7 +11,22 @@ export function DealNewTile(
   updatedCityCountdown: CityCounters;
 } {
   const rand = Math.random();
+
+  let chosen = '';
+
   let newTile = { type: 'invalid', variant: -1 };
+
+  let roadOdds = 0.52;
+  let cityOdds = 0.4;
+
+  if (gameMode === 'city') {
+    cityOdds = 0.8;
+    roadOdds = 0;
+  }
+  if (gameMode === 'road') {
+    cityOdds = 0.2;
+    roadOdds = 0.7;
+  }
 
   let updatedAbbeyCountdown = abbeyCountdown;
   let updatedCityCountdown: CityCounters = [
@@ -24,74 +39,63 @@ export function DealNewTile(
     (abbeyCountdown > 2 && cityCountdown[0] > 1) ||
     (abbeyCountdown > 1 && cityCountdown[0] > 2)
   ) {
-    if (rand > 0.4) {
-      newTile = {
-        type: 'road',
-        variant:
-          gameMode === 'road'
-            ? Math.floor(Math.random() * 11)
-            : Math.floor(Math.random() * 3) + 11,
-      };
-      updatedAbbeyCountdown = abbeyCountdown - 1;
-      const newCityCountdown: CityCounters = [
-        cityCountdown[0] - 1,
-        cityCountdown[1] - 1,
-        cityCountdown[2] - 1,
-      ];
-      updatedCityCountdown = newCityCountdown;
-    } else if (rand < 0.4 && rand >= 0.1) {
-      newTile = {
-        type: 'city',
-        variant:
-          gameMode === 'city'
-            ? Math.floor(Math.random() * 18)
-            : Math.floor(Math.random() * 4) + 18,
-      };
-      updatedAbbeyCountdown = abbeyCountdown - 1;
-      const newCityCountdown: CityCounters = [
-        cityCountdown[1] - 1,
-        cityCountdown[2] - 1,
-        15,
-      ];
-      updatedCityCountdown = newCityCountdown;
-    } else if (rand < 0.1) {
-      newTile = {
-        type: 'abbey',
-        variant: Math.floor(Math.random() * 3),
-      };
-      updatedAbbeyCountdown = 15;
-      const newCityCountdown: CityCounters = [
-        cityCountdown[0] - 1,
-        cityCountdown[1] - 1,
-        cityCountdown[2] - 1,
-      ];
-      updatedCityCountdown = newCityCountdown;
+    if (rand < roadOdds) {
+      chosen = 'road';
+    } else if (rand >= roadOdds && rand < roadOdds + cityOdds) {
+      chosen = 'city';
+    } else {
+      chosen = 'abbey';
     }
   } else if (abbeyCountdown === 1) {
+    chosen = 'abbey';
+  } else {
+    chosen = 'city';
+  }
+
+  if (chosen === 'road') {
+    let variantRand = Math.floor(Math.random() * 3) + 11;
+    if (gameMode === 'road' || gameMode === 'city') {
+      variantRand = Math.floor(Math.random() * 11);
+    }
     newTile = {
-      type: 'abbey',
-      variant: Math.floor(Math.random() * 3),
+      type: 'road',
+      variant: variantRand,
     };
-    updatedAbbeyCountdown = 15;
+    updatedAbbeyCountdown = abbeyCountdown - 1;
     const newCityCountdown: CityCounters = [
       cityCountdown[0] - 1,
       cityCountdown[1] - 1,
       cityCountdown[2] - 1,
     ];
     updatedCityCountdown = newCityCountdown;
-  } else {
+  } else if (chosen === 'city') {
     newTile = {
       type: 'city',
       variant:
         gameMode === 'city'
-          ? Math.floor(Math.random() * 18)
-          : Math.floor(Math.random() * 4) + 18,
+          ? Math.floor(Math.random() * 22)
+          : Math.floor(Math.random() * 3) + 19,
     };
     updatedAbbeyCountdown = abbeyCountdown - 1;
     const newCityCountdown: CityCounters = [
       cityCountdown[1] - 1,
       cityCountdown[2] - 1,
       15,
+    ];
+    updatedCityCountdown = newCityCountdown;
+  } else if (chosen === 'abbey') {
+    newTile = {
+      type: 'abbey',
+      variant:
+        gameMode === 'city'
+          ? Math.floor(Math.random() * 3) + 3
+          : Math.floor(Math.random() * 3),
+    };
+    updatedAbbeyCountdown = 15;
+    const newCityCountdown: CityCounters = [
+      cityCountdown[0] - 1,
+      cityCountdown[1] - 1,
+      cityCountdown[2] - 1,
     ];
     updatedCityCountdown = newCityCountdown;
   }
