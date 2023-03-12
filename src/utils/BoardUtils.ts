@@ -110,6 +110,7 @@ export function IsPlacementValid(
     if (cell.type === 'city') {
       allowedTypes = ['city', 'abbey', 'road', 'init'];
     } else if (cell.type === 'road') {
+      let roadIsConnected = false;
       let topConnectsToCurrent = false;
       let currentConnectsToTop = false;
       let rightConnectsToCurrent = false;
@@ -122,6 +123,10 @@ export function IsPlacementValid(
       let rightValid = false;
       let bottomValid = false;
       let leftValid = false;
+      let topConnected = false;
+      let rightConnected = false;
+      let bottomConnected = false;
+      let leftConnected = false;
       //Check top:
       if (upperCell.type !== 'inactive') {
         if (upperCell.type === 'road') {
@@ -131,16 +136,14 @@ export function IsPlacementValid(
           if (roadsThatConnectToTop.includes(cell.variant)) {
             currentConnectsToTop = true;
           }
-        } else {
+        } else if (upperCell.type === 'init') {
           topConnectsToCurrent = true;
           currentConnectsToTop = true;
         }
-      } else {
-        topConnectsToCurrent = true;
-        currentConnectsToTop = true;
       }
-      topValid = topConnectsToCurrent && currentConnectsToTop;
-
+      topConnected = topConnectsToCurrent && currentConnectsToTop;
+      topValid = topConnectsToCurrent === currentConnectsToTop;
+      roadIsConnected = topConnected || roadIsConnected;
       //Check right:
       if (rightCell.type !== 'inactive') {
         if (rightCell.type === 'road') {
@@ -150,16 +153,14 @@ export function IsPlacementValid(
           if (roadsThatConnectToRight.includes(cell.variant)) {
             currentConnectsToRight = true;
           }
-        } else {
+        } else if (rightCell.type === 'init') {
           rightConnectsToCurrent = true;
           currentConnectsToRight = true;
         }
-      } else {
-        rightConnectsToCurrent = true;
-        currentConnectsToRight = true;
       }
-      rightValid = rightConnectsToCurrent && currentConnectsToRight;
-
+      rightConnected = rightConnectsToCurrent && currentConnectsToRight;
+      rightValid = rightConnectsToCurrent === currentConnectsToRight;
+      roadIsConnected = rightConnected || roadIsConnected;
       //Check bottom:
       if (lowerCell.type !== 'inactive') {
         if (lowerCell.type === 'road') {
@@ -169,15 +170,14 @@ export function IsPlacementValid(
           if (roadsThatConnectToBottom.includes(cell.variant)) {
             currentConnectsToBottom = true;
           }
-        } else {
+        } else if (lowerCell.type === 'init') {
           bottomConnectsToCurrent = true;
           currentConnectsToBottom = true;
         }
-      } else {
-        bottomConnectsToCurrent = true;
-        currentConnectsToBottom = true;
       }
-      bottomValid = bottomConnectsToCurrent && currentConnectsToBottom;
+      bottomConnected = bottomConnectsToCurrent && currentConnectsToBottom;
+      bottomValid = bottomConnectsToCurrent === currentConnectsToBottom;
+      roadIsConnected = bottomConnected || roadIsConnected;
 
       //Check left:
       if (leftCell.type !== 'inactive') {
@@ -188,22 +188,32 @@ export function IsPlacementValid(
           if (roadsThatConnectToLeft.includes(cell.variant)) {
             currentConnectsToLeft = true;
           }
-        } else {
+        } else if (leftCell.type === 'init') {
           leftConnectsToCurrent = true;
           currentConnectsToLeft = true;
         }
-      } else {
-        leftConnectsToCurrent = true;
-        currentConnectsToLeft = true;
       }
-      leftValid = leftConnectsToCurrent && currentConnectsToLeft;
-      console.log([topValid, rightValid, bottomValid, leftValid]);
+      leftConnected = leftConnectsToCurrent && currentConnectsToLeft;
+      leftValid = leftConnectsToCurrent === currentConnectsToLeft;
+      roadIsConnected = leftConnected || roadIsConnected;
 
+      console.log('Road is connected: ' + roadIsConnected);
+      console.log(
+        topConnected +
+          ' ' +
+          rightConnected +
+          ' ' +
+          bottomConnected +
+          ' ' +
+          leftConnected +
+          ' ',
+      );
       isValid =
         topValid &&
         rightValid &&
         bottomValid &&
         leftValid &&
+        roadIsConnected &&
         (upperCell.type !== 'inactive' ||
           rightCell.type !== 'inactive' ||
           lowerCell.type !== 'inactive' ||
