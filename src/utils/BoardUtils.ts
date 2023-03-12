@@ -77,10 +77,6 @@ export function IsPlacementValid(
     isOnlyLeft;
 
   let allowedTypes: string[] = [];
-  const allowedRoadTopCellVariants: number[] = [];
-  const allowedRoadBottomCellVariants: number[] = [];
-  const allowedRoadRightCellVariants: number[] = [];
-  const allowedRoadLeftCellVariants: number[] = [];
   const roadsThatConnectToBottom = [0, 2, 3, 4, 6, 7, 9];
   const roadsThatConnectToLeft = [0, 1, 3, 4, 7, 8, 10];
   const roadsThatConnectToTop = [0, 1, 2, 4, 5, 8, 9];
@@ -122,6 +118,10 @@ export function IsPlacementValid(
       let currentConnectsToBottom = false;
       let leftConnectsToCurrent = false;
       let currentConnectsToLeft = false;
+      let topValid = false;
+      let rightValid = false;
+      let bottomValid = false;
+      let leftValid = false;
       //Check top:
       if (upperCell.type !== 'inactive') {
         if (upperCell.type === 'road') {
@@ -135,7 +135,11 @@ export function IsPlacementValid(
           topConnectsToCurrent = true;
           currentConnectsToTop = true;
         }
+      } else {
+        topConnectsToCurrent = true;
+        currentConnectsToTop = true;
       }
+      topValid = topConnectsToCurrent && currentConnectsToTop;
 
       //Check right:
       if (rightCell.type !== 'inactive') {
@@ -147,10 +151,14 @@ export function IsPlacementValid(
             currentConnectsToRight = true;
           }
         } else {
-          topConnectsToCurrent = true;
-          currentConnectsToTop = true;
+          rightConnectsToCurrent = true;
+          currentConnectsToRight = true;
         }
+      } else {
+        rightConnectsToCurrent = true;
+        currentConnectsToRight = true;
       }
+      rightValid = rightConnectsToCurrent && currentConnectsToRight;
 
       //Check bottom:
       if (lowerCell.type !== 'inactive') {
@@ -162,10 +170,14 @@ export function IsPlacementValid(
             currentConnectsToBottom = true;
           }
         } else {
-          topConnectsToCurrent = true;
-          currentConnectsToTop = true;
+          bottomConnectsToCurrent = true;
+          currentConnectsToBottom = true;
         }
+      } else {
+        bottomConnectsToCurrent = true;
+        currentConnectsToBottom = true;
       }
+      bottomValid = bottomConnectsToCurrent && currentConnectsToBottom;
 
       //Check left:
       if (leftCell.type !== 'inactive') {
@@ -177,16 +189,21 @@ export function IsPlacementValid(
             currentConnectsToLeft = true;
           }
         } else {
-          topConnectsToCurrent = true;
-          currentConnectsToTop = true;
+          leftConnectsToCurrent = true;
+          currentConnectsToLeft = true;
         }
+      } else {
+        leftConnectsToCurrent = true;
+        currentConnectsToLeft = true;
       }
+      leftValid = leftConnectsToCurrent && currentConnectsToLeft;
+      console.log([topValid, rightValid, bottomValid, leftValid]);
 
       isValid =
-        topConnectsToCurrent === currentConnectsToTop &&
-        rightConnectsToCurrent === currentConnectsToRight &&
-        bottomConnectsToCurrent === currentConnectsToBottom &&
-        leftConnectsToCurrent === currentConnectsToLeft &&
+        topValid &&
+        rightValid &&
+        bottomValid &&
+        leftValid &&
         (upperCell.type !== 'inactive' ||
           rightCell.type !== 'inactive' ||
           lowerCell.type !== 'inactive' ||
@@ -220,6 +237,16 @@ export function IsPlacementValid(
   } // ------------------------------------------- CITY GAMEMODE ------------------------------------------------------
   else if (gameMode == 'city') {
     if (currentCell.type === 'inactive' && cell.type === 'abbey') {
+      console.log(
+        upperCell.type +
+          ' ' +
+          rightCell.type +
+          ' ' +
+          lowerCell.type +
+          ' ' +
+          leftCell.type +
+          ' ',
+      );
       let upperValid = false;
       let rightValid = false;
       let lowerValid = false;
@@ -246,7 +273,7 @@ export function IsPlacementValid(
           }
         } else if (rightCell.type === 'abbey') {
           rightValid = false;
-        } else if (rightCell.type === 'init' || upperCell.type === 'out') {
+        } else if (rightCell.type === 'init' || rightCell.type === 'out') {
           rightValid = true;
         }
       } else {
@@ -260,7 +287,7 @@ export function IsPlacementValid(
           }
         } else if (lowerCell.type === 'abbey') {
           lowerValid = false;
-        } else if (lowerCell.type === 'init' || upperCell.type === 'out') {
+        } else if (lowerCell.type === 'init' || lowerCell.type === 'out') {
           lowerValid = true;
         }
       } else {
@@ -274,12 +301,26 @@ export function IsPlacementValid(
           }
         } else if (leftCell.type === 'abbey') {
           leftValid = false;
-        } else if (leftCell.type === 'init' || upperCell.type === 'out') {
+        } else if (leftCell.type === 'init' || leftCell.type === 'out') {
           leftValid = true;
         }
       } else {
         leftValid = true;
       }
+
+      console.log(
+        upperCell.type +
+          ' ' +
+          rightCell.type +
+          ' ' +
+          lowerCell.type +
+          ' ' +
+          leftCell.type +
+          ' ',
+      );
+      console.log(
+        upperValid + ' ' + rightValid + ' ' + lowerValid + ' ' + leftValid + ' ',
+      );
 
       isValid =
         upperValid &&
