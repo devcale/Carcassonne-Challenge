@@ -42,7 +42,6 @@ class Board {
     discardCountdown: number,
     gameMode: string,
   ): boolean {
-    console.log('Checking if game has ended');
     let gameHasEnded = true;
     if (discardCountdown === 0) {
       gameHasEnded = false;
@@ -61,6 +60,7 @@ class Board {
       }
     }
 
+    console.log('Game has ended?');
     console.log(gameHasEnded);
     return gameHasEnded;
   }
@@ -75,8 +75,6 @@ class Board {
     map: cellType[][],
     gameMode: string,
   ): { isValid: boolean; pointsGained: number } {
-    console.log('Game mode is: ' + gameMode);
-    console.log('Placing: ' + cell.type + ':' + cell.variant);
     let pointsGained = 0;
     let isValid = false;
 

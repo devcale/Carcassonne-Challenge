@@ -45,11 +45,6 @@ export const PlayGame = () => {
       [newTiles[2].tile.type, newTiles[2].tile.variant],
       [newTiles[3].tile.type, newTiles[3].tile.variant],
     ]);
-    console.log('Rendered board with board size: ' + mapGlobal.length);
-    console.log('Map is: ');
-    console.log(mapGlobal);
-    console.log('Hand is: ');
-    console.log(hand);
   }, []);
   return (
     <div className={styling.playgame}>

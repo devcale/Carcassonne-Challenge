@@ -35,6 +35,7 @@ export function DealNewTile(
     cityCountdown[2],
   ];
 
+  // Given the counters for abbey and city, deal a new card pseudorandomly
   if (
     (abbeyCountdown > 2 && cityCountdown[0] > 1) ||
     (abbeyCountdown > 1 && cityCountdown[0] > 2)
@@ -52,6 +53,7 @@ export function DealNewTile(
     chosen = 'city';
   }
 
+  // For each type of possible card, deal a random variant and update de counters
   if (chosen === 'road') {
     let variantRand = Math.floor(Math.random() * 3) + 11;
     if (gameMode === 'road' || gameMode === 'city') {
@@ -73,8 +75,8 @@ export function DealNewTile(
       type: 'city',
       variant:
         gameMode === 'city'
-          ? Math.floor(Math.random() * 22)
-          : Math.floor(Math.random() * 3) + 19,
+          ? Math.floor(Math.random() * 18)
+          : Math.floor(Math.random() * 4),
     };
     updatedAbbeyCountdown = abbeyCountdown - 1;
     const newCityCountdown: CityCounters = [

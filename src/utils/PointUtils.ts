@@ -1,3 +1,5 @@
+import { IsCityClosed, TilesInChain } from './BoardUtils';
+
 type Tile = { type: string; variant: number };
 export function GainPoints(
   cell: Tile,
@@ -41,61 +43,137 @@ export function GainPoints(
     bottomLeftCell = map[latitude - 1][altitude + 1];
   }
 
-  const pointAdders = ['init', 'abbey', 'city', 'road'];
+  if (gameMode === 'classic' || gameMode === 'road') {
+    const pointAdders = ['init', 'abbey', 'city', 'road'];
 
-  if (cell.type === 'road') {
-    pointsGained += 1;
-  } else if (cell.type === 'city') {
-    pointsGained += 3;
-  } else if (cell.type === 'abbey') {
-    if (pointAdders.includes(topRightCell.type)) {
+    if (cell.type === 'road') {
+      pointsGained += 1;
+    } else if (cell.type === 'city') {
+      pointsGained += 3;
+    } else if (cell.type === 'abbey') {
+      if (pointAdders.includes(topRightCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(topLeftCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(bottomRightCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(bottomLeftCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(rightCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(leftCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(upperCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(lowerCell.type)) {
+        pointsGained += 1;
+      }
+    }
+    if (topRightCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(topLeftCell.type)) {
+    if (topLeftCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(bottomRightCell.type)) {
+    if (bottomRightCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(bottomLeftCell.type)) {
+    if (bottomLeftCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(rightCell.type)) {
+    if (upperCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(leftCell.type)) {
+    if (rightCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(upperCell.type)) {
+    if (lowerCell.type === 'abbey') {
       pointsGained += 1;
     }
-    if (pointAdders.includes(lowerCell.type)) {
+    if (leftCell.type === 'abbey') {
       pointsGained += 1;
     }
-  }
-  if (topRightCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (topLeftCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (bottomRightCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (bottomLeftCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (upperCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (rightCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (lowerCell.type === 'abbey') {
-    pointsGained += 1;
-  }
-  if (leftCell.type === 'abbey') {
-    pointsGained += 1;
+  } else if (gameMode === 'city') {
+    console.log('Gamemode is city');
+    const pointAdders = ['init', 'abbey', 'city', 'road'];
+    if (cell.type === 'city') {
+      console.log('Tile placed was a city');
+      const mapParam = [];
+      for (let i = 0; i < map.length; i++) {
+        const col = [];
+        for (let j = 0; j < map[i].length; j++) {
+          if (i === latitude && j === altitude) {
+            col.push(cell);
+          } else {
+            col.push(map[i][j]);
+          }
+        }
+        mapParam.push(col);
+      }
+      const cityChain = TilesInChain(cell, latitude, altitude, mapParam);
+
+      console.log('city chain is: ');
+      console.log(cityChain);
+      if (IsCityClosed(cityChain, mapParam)) {
+        pointsGained = cityChain.length * 2;
+      }
+    } else if (cell.type === 'abbey') {
+      if (pointAdders.includes(topRightCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(topLeftCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(bottomRightCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(bottomLeftCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(rightCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(leftCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(upperCell.type)) {
+        pointsGained += 1;
+      }
+      if (pointAdders.includes(lowerCell.type)) {
+        pointsGained += 1;
+      }
+    }
+    if (topRightCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (topLeftCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (bottomRightCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (bottomLeftCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (upperCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (rightCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (lowerCell.type === 'abbey') {
+      pointsGained += 1;
+    }
+    if (leftCell.type === 'abbey') {
+      pointsGained += 1;
+    }
   }
 
   return pointsGained;

@@ -32,11 +32,8 @@ export const SelectModePage = () => {
       },
     );
     const newBoard = mapDuplication(board.getBoard());
-    console.log('Board created: ');
-    console.log(newBoard);
+
     setMapGlobal(newBoard);
-    console.log('Board updated: ');
-    console.log(mapGlobal);
   }
 
   function isSelected(localOption: string): string {
@@ -50,32 +47,25 @@ export const SelectModePage = () => {
   function handleClick(optionType: string, option: string) {
     if (optionType === 'mode') {
       if (option === 'classic') {
-        console.log('enters classic mode');
         setSelectedMode('classic');
         setGameMode('classic');
       } else if (option === 'road') {
-        console.log('enters road mode');
         setGameMode('road');
         setSelectedMode('road');
       } else if (option === 'city') {
-        console.log('enters city mode');
         setGameMode('city');
         setSelectedMode('city');
       } else if (option === 'abbey') {
-        console.log('enters abbey mode');
         setGameMode('abbey');
         setSelectedMode('abbey');
       }
     }
     if (optionType === 'size') {
       if (option === 'small') {
-        console.log('enters small');
         updateMapValues(5);
       } else if (option === 'classic') {
-        console.log('enters classic');
         updateMapValues(11);
       } else if (option === 'large') {
-        console.log('enters large');
         updateMapValues(17);
       }
     }
@@ -83,9 +73,6 @@ export const SelectModePage = () => {
   function handleKeyDown() {
     //
   }
-  useEffect(() => {
-    console.log('Triggered refresh on select mode page');
-  }, []);
   return (
     <div className={styling.gameModeContainer}>
       <div className={styling.title}>Carcassonne Challenge</div>

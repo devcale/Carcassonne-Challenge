@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
+import { IsCityClosed, TilesInChain } from '../../utils/BoardUtils';
 import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
 import styling from './Cell.module.css';
@@ -50,6 +51,7 @@ const Cell = (props: {
       if (placedTile.isValid) {
         setType(hand[currentTile][0]);
         setPoints(points + placedTile.pointsGained);
+
         updateHand();
         setDiscardCountdown(
           discardCountdown > 0 ? discardCountdown - 1 : discardCountdown,
@@ -84,10 +86,6 @@ const Cell = (props: {
           'city-15',
           'city-16',
           'city-17',
-          'city-18',
-          'city-19',
-          'city-20',
-          'city-21',
         ],
         road: [
           'road-0',
@@ -129,10 +127,6 @@ const Cell = (props: {
   }
 
   function handleBlur() {
-    //
-  }
-
-  function endGame(): void {
     //
   }
 
