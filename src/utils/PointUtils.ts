@@ -122,7 +122,15 @@ export function GainPoints(
       console.log('city chain is: ');
       console.log(cityChain);
       if (IsCityClosed(cityChain, mapParam)) {
-        pointsGained = cityChain.length * 2;
+        if (cityChain.length < 5) {
+          pointsGained += cityChain.length;
+        } else if (cityChain.length >= 5 && cityChain.length < 10) {
+          pointsGained += cityChain.length * 2;
+        } else if (cityChain.length >= 10 && cityChain.length < 15) {
+          pointsGained += cityChain.length * 3;
+        } else if (cityChain.length >= 15) {
+          pointsGained += cityChain.length * 4;
+        }
       }
     } else if (cell.type === 'abbey') {
       if (pointAdders.includes(topRightCell.type)) {
