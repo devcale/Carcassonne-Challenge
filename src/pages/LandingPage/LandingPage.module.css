@@ -7,21 +7,27 @@
 }
 
 .titleLanding {
+  width: 50%;
   user-select: none;
   margin: 3%;
   text-align: center;
   padding: 1.5vh;
-  font-size: 7vh;
+  font-size: 12vh;
   background-color: #1d2625;
   color: #f2e963;
   text-shadow: 2px 2px #f25e3d;
 }
 
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
 .uiButton {
   user-select: none;
-  margin: 10%;
-  width: 20vh;
-  height: 5vh;
+
   border-radius: 20px;
   background-color: #d9c9b4;
   border-style: solid;
@@ -33,7 +39,6 @@
   justify-content: center;
   align-items: center;
 
-  font-size: 3vh;
   text-decoration: none;
 
   -webkit-transform: translateZ(0);
@@ -52,6 +57,27 @@
   box-shadow: 10px 10px 5px rgba(51, 37, 24, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+.otherButtonsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+}
+
+.mainButton {
+  width: 30vh;
+  height: 8vh;
+  font-size: 4vh;
+}
+
+.minorButton {
+  margin-left: 2vh;
+  margin-right: 2vh;
+  width: 12vh;
+  height: 5vh;
+  font-size: 1.7vh;
 }
 
 .instructions {

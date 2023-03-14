@@ -85,6 +85,27 @@
 
 .dealingModeImage {
   border-radius: inherit;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.classicModeImage {
+  background-image: url('../../assets/images/modes/classic-carcassonne.png');
+}
+
+.roadModeImage {
+  background-image: url('../../assets/images/modes/road-rally.png');
+}
+
+.cityModeImage {
+  background-image: url('../../assets/images/modes/city-craze.png');
+}
+
+.abbeyModeImage {
+  background-image: url('../../assets/images/modes/abbeys-ablaze.png');
 }
 
 .dealingModeOption:hover > div {
@@ -94,7 +115,7 @@
   transform: scale(1.01);
   font-size: 3.5vh;
   transition: background-color 0.6s, color 0.5s, font-size 0.5s;
-  text-shadow: 2px 2px 4px #000;
+  text-shadow: 0px 0px 0.5rem white;
 }
 
 .selectedMode > div {
@@ -104,7 +125,16 @@
   transform: scale(1.01);
   font-size: 3.5vh;
   transition: background-color 0.6s, color 0.5s, font-size 0.5s;
-  text-shadow: 2px 2px 4px #0000;
+  text-shadow: 0px 0px 0.5rem white;
+}
+
+.selectedMode > .dealingModeImageContainer > .dealingModeImage {
+  animation: pan-image-1 25s linear infinite;
+}
+
+.selectedMode > .dealingModeInfo .dealingModeTitle {
+  transition: color 1s;
+  color: gold;
 }
 
 .unselectedMode > div {
@@ -147,12 +177,7 @@
   color: inherit;
   padding-left: 10%;
   padding-right: 10%;
-}
-
-.dealingModeImage {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+  text-shadow: none;
 }
 
 .boardSizeContainer {
@@ -237,4 +262,52 @@
   z-index: 1000;
   -webkit-transform: scale(1.6);
   transform: scale(1.6);
+}
+
+@keyframes pan-image-1 {
+  0% {
+    /* View 1 */
+    background-position: 36% 42%;
+    background-size: 200%;
+  }
+  20% {
+    background-position: 30% 35%;
+    background-size: 200%;
+  }
+  20.0001% {
+    /* View 2 */
+    background-position: 0% 0%;
+    background-size: 150%;
+  }
+  40% {
+    background-position: 49% 11%;
+    background-size: 150%;
+  }
+  40.0001% {
+    /* View 2 */
+    background-position: 80% 42%;
+    background-size: 300%;
+  }
+  60% {
+    background-position: 84% 33%;
+    background-size: 300%;
+  }
+  60.0001% {
+    /* View 2 */
+    background-position: 0% 0%;
+    background-size: 300%;
+  }
+  80% {
+    background-position: 15% 4%;
+    background-size: 300%;
+  }
+  80.0001% {
+    /* View 2 */
+    background-position: 40% 0%;
+    background-size: 150%;
+  }
+  100% {
+    background-position: 60% 0%;
+    background-size: 150%;
+  }
 }

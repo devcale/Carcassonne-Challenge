@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import abbeysAblaze from '../../assets/images/modes/abbeys-ablaze.png';
-import cityCraze from '../../assets/images/modes/city-craze.png';
-import classicCarca from '../../assets/images/modes/classic-carcassonne.png';
-import roadRally from '../../assets/images/modes/road-rally.png';
 import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
@@ -97,11 +93,9 @@ export const SelectModePage = () => {
               tabIndex={0}
             >
               <div className={styling.dealingModeImageContainer}>
-                <img
-                  className={styling.dealingModeImage}
-                  src={classicCarca}
-                  alt="Classic carcassonne game mode"
-                />
+                <div
+                  className={styling.dealingModeImage + ' ' + styling.classicModeImage}
+                ></div>
               </div>
               <div className={styling.dealingModeInfo}>
                 <div className={styling.dealingModeTitle}>
@@ -129,11 +123,9 @@ export const SelectModePage = () => {
               tabIndex={0}
             >
               <div className={styling.dealingModeImageContainer}>
-                <img
-                  className={styling.dealingModeImage}
-                  src={roadRally}
-                  alt="Road rally game mode"
-                />
+                <div
+                  className={styling.dealingModeImage + ' ' + styling.roadModeImage}
+                ></div>
               </div>
               <div className={styling.dealingModeInfo}>
                 <div className={styling.dealingModeTitle}>
@@ -163,11 +155,9 @@ export const SelectModePage = () => {
               tabIndex={0}
             >
               <div className={styling.dealingModeImageContainer}>
-                <img
-                  className={styling.dealingModeImage}
-                  src={cityCraze}
-                  alt="City craze game mode"
-                />
+                <div
+                  className={styling.dealingModeImage + ' ' + styling.cityModeImage}
+                ></div>
               </div>
               <div className={styling.dealingModeInfo}>
                 <div className={styling.dealingModeTitle}>
@@ -201,11 +191,9 @@ export const SelectModePage = () => {
               tabIndex={0}
             >
               <div className={styling.dealingModeImageContainer}>
-                <img
-                  className={styling.dealingModeImage}
-                  src={abbeysAblaze}
-                  alt="Abbeys ablaze game mode"
-                />
+                <div
+                  className={styling.dealingModeImage + ' ' + styling.abbeyModeImage}
+                ></div>
               </div>
               <div className={styling.dealingModeInfo}>
                 <div className={styling.dealingModeTitle}>

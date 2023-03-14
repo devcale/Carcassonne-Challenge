@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, useContext } from 'react';
 
 export type GameState = {
@@ -6,10 +7,15 @@ export type GameState = {
   currentTile: number;
   setCurrentTile: (handIndex: number) => void;
 
-  //The current number of points a player has
+  // The current number of points a player has
   // points > 0
   points: number;
   setPoints: (points: number) => void;
+
+  // The multiplier of points for aesthetic purposes
+  // pointsMultiplier > 0
+  pointsMultiplier: number;
+  setPointsMultiplier: (pointsMultiplier: number) => void;
 
   // Represents the tiles the player currently has in their hand.
   // Each tile comes with a variation between 0, 1 and 2
@@ -55,6 +61,10 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   },
   points: 0,
   setPoints: (newPoints: number) => {
+    //
+  },
+  pointsMultiplier: 100,
+  setPointsMultiplier: (newPointsMultiplier: number) => {
     //
   },
   hand: [

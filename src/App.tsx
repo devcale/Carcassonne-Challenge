@@ -20,6 +20,7 @@ function App() {
   ];
   const [currentTile, setCurrentTile] = useState<number>(0);
   const [points, setPoints] = useState(0);
+  const [pointsMultiplier, setPointsMultiplier] = useState(100);
   const [hand, setHand] = useState<handType>([
     getRandomType(),
     getRandomType(),
@@ -71,6 +72,8 @@ function App() {
         setCurrentTile,
         points,
         setPoints,
+        pointsMultiplier,
+        setPointsMultiplier,
         hand,
         setHand,
         abbeyCountdown,

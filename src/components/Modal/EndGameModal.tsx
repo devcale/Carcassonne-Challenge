@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
 
 import { useGameStateContext } from '../../context/Context';
 import styling from './EndGameModal.module.css';
@@ -26,7 +25,7 @@ const style = {
 
 export const EndGameModal = (props: { openModal: boolean; closeModal: () => void }) => {
   const handleClose = () => props.closeModal();
-  const { points } = useGameStateContext();
+  const { points, pointsMultiplier } = useGameStateContext();
 
   return (
     <>
@@ -41,9 +40,10 @@ export const EndGameModal = (props: { openModal: boolean; closeModal: () => void
             <div className={styling.modalTitle}>Game has ended!</div>
             <p className={styling.modalDescription}>
               You can not place any more tiles. <br />
+              <br />
               Your final score was:
             </p>
-            <div className={styling.finalPoints}>{points * 100}</div>
+            <div className={styling.finalPoints}>{points * pointsMultiplier}</div>
           </Box>
         </Modal>
       </div>
