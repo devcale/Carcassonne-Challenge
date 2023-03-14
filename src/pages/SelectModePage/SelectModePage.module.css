@@ -7,6 +7,7 @@
 }
 
 .title {
+  user-select: none;
   margin: 1%;
   text-align: center;
   padding: 1.5vh;
@@ -33,6 +34,7 @@
 }
 
 .dealingModeContainer {
+  user-select: none;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -116,6 +118,7 @@
 }
 
 .dealingModeInfo {
+  user-select: none;
   visibility: visible;
   position: absolute;
   display: flex;
@@ -153,6 +156,7 @@
 }
 
 .boardSizeContainer {
+  user-select: none;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -182,6 +186,7 @@
 }
 
 .boardSizeOption {
+  user-select: none;
   display: inline;
   align-items: center;
   text-align: center;
@@ -201,6 +206,8 @@
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+
+  user-select: none;
 
   font-size: 3vh;
 }

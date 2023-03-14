@@ -7,6 +7,7 @@
 }
 
 .titleLanding {
+  user-select: none;
   margin: 3%;
   text-align: center;
   padding: 1.5vh;
@@ -17,6 +18,7 @@
 }
 
 .uiButton {
+  user-select: none;
   margin: 10%;
   width: 20vh;
   height: 5vh;
