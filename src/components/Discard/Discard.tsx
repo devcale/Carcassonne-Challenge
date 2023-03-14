@@ -1,18 +1,23 @@
 import { useGameStateContext } from '../../context/Context';
+import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
 import styling from './Discard.module.css';
 
 export const Discard = () => {
-  const { hand, setHand, discardCountdown, setDiscardCountdown, mapGlobal } =
-    useGameStateContext();
+  const {
+    hand,
+    setHand,
+    cityCountdown,
+    abbeyCountdown,
+    discardCountdown,
+    setDiscardCountdown,
+    mapGlobal,
+    gameMode,
+  } = useGameStateContext();
 
   const discardHandTabIndex = 4;
 
-  const boardHelper = new Board(
-    0,
-    () => '',
-    () => '',
-  );
+  const boardHelper = new Board(0, { type: '', variant: 0 }, { type: '', variant: 0 });
 
   function handleKeyDown() {
     //
@@ -21,10 +26,10 @@ export const Discard = () => {
   function handleDiscard() {
     if (discardCountdown === 0) {
       const newRandoms = [
-        getRandomCard(),
-        getRandomCard(),
-        getRandomCard(),
-        getRandomCard(),
+        DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+        DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+        DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+        DealNewTile(abbeyCountdown, cityCountdown, gameMode),
       ];
       const newHand: [
         [string, number],
@@ -32,31 +37,17 @@ export const Discard = () => {
         [string, number],
         [string, number],
       ] = [...hand];
-      newHand[0] = newRandoms[0];
-      newHand[1] = newRandoms[1];
-      newHand[2] = newRandoms[2];
-      newHand[3] = newRandoms[3];
+      newHand[0] = [newRandoms[0].tile.type, newRandoms[0].tile.variant];
+      newHand[1] = [newRandoms[1].tile.type, newRandoms[1].tile.variant];
+      newHand[2] = [newRandoms[2].tile.type, newRandoms[2].tile.variant];
+      newHand[3] = [newRandoms[3].tile.type, newRandoms[3].tile.variant];
 
       setHand(newHand);
       setDiscardCountdown(5);
-      boardHelper.checkGameEnd(newHand, mapGlobal, 5);
+      boardHelper.checkGameEnd(newHand, mapGlobal, 5, gameMode);
     }
   }
 
-  function getRandomCard(): [string, number] {
-    const rand = Math.random();
-
-    let newCard = '';
-    const variation = Math.floor(Math.random() * 3);
-    if (rand > 0.4) {
-      newCard = 'road';
-    } else if (rand <= 0.4 && rand > 0.1) {
-      newCard = 'city';
-    } else if (rand <= 0.1) {
-      newCard = 'abbey';
-    }
-    return [newCard, variation];
-  }
   return (
     <div
       className={styling.discardHand}

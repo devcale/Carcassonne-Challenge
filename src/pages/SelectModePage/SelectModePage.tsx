@@ -1,35 +1,39 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import abbeysAblaze from '../../assets/images/abbeys-ablaze.png';
-import cityCraze from '../../assets/images/city-craze.png';
-import classicCarca from '../../assets/images/classic-carcassonne.png';
-import roadRally from '../../assets/images/road-rally.png';
+import abbeysAblaze from '../../assets/images/modes/abbeys-ablaze.png';
+import cityCraze from '../../assets/images/modes/city-craze.png';
+import classicCarca from '../../assets/images/modes/classic-carcassonne.png';
+import roadRally from '../../assets/images/modes/road-rally.png';
 import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
+type cellType = { type: string; variant: number };
 export const SelectModePage = () => {
-  const { mapGlobal, setMapGlobal } = useGameStateContext();
-  const [selectedMode, setSelectedMode] = useState('classic');
+  const { mapGlobal, setMapGlobal, setGameMode } = useGameStateContext();
+  const [selectedMode, setSelectedMode] = useState('classic'); // Manages UI Update
   const [selectedSize, setSelectedSize] = useState('classic');
 
-  function mapDuplication(mapToChange: string[][]): string[][] {
-    const mapInit: string[][] = mapToChange.map((subArr) => subArr.slice());
+  function mapDuplication(mapToChange: cellType[][]): cellType[][] {
+    const mapInit: cellType[][] = mapToChange.map((subArr) => subArr.slice());
     return mapInit;
   }
 
   function updateMapValues(size: number): void {
     const board = new Board(
       size,
-      () => 'inactive',
-      () => 'init',
+      {
+        type: 'inactive',
+        variant: 0,
+      },
+      {
+        type: 'init',
+        variant: 0,
+      },
     );
     const newBoard = mapDuplication(board.getBoard());
-    console.log('Board created: ');
-    console.log(newBoard);
+
     setMapGlobal(newBoard);
-    console.log('Board updated: ');
-    console.log(mapGlobal);
   }
 
   function isSelected(localOption: string): string {
@@ -43,28 +47,25 @@ export const SelectModePage = () => {
   function handleClick(optionType: string, option: string) {
     if (optionType === 'mode') {
       if (option === 'classic') {
-        console.log('enters classic mode');
         setSelectedMode('classic');
+        setGameMode('classic');
       } else if (option === 'road') {
-        console.log('enters road mode');
+        setGameMode('road');
         setSelectedMode('road');
       } else if (option === 'city') {
-        console.log('enters city mode');
+        setGameMode('city');
         setSelectedMode('city');
       } else if (option === 'abbey') {
-        console.log('enters abbey mode');
+        setGameMode('abbey');
         setSelectedMode('abbey');
       }
     }
     if (optionType === 'size') {
       if (option === 'small') {
-        console.log('enters small');
         updateMapValues(5);
       } else if (option === 'classic') {
-        console.log('enters classic');
         updateMapValues(11);
       } else if (option === 'large') {
-        console.log('enters large');
         updateMapValues(17);
       }
     }
@@ -72,9 +73,6 @@ export const SelectModePage = () => {
   function handleKeyDown() {
     //
   }
-  useEffect(() => {
-    console.log('Triggered refresh on select mode page');
-  }, []);
   return (
     <div className={styling.gameModeContainer}>
       <div className={styling.title}>Carcassonne Challenge</div>
@@ -110,8 +108,7 @@ export const SelectModePage = () => {
                   Classic <br /> Challenge
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  The classic game rules. Get the highest score possible and compare
-                  yourself to the best to ever play
+                  The classic game rules. Get the highest score possible!
                 </div>
               </div>
             </div>
@@ -144,9 +141,8 @@ export const SelectModePage = () => {
                   Rally
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  In this game mode, the player will focus on building roads and
-                  connecting them to score points. Road tiles will now have different
-                  directions, and you may only connect them if they line up.
+                  The roads that wind through our lands now bear differing paths and
+                  directions, requiring alignment to be joined.
                 </div>
               </div>
             </div>
@@ -179,9 +175,12 @@ export const SelectModePage = () => {
                   Craze
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  This game mode is focused on building cities, with a higher point value
-                  for completed cities. The game will feature more city tiles in the draw
-                  pile, and larger cities could be more common.
+                  Build mighty cities! <br />
+                  <br />
+                  Cities will now have to be aligned by their walls.
+                  <br /> Abbeys may not be placed adjacent to other abbeys.
+                  <br />
+                  Greater cities bring greater glory and riches to thee!
                 </div>
               </div>
             </div>
@@ -214,10 +213,14 @@ export const SelectModePage = () => {
                   Ablaze
                 </div>
                 <div className={styling.dealingModeDescription}>
-                  Watch out player! <br />
-                  The abbeys are on fire! <br />
-                  Abbeys will be more common in the draw pile, but they will now discount
-                  you points for each tile besides them.
+                  Beware, noble players!
+                  <br />
+                  <br />
+                  Abbeys now burn bright and are more common in the draw pile.
+                  <br />
+                  <br />
+                  But placing tiles near them shall reduce your points, as the flames of
+                  destruction threaten to spread.
                 </div>
               </div>
             </div>

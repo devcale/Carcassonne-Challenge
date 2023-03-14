@@ -13,14 +13,13 @@ export const PlayableTile = (props: {
     setCurrentTile(props.handIndex);
   }
 
-  console.log();
   return (
     <div
       className={styling.playableTile}
       onClick={handleClick}
       onKeyDown={handleClick}
       role="button"
-      tabIndex={props.handIndex + 1}
+      tabIndex={0}
     >
       <div className={styling.tileCardInfo}>
         <div className={styling.tileCardTitle}>{props.type}</div>
@@ -29,7 +28,9 @@ export const PlayableTile = (props: {
 
       <div className={styling.playableImgContainer}>
         <div
-          className={styling.playableImg + ' ' + styling[props.type + props.variation]}
+          className={
+            styling.playableImg + ' ' + styling[props.type + '-' + props.variation]
+          }
         >
           <div className={styling.mobileTile}>{props.type}</div>
         </div>

@@ -6,12 +6,18 @@ import { Hand } from '../../components/Hand/Hand';
 import { EndGameModal } from '../../components/Modal/EndGameModal';
 import { Points } from '../../components/Points/Points';
 import { useGameStateContext } from '../../context/Context';
+import { DealNewTile } from '../../utils/TileDealingUtils';
 import styling from './PlayGame.module.css';
 
 export const PlayGame = () => {
   const {
     gameHasEnded,
     mapGlobal,
+    hand,
+    abbeyCountdown,
+    cityCountdown,
+    gameMode,
+    setHand,
     setPoints,
     setDiscardCountdown,
     setAbbeyCountdown,
@@ -27,9 +33,18 @@ export const PlayGame = () => {
     setAbbeyCountdown(15);
     setCityCountdown([12, 13, 14]);
     setPoints(0);
-    console.log('Rendered board with board size: ' + mapGlobal.length);
-    console.log('Map is: ');
-    console.log(mapGlobal);
+    const newTiles = [
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+    ];
+    setHand([
+      [newTiles[0].tile.type, newTiles[0].tile.variant],
+      [newTiles[1].tile.type, newTiles[1].tile.variant],
+      [newTiles[2].tile.type, newTiles[2].tile.variant],
+      [newTiles[3].tile.type, newTiles[3].tile.variant],
+    ]);
   }, []);
   return (
     <div className={styling.playgame}>
