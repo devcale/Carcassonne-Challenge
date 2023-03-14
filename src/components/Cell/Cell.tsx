@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
+import { IsCityClosed, TilesInChain } from '../../utils/BoardUtils';
+import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
-import { getRandomTile } from '../Hand/Hand';
 import styling from './Cell.module.css';
 
 const Cell = (props: {
   type: string;
+  variant: number;
   altitude: number;
   latitude: number;
   boardDimension: number;
@@ -29,27 +31,27 @@ const Cell = (props: {
     mapGlobal,
     points,
     setPoints,
+    gameMode,
+    setGameHasEnded,
   } = useGameStateContext();
 
-  const boardHelper = new Board(
-    0,
-    () => '',
-    () => '',
-  );
+  const boardHelper = new Board(0, { type: '', variant: 0 }, { type: '', variant: 0 });
 
   const tabIndexNum = 6 + props.altitude * props.boardDimension + props.latitude;
 
   function handleClick() {
     if (type === 'inactive') {
       const placedTile = boardHelper.placeTile(
-        hand[currentTile][0],
+        { type: hand[currentTile][0], variant: hand[currentTile][1] },
         props.latitude,
         props.altitude,
         mapGlobal,
+        gameMode,
       );
       if (placedTile.isValid) {
         setType(hand[currentTile][0]);
         setPoints(points + placedTile.pointsGained);
+
         updateHand();
         setDiscardCountdown(
           discardCountdown > 0 ? discardCountdown - 1 : discardCountdown,
@@ -65,9 +67,53 @@ const Cell = (props: {
   function handleMouseOver() {
     if (type === 'inactive') {
       const images = {
-        city: ['city-0', 'city-1', 'city-2'],
-        road: ['road-0', 'road-1', 'road-2'],
-        abbey: ['abbey-0', 'abbey-1', 'abbey-2'],
+        city: [
+          'city-0',
+          'city-1',
+          'city-2',
+          'city-3',
+          'city-4',
+          'city-5',
+          'city-6',
+          'city-7',
+          'city-8',
+          'city-9',
+          'city-10',
+          'city-11',
+          'city-12',
+          'city-13',
+          'city-14',
+          'city-15',
+          'city-16',
+          'city-17',
+        ],
+        road: [
+          'road-0',
+          'road-1',
+          'road-2',
+          'road-3',
+          'road-4',
+          'road-5',
+          'road-6',
+          'road-7',
+          'road-8',
+          'road-9',
+          'road-10',
+          'road-11',
+          'road-12',
+          'road-13',
+        ],
+        abbey: [
+          'abbey-0',
+          'abbey-1',
+          'abbey-2',
+          'abbey-3',
+          'abbey-4',
+          'abbey-5',
+          'abbey-6',
+          'abbey-7',
+          'abbey-8',
+        ],
       };
 
       if (hand[currentTile][0] === 'city') {
@@ -82,7 +128,7 @@ const Cell = (props: {
 
   function handleMouseOut() {
     if (type === 'inactive') {
-      setBackgroundImage('');
+      setBackgroundImage('inactive');
     }
   }
 
@@ -95,7 +141,7 @@ const Cell = (props: {
   }
 
   function updateHand() {
-    const nextState = getRandomTile(abbeyCountdown, cityCountdown);
+    const nextState = DealNewTile(abbeyCountdown, cityCountdown, gameMode);
 
     const newHand: [
       [string, number],
@@ -104,11 +150,17 @@ const Cell = (props: {
       [string, number],
     ] = [...hand];
 
-    newHand[currentTile][0] = nextState.newTile;
-    newHand[currentTile][1] = nextState.newVariation;
+    newHand[currentTile][0] = nextState.tile.type;
+    newHand[currentTile][1] = nextState.tile.variant;
     setAbbeyCountdown(nextState.updatedAbbeyCountdown);
     setCityCountdown(nextState.updatedCityCountdown);
     setHand(newHand);
+
+    //Check if game has ended
+    if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown, gameMode)) {
+      setGameHasEnded(true);
+      console.log('Game has ended');
+    }
   }
 
   // Sets the type of each cell on load

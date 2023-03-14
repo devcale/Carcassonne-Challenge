@@ -1,8 +1,5 @@
 import { createContext, useContext } from 'react';
 
-import Board from '../components/Board/Board';
-import Cell from '../components/Cell/Cell';
-
 export type GameState = {
   // Used to simbolize the index of tile that the player has selected in his hand
   // 0 <= currentTile < 5
@@ -38,8 +35,17 @@ export type GameState = {
   discardCountdown: number;
   setDiscardCountdown: (discardCountdown: number) => void;
 
-  mapGlobal: string[][];
-  setMapGlobal: (mapGlobal: string[][]) => void;
+  // Stores the state of the board
+  // "type" stands for the type of tile that is currently in a given position (i.e. "road", "abbey", "city", "init", "inactive")
+  // "variant" stands for the variant of a given tile (Mostly used for image variety and road rally mode)
+  mapGlobal: { type: string; variant: number }[][];
+  setMapGlobal: (mapGlobal: { type: string; variant: number }[][]) => void;
+
+  gameMode: string;
+  setGameMode: (gameMode: string) => void;
+
+  gameHasEnded: boolean;
+  setGameHasEnded: (gameHasEnded: boolean) => void;
 };
 
 export const GameStateContext: React.Context<GameState> = createContext<GameState>({
@@ -75,8 +81,16 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   setDiscardCountdown: (newDiscardCountdown: number) => {
     //
   },
-  mapGlobal: [[]],
-  setMapGlobal: (newMapGlobal: string[][]) => {
+  mapGlobal: [],
+  setMapGlobal: (newMapGlobal: { type: string; variant: number }[][]) => {
+    //
+  },
+  gameMode: 'classic',
+  setGameMode: (newGameMode: string) => {
+    //
+  },
+  gameHasEnded: false,
+  setGameHasEnded: (newGameHasEnded: boolean) => {
     //
   },
 });

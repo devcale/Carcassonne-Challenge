@@ -1,84 +1,70 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import Board from '../../components/Board/Board';
 import { BoardComponent } from '../../components/Board/BoardComponent';
 import { Discard } from '../../components/Discard/Discard';
 import { Hand } from '../../components/Hand/Hand';
+import { EndGameModal } from '../../components/Modal/EndGameModal';
 import { Points } from '../../components/Points/Points';
-import { GameStateContext } from '../../context/Context';
+import { useGameStateContext } from '../../context/Context';
+import { DealNewTile } from '../../utils/TileDealingUtils';
 import styling from './PlayGame.module.css';
 
 export const PlayGame = () => {
-  type handType = [
-    [string, number],
-    [string, number],
-    [string, number],
-    [string, number],
-  ];
-  const [boardSize, setBoardSize] = useState(11);
-  const [currentTile, setCurrentTile] = useState<number>(0);
-  const [points, setPoints] = useState(0);
-  const [hand, setHand] = useState<handType>([
-    [getRandomType(), 0],
-    [getRandomType(), 0],
-    [getRandomType(), 0],
-    [getRandomType(), 0],
-  ]);
-  const [abbeyCountdown, setAbbeyCountdown] = useState<number>(15);
-  const [cityCountdown, setCityCountdown] = useState<[number, number, number]>([
-    12, 13, 14,
-  ]);
-  const [discardCountdown, setDiscardCountdown] = useState<number>(5);
+  const {
+    gameHasEnded,
+    mapGlobal,
+    hand,
+    abbeyCountdown,
+    cityCountdown,
+    gameMode,
+    setHand,
+    setPoints,
+    setDiscardCountdown,
+    setAbbeyCountdown,
+    setCityCountdown,
+    setGameHasEnded,
+  } = useGameStateContext();
 
-  const board = new Board(
-    boardSize,
-    () => 'inactive',
-    () => 'init',
-  );
+  const handleClose = () => setGameHasEnded(false);
 
-  const [mapGlobal, setMapGlobal] = useState<string[][]>(board.getBoard());
-
-  function getRandomType(): string {
-    const types = ['city', 'road', 'abbey'];
-    const rand = Math.floor(Math.random() * 3);
-    return types[rand];
-  }
-
+  useEffect(() => {
+    setGameHasEnded(false);
+    setDiscardCountdown(5);
+    setAbbeyCountdown(15);
+    setCityCountdown([12, 13, 14]);
+    setPoints(0);
+    const newTiles = [
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+      DealNewTile(abbeyCountdown, cityCountdown, gameMode),
+    ];
+    setHand([
+      [newTiles[0].tile.type, newTiles[0].tile.variant],
+      [newTiles[1].tile.type, newTiles[1].tile.variant],
+      [newTiles[2].tile.type, newTiles[2].tile.variant],
+      [newTiles[3].tile.type, newTiles[3].tile.variant],
+    ]);
+  }, []);
   return (
-    <GameStateContext.Provider
-      value={{
-        currentTile,
-        setCurrentTile,
-        points,
-        setPoints,
-        hand,
-        setHand,
-        abbeyCountdown,
-        setAbbeyCountdown,
-        cityCountdown,
-        setCityCountdown,
-        discardCountdown,
-        setDiscardCountdown,
-        mapGlobal,
-        setMapGlobal,
-      }}
-    >
-      <div className={styling.playgame}>
-        <div className={styling.title}>Carcassonne Challenge</div>
-        <div className={styling.playArea}>
-          <div className={styling.handContainer}>
-            <Hand />
-            <Discard />
-          </div>
+    <div className={styling.playgame}>
+      <EndGameModal openModal={gameHasEnded} closeModal={handleClose} />
+      <div className={styling.title}>
+        {gameHasEnded ? 'Game Over' : 'Carcassonne Challenge'}
+      </div>
+      <div className={styling.playArea}>
+        <div className={styling.handContainer}>
+          <Hand />
+          <Discard />
+        </div>
 
-          <div className={styling.boardContainer}>
-            <BoardComponent board={board} />
-          </div>
-          <div className={styling.pointsContainer}>
-            <Points />
-          </div>
+        <div className={styling.boardContainer}>
+          <BoardComponent />
+        </div>
+        <div className={styling.pointsContainer}>
+          <Points />
         </div>
       </div>
-    </GameStateContext.Provider>
+    </div>
   );
 };
