@@ -16,7 +16,7 @@ const Cell = (props: {
 }) => {
   const [type, setType] = useState('inactive');
   const [backgroundImage, setBackgroundImage] = useState(
-    props.type === 'init' ? 'src/assets/images/intersection-a.png' : '',
+    props.type === 'init' ? 'init-classic' : '',
   );
   const {
     hand,
@@ -166,6 +166,11 @@ const Cell = (props: {
   // Sets the type of each cell on load
   useEffect(() => {
     setType(props.type);
+    if (gameMode === 'road' && props.type === 'init') {
+      setBackgroundImage('init-road');
+    } else if (gameMode === 'city' && props.type === 'init') {
+      setBackgroundImage('init-city');
+    }
   }, []);
 
   return (

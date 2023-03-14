@@ -100,8 +100,16 @@
     cursor: pointer;
   }
 
-  .init {
-    background-image: url('src/assets/images/roads/intersection-a.png');
+  .init-classic {
+    background-image: url('src/assets/images/roads/011-generic-road.png');
+    outline: 3px solid #ead6ab;
+  }
+  .init-road {
+    background-image: url('src/assets/images/roads/000-four-way.png');
+    outline: 3px solid #ead6ab;
+  }
+  .init-city {
+    background-image: url('src/assets/images/grass.png');
     outline: 3px solid #ead6ab;
   }
 
