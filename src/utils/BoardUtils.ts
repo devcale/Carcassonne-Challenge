@@ -424,27 +424,14 @@ export function TilesInChain(
   altitude: number,
   map: Tile[][],
 ): Coordinate[] {
-  console.log('Map in which chain is being checked: ');
-  console.log(map);
   const cellsInChain: Coordinate[] = [];
-  console.log('Checking chain on lat/alt:' + latitude + '/' + altitude);
 
   const citiesThatCloseTop: number[] = [4, 5, 7, 10, 14, 15, 16];
   const citiesThatCloseRight: number[] = [4, 6, 7, 9, 13, 14, 17];
   const citiesThatCloseBottom: number[] = [5, 6, 7, 8, 12, 13, 16];
   const citiesThatCloseLeft: number[] = [4, 5, 6, 11, 12, 15, 17];
 
-  console.log('latitude: ' + latitude);
-  console.log('altitude: ' + altitude);
-  console.log('map col in lat is: ');
-  console.log(map[latitude]);
-  console.log('map type is: ');
-  console.log(map[latitude][altitude]);
-
-  console.log('cell passed as parameter is: ');
-  console.log(cell.type);
   if (map[latitude][altitude].type === cell.type) {
-    console.log('passes type check');
     const visited: boolean[][] = [];
     for (let i = 0; i < map.length; i++) {
       const newCol = [];

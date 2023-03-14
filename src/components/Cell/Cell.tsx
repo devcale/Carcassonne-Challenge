@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
-import { IsCityClosed, TilesInChain } from '../../utils/BoardUtils';
 import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
 import styling from './Cell.module.css';

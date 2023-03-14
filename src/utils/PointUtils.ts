@@ -120,10 +120,8 @@ export function GainPoints(
       pointsGained += 1;
     }
   } else if (gameMode === 'city') {
-    console.log('Gamemode is city');
     const pointAdders = ['init', 'abbey', 'city', 'road'];
     if (cell.type === 'city') {
-      console.log('Tile placed was a city');
       const mapParam = [];
       for (let i = 0; i < map.length; i++) {
         const col = [];
@@ -138,8 +136,6 @@ export function GainPoints(
       }
       const cityChain = TilesInChain(cell, latitude, altitude, mapParam);
 
-      console.log('city chain is: ');
-      console.log(cityChain);
       if (IsCityClosed(cityChain, mapParam)) {
         if (cityChain.length < 5) {
           pointsGained += cityChain.length;
