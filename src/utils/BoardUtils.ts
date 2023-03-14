@@ -444,6 +444,7 @@ export function TilesInChain(
     const stack: Coordinate[] = [[latitude, altitude]];
 
     while (stack.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const [currentLatitude, currentAltitude] = stack.pop()!;
 
       if (
@@ -453,7 +454,6 @@ export function TilesInChain(
         currentAltitude < visited[0].length &&
         visited[currentLatitude][currentAltitude] === false
       ) {
-        console.log('pushes into stack');
         cellsInChain.push([currentLatitude, currentAltitude]);
         visited[currentLatitude][currentAltitude] = true;
 
@@ -554,8 +554,6 @@ export function TilesInChain(
       }
     }
   }
-  console.log('cells that ended in chain: ');
-  console.log(cellsInChain);
   return cellsInChain;
 }
 
