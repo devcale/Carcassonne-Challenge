@@ -28,6 +28,11 @@ export function DealNewTile(
     roadOdds = 0.7;
   }
 
+  if (gameMode === 'abbey') {
+    cityOdds = 0.2;
+    roadOdds = 0.3;
+  }
+
   let updatedAbbeyCountdown = abbeyCountdown;
   let updatedCityCountdown: CityCounters = [
     cityCountdown[0],
@@ -86,13 +91,22 @@ export function DealNewTile(
     ];
     updatedCityCountdown = newCityCountdown;
   } else if (chosen === 'abbey') {
+    let variantRand = Math.floor(Math.random() * 3);
+    if (gameMode === 'city') {
+      variantRand = Math.floor(Math.random() * 3) + 3;
+    } else if (gameMode === 'abbey') {
+      const isAbbeyOnFire: boolean = Math.random() < 0.85;
+      if (isAbbeyOnFire) {
+        variantRand = Math.floor(Math.random() * 3) + 6;
+      } else {
+        variantRand = Math.floor(Math.random() * 3);
+      }
+    }
     newTile = {
       type: 'abbey',
-      variant:
-        gameMode === 'city'
-          ? Math.floor(Math.random() * 3) + 3
-          : Math.floor(Math.random() * 3),
+      variant: variantRand,
     };
+
     updatedAbbeyCountdown = 15;
     const newCityCountdown: CityCounters = [
       cityCountdown[0] - 1,

@@ -182,6 +182,97 @@ export function GainPoints(
     if (leftCell.type === 'abbey') {
       pointsGained += 1;
     }
+  } else if (gameMode === 'abbey') {
+    const validTiles = ['init', 'city', 'road', 'abbey'];
+    const burningAbbeys: number[] = [6, 7, 8];
+    const abbeyValue = burningAbbeys.includes(cell.variant) ? -1 : 1;
+
+    if (cell.type === 'road') {
+      pointsGained += 1;
+    } else if (cell.type === 'city') {
+      pointsGained += 3;
+    } else if (cell.type === 'abbey') {
+      if (validTiles.includes(topRightCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(topLeftCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(bottomRightCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(bottomLeftCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(rightCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(leftCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(upperCell.type)) {
+        pointsGained += abbeyValue;
+      }
+      if (validTiles.includes(lowerCell.type)) {
+        pointsGained += abbeyValue;
+      }
+    }
+    if (topRightCell.type === 'abbey') {
+      if (burningAbbeys.includes(topRightCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (topLeftCell.type === 'abbey') {
+      if (burningAbbeys.includes(topLeftCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (bottomRightCell.type === 'abbey') {
+      if (burningAbbeys.includes(bottomRightCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (bottomLeftCell.type === 'abbey') {
+      if (burningAbbeys.includes(bottomLeftCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (upperCell.type === 'abbey') {
+      if (burningAbbeys.includes(upperCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (rightCell.type === 'abbey') {
+      if (burningAbbeys.includes(rightCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (lowerCell.type === 'abbey') {
+      if (burningAbbeys.includes(lowerCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
+    if (leftCell.type === 'abbey') {
+      if (burningAbbeys.includes(leftCell.variant)) {
+        pointsGained -= 1;
+      } else {
+        pointsGained += 1;
+      }
+    }
   }
 
   return pointsGained;

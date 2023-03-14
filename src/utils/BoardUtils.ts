@@ -87,7 +87,7 @@ export function IsPlacementValid(
   const citiesThatConnectToRight = [0, 1, 2, 3, 5, 8, 10, 11, 12, 15, 16];
 
   // ------------------------------------------- CLASSIC GAMEMODE ------------------------------------------------------
-  if (gameMode === 'classic') {
+  if (gameMode === 'classic' || gameMode === 'abbey') {
     if (cell.type === 'city') {
       allowedTypes = ['city', 'abbey', 'road', 'init'];
     } else if (cell.type === 'road') {
@@ -407,7 +407,10 @@ export function IsPlacementValid(
           leftCell.type !== 'inactive') &&
         !isOnlyBorder;
     }
-  }
+  } // ------------------------------------------- ABBEY GAMEMODE ------------------------------------------------------
+  // else if (gameMode == 'abbey') {
+
+  // }
 
   return isValid;
 }

@@ -103,7 +103,17 @@ const Cell = (props: {
           'road-12',
           'road-13',
         ],
-        abbey: ['abbey-0', 'abbey-1', 'abbey-2', 'abbey-3', 'abbey-4', 'abbey-5'],
+        abbey: [
+          'abbey-0',
+          'abbey-1',
+          'abbey-2',
+          'abbey-3',
+          'abbey-4',
+          'abbey-5',
+          'abbey-6',
+          'abbey-7',
+          'abbey-8',
+        ],
       };
 
       if (hand[currentTile][0] === 'city') {
