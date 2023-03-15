@@ -5,7 +5,11 @@ import styling from './LandingPage.module.css';
 export const LandingPage = () => {
   return (
     <div className={styling.mainContainer}>
-      <div className={styling.titleLanding}>Carcassonne Challenge</div>
+      <div className={styling.titleContainer}>
+        <div className={styling.titleLanding}>Carcassonne</div>
+        <div className={styling.titleLanding}>Challenge</div>
+      </div>
+
       <div className={styling.optionsContainer}>
         <Link to="/Carcassonne-Challenge/gamemode">
           <div className={styling.uiButton + ' ' + styling.mainButton}>Play Game</div>

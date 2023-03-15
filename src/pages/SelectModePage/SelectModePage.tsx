@@ -6,7 +6,7 @@ import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
 type cellType = { type: string; variant: number };
 export const SelectModePage = () => {
-  const { mapGlobal, setMapGlobal, setGameMode } = useGameStateContext();
+  const { setMapGlobal, setGameMode } = useGameStateContext();
   const [selectedMode, setSelectedMode] = useState('classic'); // Manages UI Update
   const [selectedSize, setSelectedSize] = useState('classic');
 
@@ -40,6 +40,14 @@ export const SelectModePage = () => {
     return mode;
   }
 
+  function isSizeSelected(localOption: string): string {
+    let size = 'unselectedSize';
+    if (localOption === selectedSize) {
+      size = 'selectedSize';
+    }
+    return size;
+  }
+
   function handleClick(optionType: string, option: string) {
     if (optionType === 'mode') {
       if (option === 'classic') {
@@ -59,10 +67,13 @@ export const SelectModePage = () => {
     if (optionType === 'size') {
       if (option === 'small') {
         updateMapValues(5);
+        setSelectedSize('small');
       } else if (option === 'classic') {
         updateMapValues(11);
+        setSelectedSize('classic');
       } else if (option === 'large') {
         updateMapValues(17);
+        setSelectedSize('large');
       }
     }
   }
@@ -71,9 +82,7 @@ export const SelectModePage = () => {
   }
   return (
     <div className={styling.gameModeContainer}>
-      <div className={styling.title}>Carcassonne Challenge</div>
       <div className={styling.dealingModeContainer + ' ' + styling.background}>
-        Game Mode
         <div className={styling.dealingModeOptions}>
           <form className={styling.dealingModeOptionsForm}>
             <div
@@ -216,7 +225,6 @@ export const SelectModePage = () => {
         </div>
       </div>
       <div className={styling.boardSizeContainer + ' ' + styling.background}>
-        Board Size
         <div className={styling.boardSizeOptions}>
           <form className={styling.boardSizeOptionsForm}>
             <div
@@ -225,14 +233,21 @@ export const SelectModePage = () => {
                 ' ' +
                 styling.backgroundOption +
                 ' ' +
-                styling.interactable
+                styling.interactable +
+                ' ' +
+                styling[isSizeSelected('small')]
               }
               role="button"
               onClick={() => handleClick('size', 'small')}
               onKeyDown={handleKeyDown}
               tabIndex={0}
             >
-              Small
+              <div className={styling.boardSizeImageContainer}>
+                <div
+                  className={styling.boardSizeImage + ' ' + styling.smallSizeImage}
+                ></div>
+              </div>
+              <div className={styling.boardSizeTitle}>Small</div>
             </div>
             <div
               className={
@@ -240,14 +255,21 @@ export const SelectModePage = () => {
                 ' ' +
                 styling.backgroundOption +
                 ' ' +
-                styling.interactable
+                styling.interactable +
+                ' ' +
+                styling[isSizeSelected('classic')]
               }
               role="button"
               onClick={() => handleClick('size', 'classic')}
               onKeyDown={handleKeyDown}
               tabIndex={0}
             >
-              Classic
+              <div className={styling.boardSizeImageContainer}>
+                <div
+                  className={styling.boardSizeImage + ' ' + styling.classicSizeImage}
+                ></div>
+              </div>
+              <div className={styling.boardSizeTitle}>Classic</div>
             </div>
             <div
               className={
@@ -255,26 +277,27 @@ export const SelectModePage = () => {
                 ' ' +
                 styling.backgroundOption +
                 ' ' +
-                styling.interactable
+                styling.interactable +
+                ' ' +
+                styling[isSizeSelected('large')]
               }
               role="button"
               onClick={() => handleClick('size', 'large')}
               onKeyDown={handleKeyDown}
               tabIndex={0}
             >
-              Large
+              <div className={styling.boardSizeImageContainer}>
+                <div
+                  className={styling.boardSizeImage + ' ' + styling.largeSizeImage}
+                ></div>
+              </div>
+              <div className={styling.boardSizeTitle}>Large</div>
             </div>
           </form>
         </div>
       </div>
       <Link to="/Carcassonne-Challenge/play">
-        <div
-          className={
-            styling.playButton + ' ' + styling.background + ' ' + styling.interactable
-          }
-        >
-          Play
-        </div>
+        <div className={styling.playButton + ' ' + styling.interactable}>Start Game</div>
       </Link>
     </div>
   );
