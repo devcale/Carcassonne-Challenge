@@ -1,8 +1,48 @@
+.mainImageContainer {
+  right: 0;
+  bottom: 0;
+  height: 80vh;
+  width: 40vw;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0.05;
+  filter: sepia(50%);
+}
+.mainImage {
+  object-fit: contain;
+  height: 200%;
+  width: 200%;
+  top: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.mainImageContainer2 {
+  left: 0;
+  bottom: 0;
+  height: 80vh;
+  width: 40vw;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0.1;
+  z-index: 0;
+  filter: sepia(50%);
+}
+.mainImage2 {
+  object-fit: contain;
+  height: 200%;
+  width: 200%;
+  margin-left: -100%;
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+}
+
 .mainContainer {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
@@ -14,6 +54,7 @@
   align-items: center;
   margin-bottom: 3%;
   padding-bottom: 1.5vh;
+  margin-top: 15vh;
 }
 
 .titleLanding {
@@ -22,13 +63,14 @@
   text-align: center;
   font-size: 8vw;
   background-image: linear-gradient(
-    to right,
+    to top,
     #cb9b51 22%,
     #f6e27a 45%,
     #f6f2c0 50%,
     #f6e27a 55%,
     #cb9b51 78%
   );
+
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;

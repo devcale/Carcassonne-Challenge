@@ -135,6 +135,10 @@
     display: none;
   }
 
+  .city-placeholder {
+    background-image: url('../../assets/images/placeholders/city-min.png');
+  }
+
   .city-0 {
     background-image: url('../../assets/images/cities/000-city.png');
   }

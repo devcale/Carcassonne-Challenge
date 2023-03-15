@@ -14,25 +14,19 @@
   align-items: center;
   height: 42vw;
   width: 42vw;
-  padding: 1.5vw;
-  background-color: #735236;
+  padding: 2vw;
+  background-image: url('src/assets/images/ui/wood-clip.png');
+  background-size: 25%;
+  background-repeat: repeat;
   border-radius: 1%;
-}
-
-.title {
-  user-select: none;
-  text-align: center;
-  padding: 1.5vh;
-  font-size: 7vh;
-  color: #f2e963;
-  text-shadow: 2px 2px #f25e3d;
 }
 
 .playArea {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
-  height: 80vh;
+  align-items: center;
+  height: 100vh;
 }
 
 .handContainer {

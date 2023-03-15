@@ -47,9 +47,7 @@ export const PlayGame = () => {
   return (
     <div className={styling.playgame}>
       <EndGameModal openModal={gameHasEnded} closeModal={handleClose} />
-      <div className={styling.title}>
-        {gameHasEnded ? 'Game Over' : 'Carcassonne Challenge'}
-      </div>
+
       <div className={styling.playArea}>
         <div className={styling.handContainer}>
           <Hand />
