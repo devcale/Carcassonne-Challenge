@@ -6,8 +6,8 @@ import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
 type cellType = { type: string; variant: number };
 export const SelectModePage = () => {
-  const { setMapGlobal, setGameMode } = useGameStateContext();
-  const [selectedMode, setSelectedMode] = useState('classic'); // Manages UI Update
+  const { gameMode, setMapGlobal, setGameMode } = useGameStateContext();
+  const [selectedMode, setSelectedMode] = useState(gameMode); // Manages UI Update
   const [selectedSize, setSelectedSize] = useState('classic');
 
   function mapDuplication(mapToChange: cellType[][]): cellType[][] {

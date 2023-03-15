@@ -3,36 +3,63 @@ import { PlayableTile } from '../PlayableTile/PlayableTile';
 import styling from './Hand.module.css';
 
 export const Hand = () => {
-  const { hand, gameMode } = useGameStateContext();
+  const { hand, gameMode, pointsMultiplier } = useGameStateContext();
 
   function configureDescription(type: string, variant: number): string {
     let desc = '';
+    const pointPlural = pointsMultiplier > 1 ? 'points' : 'point';
     if (type === 'city') {
       if (gameMode === 'city') {
         desc =
           'You only gain points for completed cities. Bigger cities give more points.';
       } else {
         desc =
-          'Cities gives you two points per tile, and an extra point for each city chain.';
+          'Cities gives you ' +
+          2 * pointsMultiplier +
+          ' ' +
+          pointPlural +
+          ' per tile, and an extra ' +
+          1 * pointsMultiplier +
+          ' ' +
+          pointPlural +
+          ' for each city chain.';
       }
     } else if (type === 'abbey') {
       if (gameMode === 'abbey') {
         if (variant >= 6) {
           desc =
-            'Abbey is ablaze. Every tile that surrounds this abbey will cost you a point.';
+            'Abbey is ablaze. Every tile that surrounds this abbey will cost you ' +
+            1 * pointsMultiplier +
+            ' ' +
+            pointPlural +
+            '.';
         } else {
           desc =
-            'Abbey is safe. Every tile that surrounds this abbey will give you a point.';
+            'Abbey is safe. Every tile that surrounds this abbey will give you ' +
+            1 * pointsMultiplier +
+            ' ' +
+            pointPlural +
+            '.';
         }
       } else {
-        desc = 'Abbeys give you one point for each tile that surrounds it.';
+        desc =
+          'Abbeys give you ' +
+          1 * pointsMultiplier +
+          ' ' +
+          pointPlural +
+          ' for each tile that surrounds it.';
       }
     } else if (type === 'road') {
       if (gameMode === 'road') {
         desc =
-          'Roads give you one point per tile. Can only be placed if it matches the adjacent tile.';
+          'Roads give you ' +
+          1 * pointsMultiplier +
+          ' ' +
+          pointPlural +
+          ' per tile. Can only be placed if it matches the adjacent tile.';
       } else {
-        desc = 'Roads give you one point per tile.';
+        desc =
+          'Roads give you ' + 1 * pointsMultiplier + ' ' + pointPlural + ' per tile.';
       }
     }
     return desc;

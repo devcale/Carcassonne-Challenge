@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { useGameStateContext } from '../../context/Context';
 import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
@@ -50,13 +52,17 @@ export const Discard = () => {
 
   return (
     <div
-      className={styling.discardHand}
+      className={
+        styling.discardHand +
+        ' ' +
+        styling[discardCountdown > 0 ? 'unavailable' : 'available']
+      }
       role="button"
       onClick={handleDiscard}
       onKeyDown={handleKeyDown}
       tabIndex={discardHandTabIndex}
     >
-      {'Discard Hand ' + '(' + discardCountdown + ')'}
+      {discardCountdown > 0 ? discardCountdown : 'R'}
     </div>
   );
 };

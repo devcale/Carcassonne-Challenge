@@ -10,6 +10,7 @@ import { InstructionsPage } from './pages/InstructionsPage/InstructionsPage';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { PlayGame } from './pages/PlayGame/PlayGame';
 import { SelectModePage } from './pages/SelectModePage/SelectModePage';
+import { SettingsPage } from './pages/SettingsPage/SettingsPage';
 type cellType = { type: string; variant: number };
 function App() {
   type handType = [
@@ -95,6 +96,7 @@ function App() {
         <Route path="/Carcassonne-Challenge/gamemode" element={<SelectModePage />} />
         <Route path="/Carcassonne-Challenge/play" element={<PlayGame />} />
         <Route path="/Carcassonne-Challenge/howtoplay" element={<InstructionsPage />} />
+        <Route path="/Carcassonne-Challenge/settings" element={<SettingsPage />} />
       </Routes>
     </GameStateContext.Provider>
   );
