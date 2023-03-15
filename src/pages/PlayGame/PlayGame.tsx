@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { BoardComponent } from '../../components/Board/BoardComponent';
 import { Discard } from '../../components/Discard/Discard';
@@ -12,8 +12,6 @@ import styling from './PlayGame.module.css';
 export const PlayGame = () => {
   const {
     gameHasEnded,
-    mapGlobal,
-    hand,
     abbeyCountdown,
     cityCountdown,
     gameMode,
