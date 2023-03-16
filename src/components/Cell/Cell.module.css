@@ -55,21 +55,18 @@
     justify-content: center;
     align-items: center;
 
-    border-style: solid;
-    border-width: 1px;
-    border-color: #53735e;
+    outline: 1px solid #53735eaa;
 
     transition: 0.5s;
 
     aspect-ratio: 1;
-    outline: 50% solid #0009;
 
     background-size: cover;
 
     z-index: 500;
-    outline-offset: -4px;
+    outline-offset: -2px;
 
-    outline-style: none;
+    outline-style: solid;
     user-select: none;
   }
 
@@ -100,8 +97,16 @@
     cursor: pointer;
   }
 
-  .init {
-    background-image: url('src/assets/images/roads/intersection-a.png');
+  .init-classic {
+    background-image: url('src/assets/images/roads/011-generic-road.png');
+    outline: 3px solid #ead6ab;
+  }
+  .init-road {
+    background-image: url('src/assets/images/roads/000-four-way.png');
+    outline: 3px solid #ead6ab;
+  }
+  .init-city {
+    background-image: url('src/assets/images/grass.png');
     outline: 3px solid #ead6ab;
   }
 

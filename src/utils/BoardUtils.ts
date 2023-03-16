@@ -8,6 +8,7 @@ export function IsPlacementValid(
 ): boolean {
   let isValid = false;
   const currentCell = map[latitude][altitude];
+  console.log('tile on coordinates is: ' + currentCell.type);
   let upperCell = { type: 'out', variant: -1 };
   let lowerCell = { type: 'out', variant: -1 };
   let rightCell = { type: 'out', variant: -1 };
@@ -138,7 +139,9 @@ export function IsPlacementValid(
           }
         } else if (upperCell.type === 'init') {
           topConnectsToCurrent = true;
-          currentConnectsToTop = true;
+          if (roadsThatConnectToTop.includes(cell.variant)) {
+            currentConnectsToTop = true;
+          }
         }
       }
       topConnected = topConnectsToCurrent && currentConnectsToTop;
@@ -155,7 +158,9 @@ export function IsPlacementValid(
           }
         } else if (rightCell.type === 'init') {
           rightConnectsToCurrent = true;
-          currentConnectsToRight = true;
+          if (roadsThatConnectToRight.includes(cell.variant)) {
+            currentConnectsToRight = true;
+          }
         }
       }
       rightConnected = rightConnectsToCurrent && currentConnectsToRight;
@@ -172,7 +177,9 @@ export function IsPlacementValid(
           }
         } else if (lowerCell.type === 'init') {
           bottomConnectsToCurrent = true;
-          currentConnectsToBottom = true;
+          if (roadsThatConnectToBottom.includes(cell.variant)) {
+            currentConnectsToBottom = true;
+          }
         }
       }
       bottomConnected = bottomConnectsToCurrent && currentConnectsToBottom;
@@ -190,7 +197,9 @@ export function IsPlacementValid(
           }
         } else if (leftCell.type === 'init') {
           leftConnectsToCurrent = true;
-          currentConnectsToLeft = true;
+          if (roadsThatConnectToLeft.includes(cell.variant)) {
+            currentConnectsToLeft = true;
+          }
         }
       }
       leftConnected = leftConnectsToCurrent && currentConnectsToLeft;
@@ -198,6 +207,7 @@ export function IsPlacementValid(
       roadIsConnected = leftConnected || roadIsConnected;
 
       isValid =
+        currentCell.type === 'inactive' &&
         topValid &&
         rightValid &&
         bottomValid &&
@@ -230,6 +240,13 @@ export function IsPlacementValid(
         allowedTypes.includes(rightCell.type) ||
         allowedTypes.includes(leftCell.type)
       ) {
+        console.log('Is allowed because:');
+        console.log([
+          allowedTypes.includes(upperCell.type),
+          allowedTypes.includes(rightCell.type),
+          allowedTypes.includes(lowerCell.type),
+          allowedTypes.includes(leftCell.type),
+        ]);
         isValid = true;
       }
     }
@@ -424,27 +441,14 @@ export function TilesInChain(
   altitude: number,
   map: Tile[][],
 ): Coordinate[] {
-  console.log('Map in which chain is being checked: ');
-  console.log(map);
   const cellsInChain: Coordinate[] = [];
-  console.log('Checking chain on lat/alt:' + latitude + '/' + altitude);
 
   const citiesThatCloseTop: number[] = [4, 5, 7, 10, 14, 15, 16];
   const citiesThatCloseRight: number[] = [4, 6, 7, 9, 13, 14, 17];
   const citiesThatCloseBottom: number[] = [5, 6, 7, 8, 12, 13, 16];
   const citiesThatCloseLeft: number[] = [4, 5, 6, 11, 12, 15, 17];
 
-  console.log('latitude: ' + latitude);
-  console.log('altitude: ' + altitude);
-  console.log('map col in lat is: ');
-  console.log(map[latitude]);
-  console.log('map type is: ');
-  console.log(map[latitude][altitude]);
-
-  console.log('cell passed as parameter is: ');
-  console.log(cell.type);
   if (map[latitude][altitude].type === cell.type) {
-    console.log('passes type check');
     const visited: boolean[][] = [];
     for (let i = 0; i < map.length; i++) {
       const newCol = [];
@@ -457,6 +461,7 @@ export function TilesInChain(
     const stack: Coordinate[] = [[latitude, altitude]];
 
     while (stack.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const [currentLatitude, currentAltitude] = stack.pop()!;
 
       if (
@@ -466,7 +471,6 @@ export function TilesInChain(
         currentAltitude < visited[0].length &&
         visited[currentLatitude][currentAltitude] === false
       ) {
-        console.log('pushes into stack');
         cellsInChain.push([currentLatitude, currentAltitude]);
         visited[currentLatitude][currentAltitude] = true;
 
@@ -567,8 +571,6 @@ export function TilesInChain(
       }
     }
   }
-  console.log('cells that ended in chain: ');
-  console.log(cellsInChain);
   return cellsInChain;
 }
 

@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { GiCardRandom } from 'react-icons/gi';
+
 import { useGameStateContext } from '../../context/Context';
 import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
@@ -16,6 +19,8 @@ export const Discard = () => {
   } = useGameStateContext();
 
   const discardHandTabIndex = 4;
+
+  const discardIcon = <GiCardRandom />;
 
   const boardHelper = new Board(0, { type: '', variant: 0 }, { type: '', variant: 0 });
 
@@ -50,13 +55,19 @@ export const Discard = () => {
 
   return (
     <div
-      className={styling.discardHand}
+      className={
+        styling.discardHand +
+        ' ' +
+        styling[discardCountdown > 0 ? 'unavailable' : 'available']
+      }
       role="button"
       onClick={handleDiscard}
       onKeyDown={handleKeyDown}
       tabIndex={discardHandTabIndex}
     >
-      {'Discard Hand ' + '(' + discardCountdown + ')'}
+      <div className={styling.discardText}>
+        {discardCountdown > 0 ? discardCountdown : discardIcon}
+      </div>
     </div>
   );
 };

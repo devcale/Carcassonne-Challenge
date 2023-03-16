@@ -10,6 +10,7 @@ import { InstructionsPage } from './pages/InstructionsPage/InstructionsPage';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { PlayGame } from './pages/PlayGame/PlayGame';
 import { SelectModePage } from './pages/SelectModePage/SelectModePage';
+import { SettingsPage } from './pages/SettingsPage/SettingsPage';
 type cellType = { type: string; variant: number };
 function App() {
   type handType = [
@@ -20,6 +21,7 @@ function App() {
   ];
   const [currentTile, setCurrentTile] = useState<number>(0);
   const [points, setPoints] = useState(0);
+  const [pointsMultiplier, setPointsMultiplier] = useState(100);
   const [hand, setHand] = useState<handType>([
     getRandomType(),
     getRandomType(),
@@ -41,6 +43,7 @@ function App() {
   const [mapGlobal, setMapGlobal] = useState<cellType[][]>(initMapGlobal);
   const [gameMode, setGameMode] = useLocalStorage<string>('mode', 'classic');
   const [gameHasEnded, setGameHasEnded] = useState<boolean>(false);
+  const [debugMode, setDebugMode] = useState<boolean>(false);
 
   function initMapGlobal(): cellType[][] {
     const mapInit: cellType[][] = board.getBoard().map((subArr) => subArr.slice());
@@ -71,6 +74,8 @@ function App() {
         setCurrentTile,
         points,
         setPoints,
+        pointsMultiplier,
+        setPointsMultiplier,
         hand,
         setHand,
         abbeyCountdown,
@@ -85,6 +90,8 @@ function App() {
         setGameMode,
         gameHasEnded,
         setGameHasEnded,
+        debugMode,
+        setDebugMode,
       }}
     >
       <Routes>
@@ -92,6 +99,7 @@ function App() {
         <Route path="/Carcassonne-Challenge/gamemode" element={<SelectModePage />} />
         <Route path="/Carcassonne-Challenge/play" element={<PlayGame />} />
         <Route path="/Carcassonne-Challenge/howtoplay" element={<InstructionsPage />} />
+        <Route path="/Carcassonne-Challenge/settings" element={<SettingsPage />} />
       </Routes>
     </GameStateContext.Provider>
   );

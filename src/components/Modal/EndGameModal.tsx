@@ -1,8 +1,10 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useGameStateContext } from '../../context/Context';
+import { API_URL } from '../../utils/api';
 import styling from './EndGameModal.module.css';
 
 const style = {
@@ -11,12 +13,12 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 600,
-  bgcolor: '#d9c9b4',
-  border: '10px solid #735236',
+  background: '#e6e2b6',
+  backgroundImage:
+    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==);',
+  border: '8px solid hsl(20, 50%, 24%)',
   borderRadius: '20px',
-  outline: '0',
-  outlineStyle: 'ridge',
-  boxShadow: 24,
+  boxShadow: '2px 3px 20px black, 0 0 30px #8a4d0f inset !important',
   p: 4,
   display: 'flex',
   flexDirection: 'column',
@@ -24,9 +26,67 @@ const style = {
   alignItems: 'center',
 };
 
+type ScoreType = { player: string; mode: string; size: number; points: number };
 export const EndGameModal = (props: { openModal: boolean; closeModal: () => void }) => {
   const handleClose = () => props.closeModal();
-  const { points } = useGameStateContext();
+  const { points, pointsMultiplier, gameMode, mapGlobal } = useGameStateContext();
+  const [name, setName] = useState('');
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
+
+  async function postData(data: ScoreType) {
+    const response = await fetch(`${API_URL}/score`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    return response.json();
+  }
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+    console.log(name);
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setScoreSubmitted(true);
+    event.preventDefault();
+    if (!scoreSubmitted) {
+      const playerScore: ScoreType = {
+        player: name,
+        mode: gameMode,
+        size: mapGlobal.length,
+        points: points,
+      };
+      console.log('sending: ');
+      console.log(playerScore);
+      postData(playerScore)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+          setScoreSubmitted(false);
+        });
+    }
+  };
+
+  const submitForm = (
+    <div>
+      Save your score:
+      <form onSubmit={onSubmit} className={styling.nameForm}>
+        <input
+          type="text"
+          name="name"
+          onChange={onChange}
+          className={styling.nameInput}
+          placeholder="thy name"
+        />
+      </form>
+    </div>
+  );
 
   return (
     <>
@@ -41,9 +101,23 @@ export const EndGameModal = (props: { openModal: boolean; closeModal: () => void
             <div className={styling.modalTitle}>Game has ended!</div>
             <p className={styling.modalDescription}>
               You can not place any more tiles. <br />
+              <br />
               Your final score was:
             </p>
-            <div className={styling.finalPoints}>{points * 100}</div>
+            <div className={styling.finalPoints}>{points * pointsMultiplier}</div>
+            <div className={styling.saveScoreSection}>
+              {scoreSubmitted === false ? submitForm : 'Score submitted!'}
+            </div>
+            <div className={styling.bottomButtons}>
+              <Link to="/Carcassonne-Challenge/gamemode">
+                <div className={styling.button + ' ' + styling.playAgain}>
+                  Select Mode
+                </div>
+              </Link>
+              <Link to="/Carcassonne-Challenge/">
+                <div className={styling.button + ' ' + styling.exit}>Exit</div>
+              </Link>
+            </div>
           </Box>
         </Modal>
       </div>
