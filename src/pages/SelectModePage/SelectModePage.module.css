@@ -7,7 +7,7 @@
   opacity: 0.1;
   z-index: 1;
 
-  animation: fadeIn ease 25s infinite;
+  animation: fadeIn ease 30s infinite;
 }
 .selectModeImage {
   height: 100%;
@@ -21,8 +21,11 @@
   0% {
     opacity: 0;
   }
-  50% {
-    opacity: 0.1;
+  30% {
+    opacity: 0.15;
+  }
+  70% {
+    opacity: 0.15;
   }
   100% {
     opacity: 0;
@@ -195,10 +198,11 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   height: 100%;
   width: 100%;
+
   transform: scale(1.01);
   background-color: rgba(51, 37, 24, 0.3);
   border-radius: inherit;
@@ -207,6 +211,7 @@
   text-shadow: none;
 }
 .dealingModeTitle {
+  padding-top: 25%;
   padding-left: 10%;
   padding-right: 10%;
   font-size: inherit;

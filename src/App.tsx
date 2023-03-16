@@ -43,6 +43,7 @@ function App() {
   const [mapGlobal, setMapGlobal] = useState<cellType[][]>(initMapGlobal);
   const [gameMode, setGameMode] = useLocalStorage<string>('mode', 'classic');
   const [gameHasEnded, setGameHasEnded] = useState<boolean>(false);
+  const [debugMode, setDebugMode] = useState<boolean>(false);
 
   function initMapGlobal(): cellType[][] {
     const mapInit: cellType[][] = board.getBoard().map((subArr) => subArr.slice());
@@ -89,6 +90,8 @@ function App() {
         setGameMode,
         gameHasEnded,
         setGameHasEnded,
+        debugMode,
+        setDebugMode,
       }}
     >
       <Routes>

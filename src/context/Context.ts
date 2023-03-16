@@ -52,6 +52,9 @@ export type GameState = {
 
   gameHasEnded: boolean;
   setGameHasEnded: (gameHasEnded: boolean) => void;
+
+  debugMode: boolean;
+  setDebugMode: (debugMode: boolean) => void;
 };
 
 export const GameStateContext: React.Context<GameState> = createContext<GameState>({
@@ -101,6 +104,10 @@ export const GameStateContext: React.Context<GameState> = createContext<GameStat
   },
   gameHasEnded: false,
   setGameHasEnded: (newGameHasEnded: boolean) => {
+    //
+  },
+  debugMode: false,
+  setDebugMode: (newDebugMode: boolean) => {
     //
   },
 });

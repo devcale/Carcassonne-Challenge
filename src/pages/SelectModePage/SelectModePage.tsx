@@ -6,13 +6,23 @@ import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
 type cellType = { type: string; variant: number };
 export const SelectModePage = () => {
-  const { gameMode, setMapGlobal, setGameMode } = useGameStateContext();
+  const { gameMode, mapGlobal, setMapGlobal, setGameMode } = useGameStateContext();
   const [selectedMode, setSelectedMode] = useState(gameMode); // Manages UI Update
-  const [selectedSize, setSelectedSize] = useState('classic');
+  const [selectedSize, setSelectedSize] = useState(getSize());
 
   function mapDuplication(mapToChange: cellType[][]): cellType[][] {
     const mapInit: cellType[][] = mapToChange.map((subArr) => subArr.slice());
     return mapInit;
+  }
+
+  function getSize() {
+    let size = 'classic';
+    if (mapGlobal.length < 11) {
+      size = 'small';
+    } else if (mapGlobal.length > 11) {
+      size = 'large';
+    }
+    return size;
   }
 
   function updateMapValues(size: number): void {

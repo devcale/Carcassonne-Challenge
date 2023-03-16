@@ -8,6 +8,7 @@ export function IsPlacementValid(
 ): boolean {
   let isValid = false;
   const currentCell = map[latitude][altitude];
+  console.log('tile on coordinates is: ' + currentCell.type);
   let upperCell = { type: 'out', variant: -1 };
   let lowerCell = { type: 'out', variant: -1 };
   let rightCell = { type: 'out', variant: -1 };
@@ -138,7 +139,9 @@ export function IsPlacementValid(
           }
         } else if (upperCell.type === 'init') {
           topConnectsToCurrent = true;
-          currentConnectsToTop = true;
+          if (roadsThatConnectToTop.includes(cell.variant)) {
+            currentConnectsToTop = true;
+          }
         }
       }
       topConnected = topConnectsToCurrent && currentConnectsToTop;
@@ -155,7 +158,9 @@ export function IsPlacementValid(
           }
         } else if (rightCell.type === 'init') {
           rightConnectsToCurrent = true;
-          currentConnectsToRight = true;
+          if (roadsThatConnectToRight.includes(cell.variant)) {
+            currentConnectsToRight = true;
+          }
         }
       }
       rightConnected = rightConnectsToCurrent && currentConnectsToRight;
@@ -172,7 +177,9 @@ export function IsPlacementValid(
           }
         } else if (lowerCell.type === 'init') {
           bottomConnectsToCurrent = true;
-          currentConnectsToBottom = true;
+          if (roadsThatConnectToBottom.includes(cell.variant)) {
+            currentConnectsToBottom = true;
+          }
         }
       }
       bottomConnected = bottomConnectsToCurrent && currentConnectsToBottom;
@@ -190,7 +197,9 @@ export function IsPlacementValid(
           }
         } else if (leftCell.type === 'init') {
           leftConnectsToCurrent = true;
-          currentConnectsToLeft = true;
+          if (roadsThatConnectToLeft.includes(cell.variant)) {
+            currentConnectsToLeft = true;
+          }
         }
       }
       leftConnected = leftConnectsToCurrent && currentConnectsToLeft;
@@ -198,6 +207,7 @@ export function IsPlacementValid(
       roadIsConnected = leftConnected || roadIsConnected;
 
       isValid =
+        currentCell.type === 'inactive' &&
         topValid &&
         rightValid &&
         bottomValid &&
@@ -230,6 +240,13 @@ export function IsPlacementValid(
         allowedTypes.includes(rightCell.type) ||
         allowedTypes.includes(leftCell.type)
       ) {
+        console.log('Is allowed because:');
+        console.log([
+          allowedTypes.includes(upperCell.type),
+          allowedTypes.includes(rightCell.type),
+          allowedTypes.includes(lowerCell.type),
+          allowedTypes.includes(leftCell.type),
+        ]);
         isValid = true;
       }
     }
