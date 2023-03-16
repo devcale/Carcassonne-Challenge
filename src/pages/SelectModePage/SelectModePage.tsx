@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import Board from '../../components/Board/Board';
@@ -99,6 +100,12 @@ export const SelectModePage = () => {
           alt="A medieval city"
         ></img>
       </div>
+      <Link to="/Carcassonne-Challenge/">
+        <div className={styling.backButton}>
+          <FaArrowLeft />
+        </div>
+      </Link>
+
       <div className={styling.gameModeContainer}>
         <div className={styling.dealingModeContainer + ' ' + styling.background}>
           <div className={styling.dealingModeOptions}>

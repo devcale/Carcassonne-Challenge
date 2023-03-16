@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { ImCross } from 'react-icons/im';
+import { Link } from 'react-router-dom';
 
 import { BoardComponent } from '../../components/Board/BoardComponent';
 import { Discard } from '../../components/Discard/Discard';
@@ -45,22 +47,30 @@ export const PlayGame = () => {
     ]);
   }, []);
   return (
-    <div className={styling.playgame}>
-      <EndGameModal openModal={gameHasEnded} closeModal={handleClose} />
-
-      <div className={styling.playArea}>
-        <div className={styling.handContainer}>
-          <Hand />
-          <Discard />
+    <>
+      <Link to="/Carcassonne-Challenge/gamemode">
+        <div className={styling.exitButton}>
+          <ImCross />
         </div>
+      </Link>
 
-        <div className={styling.boardContainer}>
-          <BoardComponent />
-        </div>
-        <div className={styling.pointsContainer}>
-          <Points />
+      <div className={styling.playgame}>
+        <EndGameModal openModal={gameHasEnded} closeModal={handleClose} />
+
+        <div className={styling.playArea}>
+          <div className={styling.handContainer}>
+            <Hand />
+            <Discard />
+          </div>
+
+          <div className={styling.boardContainer}>
+            <BoardComponent />
+          </div>
+          <div className={styling.pointsContainer}>
+            <Points />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

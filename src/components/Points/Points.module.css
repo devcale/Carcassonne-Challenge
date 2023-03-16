@@ -105,4 +105,33 @@
     font-size: 2vw;
     text-align: center;
   }
+
+  .leaderboardList {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .leaderboardEntry {
+    height: 10%;
+    width: 80%;
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .entryName {
+    font-size: 2.8rem;
+    user-select: none;
+    color: hsl(21, 51%, 15%);
+  }
+
+  .entryScore {
+    font-size: 2.8rem;
+    user-select: none;
+    color: #f2e963;
+    text-shadow: 2px 2px #735236;
+  }
 }

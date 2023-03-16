@@ -1,7 +1,10 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useGameStateContext } from '../../context/Context';
+import { API_URL } from '../../utils/api';
 import styling from './EndGameModal.module.css';
 
 const style = {
@@ -23,9 +26,67 @@ const style = {
   alignItems: 'center',
 };
 
+type ScoreType = { player: string; mode: string; size: number; points: number };
 export const EndGameModal = (props: { openModal: boolean; closeModal: () => void }) => {
   const handleClose = () => props.closeModal();
-  const { points, pointsMultiplier } = useGameStateContext();
+  const { points, pointsMultiplier, gameMode, mapGlobal } = useGameStateContext();
+  const [name, setName] = useState('');
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
+
+  async function postData(data: ScoreType) {
+    const response = await fetch(`${API_URL}/score`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    return response.json();
+  }
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+    console.log(name);
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setScoreSubmitted(true);
+    event.preventDefault();
+    if (!scoreSubmitted) {
+      const playerScore: ScoreType = {
+        player: name,
+        mode: gameMode,
+        size: mapGlobal.length,
+        points: points,
+      };
+      console.log('sending: ');
+      console.log(playerScore);
+      postData(playerScore)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+          setScoreSubmitted(false);
+        });
+    }
+  };
+
+  const submitForm = (
+    <div>
+      Save your score:
+      <form onSubmit={onSubmit} className={styling.nameForm}>
+        <input
+          type="text"
+          name="name"
+          onChange={onChange}
+          className={styling.nameInput}
+          placeholder="thy name"
+        />
+      </form>
+    </div>
+  );
 
   return (
     <>
@@ -44,6 +105,19 @@ export const EndGameModal = (props: { openModal: boolean; closeModal: () => void
               Your final score was:
             </p>
             <div className={styling.finalPoints}>{points * pointsMultiplier}</div>
+            <div className={styling.saveScoreSection}>
+              {scoreSubmitted === false ? submitForm : 'Score submitted!'}
+            </div>
+            <div className={styling.bottomButtons}>
+              <Link to="/Carcassonne-Challenge/gamemode">
+                <div className={styling.button + ' ' + styling.playAgain}>
+                  Select Mode
+                </div>
+              </Link>
+              <Link to="/Carcassonne-Challenge/">
+                <div className={styling.button + ' ' + styling.exit}>Exit</div>
+              </Link>
+            </div>
           </Box>
         </Modal>
       </div>
