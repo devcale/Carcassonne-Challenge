@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { useGameStateContext } from '../../context/Context';
-import { IsCityClosed, TilesInChain } from '../../utils/BoardUtils';
 import { DealNewTile } from '../../utils/TileDealingUtils';
 import Board from '../Board/Board';
 import styling from './Cell.module.css';
@@ -16,7 +15,7 @@ const Cell = (props: {
 }) => {
   const [type, setType] = useState('inactive');
   const [backgroundImage, setBackgroundImage] = useState(
-    props.type === 'init' ? 'src/assets/images/intersection-a.png' : '',
+    props.type === 'init' ? 'init-classic' : '',
   );
   const {
     hand,
@@ -33,6 +32,7 @@ const Cell = (props: {
     setPoints,
     gameMode,
     setGameHasEnded,
+    debugMode,
   } = useGameStateContext();
 
   const boardHelper = new Board(0, { type: '', variant: 0 }, { type: '', variant: 0 });
@@ -52,10 +52,10 @@ const Cell = (props: {
         setType(hand[currentTile][0]);
         setPoints(points + placedTile.pointsGained);
 
-        updateHand();
         setDiscardCountdown(
           discardCountdown > 0 ? discardCountdown - 1 : discardCountdown,
         );
+        updateHand();
       }
     }
   }
@@ -156,8 +156,17 @@ const Cell = (props: {
     setCityCountdown(nextState.updatedCityCountdown);
     setHand(newHand);
 
+    const mapParam = [];
+    for (let i = 0; i < mapGlobal.length; i++) {
+      const col = [];
+      for (let j = 0; j < mapGlobal[i].length; j++) {
+        col.push(mapGlobal[i][j]);
+      }
+      mapParam.push(col);
+    }
+
     //Check if game has ended
-    if (boardHelper.checkGameEnd(newHand, mapGlobal, discardCountdown, gameMode)) {
+    if (boardHelper.checkGameEnd(newHand, mapParam, discardCountdown, gameMode)) {
       setGameHasEnded(true);
       console.log('Game has ended');
     }
@@ -166,6 +175,11 @@ const Cell = (props: {
   // Sets the type of each cell on load
   useEffect(() => {
     setType(props.type);
+    if (gameMode === 'road' && props.type === 'init') {
+      setBackgroundImage('init-road');
+    } else if (gameMode === 'city' && props.type === 'init') {
+      setBackgroundImage('init-city');
+    }
   }, []);
 
   return (
@@ -181,7 +195,9 @@ const Cell = (props: {
       role="button"
       tabIndex={tabIndexNum}
       style={{ height: props.cellHeight }}
-    ></div>
+    >
+      {debugMode ? props.latitude + '-' + props.altitude : ''}
+    </div>
   );
 };
 export default Cell;

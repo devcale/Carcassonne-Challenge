@@ -49,7 +49,26 @@ export function GainPoints(
     if (cell.type === 'road') {
       pointsGained += 1;
     } else if (cell.type === 'city') {
-      pointsGained += 3;
+      pointsGained += 2;
+      const mapParam = [];
+      for (let i = 0; i < map.length; i++) {
+        const col = [];
+        for (let j = 0; j < map[i].length; j++) {
+          if (i === latitude && j === altitude) {
+            col.push(cell);
+          } else {
+            col.push(map[i][j]);
+          }
+        }
+        mapParam.push(col);
+      }
+      const cityChain = TilesInChain(cell, latitude, altitude, mapParam);
+
+      if (cityChain.length === 2) {
+        pointsGained += 2;
+      } else if (cityChain.length > 2) {
+        pointsGained += 1;
+      }
     } else if (cell.type === 'abbey') {
       if (pointAdders.includes(topRightCell.type)) {
         pointsGained += 1;
@@ -101,10 +120,8 @@ export function GainPoints(
       pointsGained += 1;
     }
   } else if (gameMode === 'city') {
-    console.log('Gamemode is city');
     const pointAdders = ['init', 'abbey', 'city', 'road'];
     if (cell.type === 'city') {
-      console.log('Tile placed was a city');
       const mapParam = [];
       for (let i = 0; i < map.length; i++) {
         const col = [];
@@ -119,8 +136,6 @@ export function GainPoints(
       }
       const cityChain = TilesInChain(cell, latitude, altitude, mapParam);
 
-      console.log('city chain is: ');
-      console.log(cityChain);
       if (IsCityClosed(cityChain, mapParam)) {
         if (cityChain.length < 5) {
           pointsGained += cityChain.length;
@@ -190,7 +205,26 @@ export function GainPoints(
     if (cell.type === 'road') {
       pointsGained += 1;
     } else if (cell.type === 'city') {
-      pointsGained += 3;
+      pointsGained += 2;
+      const mapParam = [];
+      for (let i = 0; i < map.length; i++) {
+        const col = [];
+        for (let j = 0; j < map[i].length; j++) {
+          if (i === latitude && j === altitude) {
+            col.push(cell);
+          } else {
+            col.push(map[i][j]);
+          }
+        }
+        mapParam.push(col);
+      }
+      const cityChain = TilesInChain(cell, latitude, altitude, mapParam);
+
+      if (cityChain.length === 2) {
+        pointsGained += 2;
+      } else if (cityChain.length > 2) {
+        pointsGained += 1;
+      }
     } else if (cell.type === 'abbey') {
       if (validTiles.includes(topRightCell.type)) {
         pointsGained += abbeyValue;

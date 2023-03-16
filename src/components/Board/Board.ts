@@ -42,16 +42,32 @@ class Board {
     discardCountdown: number,
     gameMode: string,
   ): boolean {
+    console.log(
+      '---------------------------------CHECKING GAME END----------------------------',
+    );
+    console.log('game mode is: ' + gameMode);
+    let found = false;
+
     let gameHasEnded = true;
+    let handTile: cellType = { type: '', variant: -1 };
     if (discardCountdown === 0) {
+      console.log('game has not ended because of discard');
       gameHasEnded = false;
     } else {
-      let found = false;
-      for (let i = 0; i < hand.length && !found; i++) {
-        const handTile: cellType = { type: hand[i][0], variant: hand[i][1] };
-        for (let j = 0; j < map.length && !found; j++) {
-          for (let k = 0; k < map[j].length && !found; k++) {
-            if (IsPlacementValid(handTile, j, k, map, gameMode)) {
+      console.log('hand is');
+      console.log(hand);
+      for (let handIndex = 0; handIndex < hand.length && !found; handIndex++) {
+        handTile = {
+          type: hand[handIndex][0],
+          variant: hand[handIndex][1],
+        };
+        for (let i = 0; i < map.length && !found; i++) {
+          for (let j = 0; j < map[i].length && !found; j++) {
+            if (IsPlacementValid(handTile, i, j, map, gameMode)) {
+              console.log('found possible with hand index: ' + handIndex);
+              console.log('found possible with col index: ' + i);
+              console.log('found possible with row index: ' + j);
+
               gameHasEnded = false;
               found = true;
             }
@@ -59,6 +75,8 @@ class Board {
         }
       }
     }
+    console.log('map is: ');
+    console.log(map);
 
     console.log('Game has ended?');
     console.log(gameHasEnded);

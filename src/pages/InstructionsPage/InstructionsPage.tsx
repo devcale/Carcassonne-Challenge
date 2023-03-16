@@ -5,7 +5,6 @@ import styling from './InstructionsPage.module.css';
 export const InstructionsPage = () => {
   return (
     <div className={styling.instructionsContainer}>
-      <div className={styling.titleInstructions}>Carcassonne Challenge</div>
       <div className={styling.instructionsContentContainer}>
         <h2 id="objective">Objective 🎯</h2>
         <p>
