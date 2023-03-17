@@ -1,9 +1,10 @@
 # Carcassonne Challenge 🏰🎲
 
-![background](https://user-images.githubusercontent.com/65783607/221674219-193c8ab3-9d50-4b3e-88f4-bacf9646b6c8.png)
+![image](https://user-images.githubusercontent.com/65783607/225818569-34d1ce90-6944-4185-8c24-c5b664c9ec47.png)
 
 Welcome to Carcassonne Challenge: my web-based implementation of the popular board game Carcassonne! 🎉
-This is a single player variation in which the player will try to score as much points as he can.
+
+This is a single player variation in which the player will try to score as much points as he can, and compare their highest scores to other players' highscores.
 
 🛠️ Built with Vite, ReactJS and TypeScript.
 
@@ -25,39 +26,149 @@ To get started with the game, follow these steps:
 
 The game should now be running on http://localhost:3000. 🌐
 
-## How to Play 🎲
+## Technical Details
 
-### Objective 🎯
+Every aspect of the game runs on Vite + ReactJS + TypeScript (except for the leaderboard logic). 
 
-- The objective of Carcassonne Challenge is to score the most points by strategically placing tiles within the limits of a board. 💡
+### Managing the game state
+In order to manage the game's state, the project leverages React's useContext hook. Using this hook, we avoid prop drilling and can easily access important data throughout the project.
 
-- The game is played by placing tiles on the board to create a landscape. The landscape will be occupied by tiles representing roads, abbeys and
-  cities. Each of these tiles give the player a different amount of points.
+The hook is created using the createContext function, setting up the variables related to the game's state:
 
-### Rules 📜
+    export const GameStateContext: React.Context<GameState> = createContext<GameState>({
+    currentTile: 0,
+    setCurrentTile: (newTile: number) => {},
+    points: 0,
+    setPoints: (newPoints: number) => {},
+    pointsMultiplier: 100,
+    setPointsMultiplier: (newPointsMultiplier: number) => {},
+    ...
+    });
 
-- At the start of each game, you will be dealt four random tiles.
+The most important value that is stored in the context is the game's board, saved as "mapGlobal".
 
-- On each turn you will only be able to place one tile of these types:
+The variable mapGlobal is a matrix of tile objects, in which each tile object has a type and a variant. The type can be "init", "inactive", "road", "city" or "abbey". The variant is a number which represents the variation of a given type, this is useful for game modes in which there are multiple types of cities, roads, etc. An example of this can be seen on the image below:
 
-  - 🏰 Cities: They can be placed in any free space that is adjacent to any placed tile.
+![image](https://user-images.githubusercontent.com/65783607/225816387-36a0a333-baf0-42b5-a195-5084e70fb4f2.png)
 
-  - 🛣️ Roads: They can be placed in any free space that has an adjacent road.
 
-  - ⛪ Abbeys: They can be placed in any free space that is adjacent to any placed tile.
+This hook is then exported as follows:
 
-- After a tile is placed, you will be dealt a new random tile.
+    export const useGameStateContext = () => useContext(GameStateContext);
+    
+In order to use and modify each of the values that make up the context, it is necessary to initialize each variable and set function as a state.
+This is done in the App.tsx file.
+   
+It can be imported to any component that is wrapped by the context.
 
-- You are able to discard the tiles in your hand, but this ability takes 5 turns to recharge.
+### Initializing the board
 
-- The game ends when all tiles have been placed, or a tile in your current hand can't be played and you have no discards available. 💥
+The initial board is setup as the inital value of the "mapGlobal" context state in the App.tsx file. The default board size is 11.
 
-### Points ⭐
+A new board is initialized every time a player selects a size from the select mode page. The board is created using a the "Board" class' constructor. This constructor receives the size of the board, the default tile that is going to be assigned to every cell, and what the center tile should be. The board is then retrieved and duplicated in order to avoid any memory errors. The new board is then assigned to the "mapGlobal" context state.   
 
-You are able to gain points through a variety of ways:
+    const board = new Board(
+      size,
+      {
+        type: 'inactive',
+        variant: 0,
+      },
+      {
+        type: 'init',
+        variant: 0,
+      },
+    );
+    const newBoard = mapDuplication(board.getBoard());
 
-- Roads give you one point per tile.
+    setMapGlobal(newBoard);
+    
+The visual component for the board is then rendered in the BoardComponent.tsx file. Here, a matrix of "Cell" components is created, in which each cell has knowledge of it's location, its type and variant.
 
-- Abbeys give you one point for each tile that surrounds it. This way, the maximum amount of points per Abbey is 8 points.
+### Placing a tile
 
-- Cities gives you two points per tile, and an extra point for each city chain.
+Each cell component has a "OnClick" attribute, which as the name says, when the cell is clicked triggers a function. The function handles the click by doing the following:
+1. Checks if the cell clicked is inactive, this way a previously placed cell can not be replaced.
+2. Checks if the tile can be placed in the current position.
+3. If the tile can be placed, sets the "type" of the current cell component to the type of the cell that was selected in hand.
+4. Updates the score.
+5. Updates the countdown that manages when a discard can be played.
+6. Deals a new tile taking into account the tile dealing considerations.
+7. Updates the "mapGlobal" context state.
+8. Checks if there are any moves left (if the game has ended).
+
+### Checking if a tile can be placed
+
+In order to check if a tile can be placed, the game uses the "IsPlacementValid" function from the BoardUtils.tsx file. The function receives the tile which wants to be checked, the coordinates where it wants to be placed, the map where it wants to be placed, and the gamemode. The function returns a boolean (true if it can be placed, false otherwise).
+
+The function retrieves the adjacent cells to the tile:
+
+    let upperCell = { type: 'out', variant: -1 };
+    let lowerCell = { type: 'out', variant: -1 };
+    let rightCell = { type: 'out', variant: -1 };
+    let leftCell = { type: 'out', variant: -1 };
+
+    if (altitude - 1 >= 0) {
+      upperCell = map[latitude][altitude - 1];
+    }
+    if (altitude + 1 < map.length) {
+      lowerCell = map[latitude][altitude + 1];
+    }
+    if (latitude + 1 < map.length) {
+      rightCell = map[latitude + 1][altitude];
+    }
+    if (latitude - 1 >= 0) {
+      leftCell = map[latitude - 1][altitude];
+    }
+
+And depending on the gamemode, checks which tiles are allowed on each direction. If all the adjacent tiles are valid, then the placement is considered valid. Example for the simplest case, classic challenge:
+
+    if (gameMode === 'classic' || gameMode === 'abbey') {
+      if (cell.type === 'city') {
+        allowedTypes = ['city', 'abbey', 'road', 'init'];
+      } else if (cell.type === 'road') {
+        allowedTypes = ['road', 'init'];
+      } else if (cell.type === 'abbey') {
+        allowedTypes = ['city', 'abbey', 'road', 'init'];
+      }
+
+      if (
+        currentCell.type === 'inactive' &&
+        (allowedTypes.includes(upperCell.type) ||
+          allowedTypes.includes(lowerCell.type) ||
+          allowedTypes.includes(rightCell.type) ||
+          allowedTypes.includes(leftCell.type))
+      ) {
+        isValid = true;
+      }
+
+
+### Updating the points
+
+### Dealing a new tile
+
+### Handling a discard
+
+### Checking if there are any moves left
+
+
+
+### The leaderboard
+As the leaderboard needs to be updated globally, scores that are submitted are sent to an express backend, which store the given score on a MongoDB database.
+![image](https://user-images.githubusercontent.com/65783607/225813043-e7982e55-a230-4025-8a9f-b0b403bd7188.png)
+
+The top scores are retrieved using a simple query that filters by gamemode and board size. This response is then sorted on descending order and the answer is limited to the top 6 scores. 
+
+The route configuration for retrieving the top scores is the following:
+
+    app.get("/api/leaderboard", async (req, res) => {
+    
+    let query = {mode: req.query.mode, size: req.query.size}
+    try{
+        const result = await Score.find(query).sort({points: -1}).limit(6);
+        res.json({"scores": result});
+    } catch(err) {
+        res.status(500).json({error: err.message})
+    }
+})
+
+
