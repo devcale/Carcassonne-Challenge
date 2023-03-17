@@ -50,9 +50,8 @@ export const EndGameModal = (props: { openModal: boolean; closeModal: () => void
     console.log(name);
   };
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async () => {
     setScoreSubmitted(true);
-    event.preventDefault();
     if (!scoreSubmitted) {
       const playerScore: ScoreType = {
         player: name,
@@ -73,18 +72,34 @@ export const EndGameModal = (props: { openModal: boolean; closeModal: () => void
     }
   };
 
+  function handleKeyDown() {
+    //
+  }
+
   const submitForm = (
-    <div>
-      Save your score:
-      <form onSubmit={onSubmit} className={styling.nameForm}>
-        <input
-          type="text"
-          name="name"
-          onChange={onChange}
-          className={styling.nameInput}
-          placeholder="thy name"
-        />
-      </form>
+    <div className={styling.submitScoreSection}>
+      <div className={styling.submitInput}>
+        Enter name:
+        <form onSubmit={onSubmit} className={styling.nameForm}>
+          <input
+            type="text"
+            name="name"
+            onChange={onChange}
+            className={styling.nameInput}
+            placeholder="Louis the Great"
+          />
+        </form>
+      </div>
+
+      <div
+        className={styling.submitButton}
+        role="button"
+        onClick={onSubmit}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+      >
+        Submit Score
+      </div>
     </div>
   );
 
