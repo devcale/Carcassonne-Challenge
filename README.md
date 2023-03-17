@@ -102,7 +102,7 @@ Each cell component has a "OnClick" attribute, which as the name says, when the 
 
 In order to check if a tile can be placed, the game uses the "IsPlacementValid" function from the BoardUtils.tsx file. The function receives the tile which wants to be checked, the coordinates where it wants to be placed, the map where it wants to be placed, and the gamemode. The function returns a boolean (true if it can be placed, false otherwise).
 
-The function retrieves the adjacent cells to the tile:
+The function first retrieves the adjacent cells to the tile:
 
     let upperCell = { type: 'out', variant: -1 };
     let lowerCell = { type: 'out', variant: -1 };
