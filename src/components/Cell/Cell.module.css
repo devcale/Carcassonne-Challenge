@@ -1,46 +1,5 @@
 /* Extra small devices (phones, 768px and down) */
 @media only screen and (max-width: 768px) {
-  .cell {
-    position: relative;
-    width: 100%;
-    height: 10%;
-    margin: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-style: solid;
-    border-width: 1px;
-    border-color: #53735e;
-
-    transition: 0.5s;
-
-    aspect-ratio: 1;
-    outline: 50% solid #0009;
-
-    background-size: cover;
-
-    z-index: 500;
-    outline-offset: -4px;
-  }
-
-  .city {
-    outline: 2px solid #95a6f0;
-  }
-
-  .abbey {
-    outline: 2px solid #96e394;
-  }
-
-  .road {
-    outline: 2px solid #ead6ab;
-  }
-
-  .init {
-    background-image: url('src/assets/images/intersection-a.png');
-    outline: 2px solid #fff;
-  }
 }
 
 /* Small devices (portrait tablets and large phones, 768px and up) */
