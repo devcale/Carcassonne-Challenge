@@ -91,7 +91,7 @@ The visual component for the board is then rendered in the BoardComponent.tsx fi
 Each cell component has a "OnClick" attribute, which as the name says, when the cell is clicked triggers a function. The function handles the click by doing the following:
 1. Checks if the cell clicked is inactive, this way a previously placed cell can not be replaced.
 2. Checks if the tile can be placed in the current position.
-3. If the tile can be placed, sets the "type" of the current cell component to the type of the cell that was selected in hand.
+3. If the tile can be placed, sets the "type" of the current cell component to the type of the cell that the player had selected in hand.
 4. Updates the score.
 5. Updates the countdown that manages when a discard can be played.
 6. Deals a new tile taking into account the tile dealing considerations.
