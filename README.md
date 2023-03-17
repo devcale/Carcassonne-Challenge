@@ -40,8 +40,10 @@ The hook is created using the createContext function, setting up the variables r
     setCurrentTile: (newTile: number) => {},
     points: 0,
     setPoints: (newPoints: number) => {},
-    pointsMultiplier: 100,
-    setPointsMultiplier: (newPointsMultiplier: number) => {},
+    mapGlobal: [],
+    setMapGlobal: (newMapGlobal: { type: string; variant: number }[][]) => {},
+    gameMode: 'classic',
+    setGameMode: (newGameMode: string) => {},
     ...
     });
 
