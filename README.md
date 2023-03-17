@@ -146,7 +146,11 @@ And depending on the gamemode, checks which tiles are allowed on each direction.
 
 ### Updating the points
 
-In order to know how many points were gained during a move, the game uses the "GainPoints" function from the PointUtils.ts file. This function checks the adjacent tiles to a tile that is being placed in order to know how many points have to be added. Cities use the "TilesInChain" and "IsCityClosed" functions from the BoardUtils.ts file in order to know how many cities are part of a chain, and if the city is closed for the "City Craze" mode.
+In order to know how many points were gained during a move, the game uses the "GainPoints" function from the PointUtils.ts file. 
+
+This function first checks what type of tile is being placed, and then checks the adjacent tiles in order to know how many points have to be added. 
+
+Cities use the "TilesInChain" and "IsCityClosed" functions from the BoardUtils.ts file in order to know how many cities are part of a chain, and if the city is closed for the "City Craze" mode.
 
 ### Dealing a new tile
 
