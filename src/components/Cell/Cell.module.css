@@ -98,15 +98,15 @@
   }
 
   .init-classic {
-    background-image: url('src/assets/images/roads/011-generic-road.png');
+    background-image: url('../../assets/images/roads/011-generic-road.png');
     outline: 3px solid #ead6ab;
   }
   .init-road {
-    background-image: url('src/assets/images/roads/000-four-way.png');
+    background-image: url('../../assets/images/roads/000-four-way.png');
     outline: 3px solid #ead6ab;
   }
   .init-city {
-    background-image: url('src/assets/images/grass.png');
+    background-image: url('../../assets/images/grass.png');
     outline: 3px solid #ead6ab;
   }
 
