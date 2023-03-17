@@ -144,13 +144,20 @@ And depending on the gamemode, checks which tiles are allowed on each direction.
 
 ### Updating the points
 
+In order to know how many points were gained during a move, the game uses the "GainPoints" function from the PointUtils.ts file. This function checks the adjacent tiles to a tile that is being placed in order to know how many points have to be added. Cities use the "TilesInChain" and "IsCityClosed" functions from the BoardUtils.ts file in order to know how many cities are part of a chain, and if the city is closed for the "City Craze" mode.
+
 ### Dealing a new tile
+
+Tile dealing is not completely random, and is managed by the "DealNewTile" function from the TileDealingUtils.ts file. This function checks if an abbey has been dealt in the last 15 turns, as well as 3 cities. Countdown variables are created in the UseContext hook in order to keep track of how many turns have passed without an abbey and the 3 cities. If the countdowns for abbey and cities are big enough, the tile dealing is random and weighted based on the game mode (i.e. abbeys are more common in the Abbeys Ablaze mode).
+
 
 ### Handling a discard
 
+When the player selects to discard his hand, the game manages it by using the "handleDiscard" function from the Discard.tsx component. If the discard countdown is 0, 4 new random tiles are selected using the "DealNewTile" function. This 4 new cards are then set to the "hand" context variable, and the discard countdown is reset. Finally, the game checks if there are any moves left with the new set of tiles.
+
 ### Checking if there are any moves left
 
-
+In order to check if there are any moves left, the game first checks if the player has an available discard. If the player does not have an available discard, the game then checks if any of the tiles in the players hand can be placed in any space on the board. If this is also false, the game has ended and a modal is shown.
 
 ### The leaderboard
 As the leaderboard needs to be updated globally, scores that are submitted are sent to an express backend, which store the given score on a MongoDB database.
