@@ -6,11 +6,16 @@ import { Route, Routes } from 'react-router-dom';
 import Board from './components/Board/Board';
 import { GameStateContext } from './context/Context';
 import useLocalStorage from './hooks/useLocalStorage';
+import { AbbeyPage } from './pages/AbbeyPage/AbbeyPage';
+import { CityPage } from './pages/CityPage/CityPage';
+import { ClassicPage } from './pages/ClassicPage/ClassicPage';
 import { InstructionsPage } from './pages/InstructionsPage/InstructionsPage';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { PlayGame } from './pages/PlayGame/PlayGame';
+import { RoadPage } from './pages/RoadPage/RoadPage';
 import { SelectModePage } from './pages/SelectModePage/SelectModePage';
 import { SettingsPage } from './pages/SettingsPage/SettingsPage';
+
 type cellType = { type: string; variant: number };
 function App() {
   type handType = [
@@ -99,6 +104,13 @@ function App() {
         <Route path="/Carcassonne-Challenge/gamemode" element={<SelectModePage />} />
         <Route path="/Carcassonne-Challenge/play" element={<PlayGame />} />
         <Route path="/Carcassonne-Challenge/howtoplay" element={<InstructionsPage />} />
+        <Route
+          path="/Carcassonne-Challenge/howtoplay/classic"
+          element={<ClassicPage />}
+        />
+        <Route path="/Carcassonne-Challenge/howtoplay/road" element={<RoadPage />} />
+        <Route path="/Carcassonne-Challenge/howtoplay/city" element={<CityPage />} />
+        <Route path="/Carcassonne-Challenge/howtoplay/abbey" element={<AbbeyPage />} />
         <Route path="/Carcassonne-Challenge/settings" element={<SettingsPage />} />
       </Routes>
     </GameStateContext.Provider>

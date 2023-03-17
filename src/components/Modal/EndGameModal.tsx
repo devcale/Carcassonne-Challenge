@@ -51,24 +51,26 @@ export const EndGameModal = (props: { openModal: boolean; closeModal: () => void
   };
 
   const onSubmit = async () => {
-    setScoreSubmitted(true);
-    if (!scoreSubmitted) {
-      const playerScore: ScoreType = {
-        player: name,
-        mode: gameMode,
-        size: mapGlobal.length,
-        points: points,
-      };
-      console.log('sending: ');
-      console.log(playerScore);
-      postData(playerScore)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error(error);
-          setScoreSubmitted(false);
-        });
+    if (name !== '') {
+      setScoreSubmitted(true);
+      if (!scoreSubmitted) {
+        const playerScore: ScoreType = {
+          player: name,
+          mode: gameMode,
+          size: mapGlobal.length,
+          points: points,
+        };
+        console.log('sending: ');
+        console.log(playerScore);
+        postData(playerScore)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error(error);
+            setScoreSubmitted(false);
+          });
+      }
     }
   };
 

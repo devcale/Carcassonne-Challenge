@@ -1,24 +1,17 @@
 import { Link } from 'react-router-dom';
 
+import cityImg from '../../assets/images/ui/city-land.png';
 import styling from './LandingPage.module.css';
 
 export const LandingPage = () => {
   return (
     <>
       <div className={styling.mainImageContainer}>
-        <img
-          className={styling.mainImage}
-          src="src\assets\images\ui\city-land.png"
-          alt="A medieval city"
-        ></img>
+        <img className={styling.mainImage} src={cityImg} alt="A medieval city"></img>
       </div>
 
       <div className={styling.mainImageContainer2}>
-        <img
-          className={styling.mainImage2}
-          src="src\assets\images\ui\city-land.png"
-          alt="A medieval city"
-        ></img>
+        <img className={styling.mainImage2} src={cityImg} alt="A medieval city"></img>
       </div>
 
       <div className={styling.mainContainer}>

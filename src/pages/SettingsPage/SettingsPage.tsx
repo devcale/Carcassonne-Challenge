@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 import { useGameStateContext } from '../../context/Context';
 import styling from './SettingsPage.module.css';
@@ -17,33 +19,40 @@ export const SettingsPage = () => {
     //
   }
   return (
-    <div className={styling.settingsContainer}>
-      <div className={styling.settingOptionsContainer}>
-        <div className={styling.option}>
-          <div className={styling.optionName}>Points Multiplier</div>
-          <div
-            className={styling.optionButton}
-            role="button"
-            onClick={() => handleClick()}
-            onKeyDown={handleKeyDown}
-            tabIndex={0}
-          >
-            x{pointsMultiplier}
-          </div>
+    <>
+      <Link to="/Carcassonne-Challenge/">
+        <div className={styling.backButton}>
+          <FaArrowLeft />
         </div>
-        <div className={styling.option}>
-          <div className={styling.optionName}>Debug Mode</div>
-          <div
-            className={styling.optionButton}
-            role="button"
-            onClick={() => setDebugMode(!debugMode)}
-            onKeyDown={handleKeyDown}
-            tabIndex={0}
-          >
-            {debugMode ? 'ON' : 'OFF'}
+      </Link>
+      <div className={styling.settingsContainer}>
+        <div className={styling.settingOptionsContainer}>
+          <div className={styling.option}>
+            <div className={styling.optionName}>Points Multiplier</div>
+            <div
+              className={styling.optionButton}
+              role="button"
+              onClick={() => handleClick()}
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+            >
+              x{pointsMultiplier}
+            </div>
+          </div>
+          <div className={styling.option}>
+            <div className={styling.optionName}>Debug Mode</div>
+            <div
+              className={styling.optionButton}
+              role="button"
+              onClick={() => setDebugMode(!debugMode)}
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+            >
+              {debugMode ? 'ON' : 'OFF'}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

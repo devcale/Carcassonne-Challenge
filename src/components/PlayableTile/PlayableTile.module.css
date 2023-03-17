@@ -4,15 +4,17 @@
     width: 20%;
     height: 80%;
     border-radius: 20px;
-    background-color: #d9c9b4;
+    box-shadow: 2px 3px 20px black, 0 0 30px #8a4d0f inset !important;
+    background: #e6e2b6;
+    background-image: url(data:image/png;base64,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);
+
+    border-style: solid;
+    border-width: 8px;
+    border-color: hsl(20, 50%, 24%);
     display: flex;
-    flex-direction: column-reverse;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 
-    border-style: solid;
-    border-width: 5px;
-    border-color: #735236;
     cursor: pointer;
 
     -webkit-transform: translateZ(0);
@@ -29,9 +31,6 @@
 
   .tileCardInfo {
     display: none;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 40%;
   }
 
   .playableImgContainer {
@@ -43,9 +42,163 @@
   }
 
   .mobileTile {
-    display: inline;
-    color: white;
-    text-shadow: 2px 2px black;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #e6c41a;
+    text-shadow: 0px 0px 1rem #735236, 0px 0px 0.5rem #735236, 0px 0px 0.5rem #735236;
+    font-size: 6vw;
+    text-align: center;
+  }
+
+  .playableImgContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+  }
+
+  .playableImg {
+    border-radius: 10%;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .city-0 {
+    background-image: url('../../assets/images/cities/000-city.png');
+  }
+  .city-1 {
+    background-image: url('../../assets/images/cities/001-city.png');
+  }
+  .city-2 {
+    background-image: url('../../assets/images/cities/002-city.png');
+  }
+  .city-3 {
+    background-image: url('../../assets/images/cities/003-city.png');
+  }
+  .city-4 {
+    background-image: url('../../assets/images/cities/004-city.png');
+  }
+  .city-5 {
+    background-image: url('../../assets/images/cities/005-city.png');
+  }
+  .city-6 {
+    background-image: url('../../assets/images/cities/006-city.png');
+  }
+  .city-7 {
+    background-image: url('../../assets/images/cities/007-city.png');
+  }
+  .city-8 {
+    background-image: url('../../assets/images/cities/008-city.png');
+  }
+  .city-9 {
+    background-image: url('../../assets/images/cities/009-city.png');
+  }
+  .city-10 {
+    background-image: url('../../assets/images/cities/010-city.png');
+  }
+  .city-11 {
+    background-image: url('../../assets/images/cities/011-city.png');
+  }
+  .city-12 {
+    background-image: url('../../assets/images/cities/012-city.png');
+  }
+  .city-13 {
+    background-image: url('../../assets/images/cities/013-city.png');
+  }
+  .city-14 {
+    background-image: url('../../assets/images/cities/014-city.png');
+  }
+  .city-15 {
+    background-image: url('../../assets/images/cities/015-city.png');
+  }
+  .city-16 {
+    background-image: url('../../assets/images/cities/016-city.png');
+  }
+  .city-17 {
+    background-image: url('../../assets/images/cities/017-city.png');
+  }
+
+  .road-0 {
+    background-image: url('../../assets/images/roads/000-four-way.png');
+  }
+  .road-1 {
+    background-image: url('../../assets/images/roads/001-three-way-top.png');
+  }
+  .road-2 {
+    background-image: url('../../assets/images/roads/002-three-way-right.png');
+  }
+  .road-3 {
+    background-image: url('../../assets/images/roads/003-three-way-bottom.png');
+  }
+  .road-4 {
+    background-image: url('../../assets/images/roads/004-three-way-left.png');
+  }
+  .road-5 {
+    background-image: url('../../assets/images/roads/005-corner-top-right.png');
+  }
+  .road-6 {
+    background-image: url('../../assets/images/roads/006-corner-right-bottom.png');
+  }
+  .road-7 {
+    background-image: url('../../assets/images/roads/007-corner-bottom-left.png');
+  }
+  .road-8 {
+    background-image: url('../../assets/images/roads/008-corner-left-top.png');
+  }
+  .road-9 {
+    background-image: url('../../assets/images/roads/009-straight-top-bottom.png');
+  }
+  .road-10 {
+    background-image: url('../../assets/images/roads/010-straight-left-right.png');
+  }
+  .road-11 {
+    background-image: url('../../assets/images/roads/011-generic-road.png');
+  }
+  .road-12 {
+    background-image: url('../../assets/images/roads/012-generic-road.png');
+  }
+  .road-13 {
+    background-image: url('../../assets/images/roads/013-generic-road.png');
+  }
+
+  .abbey-0 {
+    background-image: url('../../assets/images/abbeys/000-abbey.png');
+  }
+  .abbey-1 {
+    background-image: url('../../assets/images/abbeys/001-abbey.png');
+  }
+  .abbey-2 {
+    background-image: url('../../assets/images/abbeys/002-abbey.png');
+  }
+  .abbey-3 {
+    background-image: url('../../assets/images/abbeys/003-abbey.png');
+  }
+  .abbey-4 {
+    background-image: url('../../assets/images/abbeys/004-abbey.png');
+  }
+  .abbey-5 {
+    background-image: url('../../assets/images/abbeys/005-abbey.png');
+  }
+  .abbey-6 {
+    background-image: url('../../assets/images/abbeys/006-abbey.png');
+  }
+  .abbey-7 {
+    background-image: url('../../assets/images/abbeys/007-abbey.png');
+  }
+  .abbey-8 {
+    background-image: url('../../assets/images/abbeys/008-abbey.png');
   }
 }
 
@@ -108,9 +261,10 @@
 
   .tileCardDescription {
     color: #735236;
-    font-size: 16px;
+    font-size: 1.5vh;
     width: 100%;
     text-align: center;
+    overflow-y: hidden;
   }
 
   .playableImgContainer {

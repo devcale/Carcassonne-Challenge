@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+import knightImg from '../../assets/images/ui/knight.jpg';
 import Board from '../../components/Board/Board';
 import { useGameStateContext } from '../../context/Context';
 import styling from './SelectModePage.module.css';
@@ -96,7 +97,7 @@ export const SelectModePage = () => {
       <div className={styling.selectModeImageContainer}>
         <img
           className={styling.selectModeImage}
-          src="src\assets\images\ui\knight.jpg"
+          src={knightImg}
           alt="A medieval city"
         ></img>
       </div>
@@ -168,7 +169,7 @@ export const SelectModePage = () => {
                   </div>
                   <div className={styling.dealingModeDescription}>
                     The roads that wind through our lands now bear differing paths and
-                    directions, requiring alignment to be joined.
+                    directions.
                   </div>
                 </div>
               </div>
@@ -200,10 +201,6 @@ export const SelectModePage = () => {
                   </div>
                   <div className={styling.dealingModeDescription}>
                     Build mighty cities! <br />
-                    <br />
-                    Cities will now have to be aligned by their walls.
-                    <br /> Abbeys may not be placed adjacent to other abbeys.
-                    <br />
                     Greater cities bring greater glory and riches to thee!
                   </div>
                 </div>
@@ -236,13 +233,8 @@ export const SelectModePage = () => {
                   </div>
                   <div className={styling.dealingModeDescription}>
                     Beware, noble players!
+                    <br /> Abbeys now burn bright and are more common in the draw pile.
                     <br />
-                    <br />
-                    Abbeys now burn bright and are more common in the draw pile.
-                    <br />
-                    <br />
-                    But placing tiles near them shall reduce your points, as the flames of
-                    destruction threaten to spread.
                   </div>
                 </div>
               </div>
