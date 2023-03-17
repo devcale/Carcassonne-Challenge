@@ -92,8 +92,6 @@
   }
 
   .active {
-    background-image: url('src/assets/images/city-a.png');
-
     cursor: pointer;
   }
 
